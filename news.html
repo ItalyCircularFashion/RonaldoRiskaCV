@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Textile Newsroom | Textile Intelligence Platform</title>
+  <meta name="description" content="Notizie tessile e moda: AI, sostenibilità, produzione, luxury, certificazioni, supply chain, economia circolare. Feed editoriale categorizzato.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://italycircularfashion.github.io/RonaldoRiska/news.html">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Salta al contenuto</a>
+<div class="platform">
+
+  <div class="platform-ticker">
+    <div class="ticker-bar">
+      <div class="ticker-label">LIVE</div>
+      <div class="ticker-track"><div class="ticker-items" aria-hidden="true"></div></div>
+    </div>
+  </div>
+
+  <aside class="platform-sidebar sidebar">
+    <a class="sb-brand" href="index.html">
+      <div class="sb-mark">RR</div>
+      <div class="sb-txt"><div class="sb-name">Ronaldo Riska</div><div class="sb-role">Textile Intelligence</div></div>
+    </a>
+    <div class="sb-section">
+      <div class="sb-section-title">Profilo</div>
+      <a class="sb-link" href="index.html"><span class="sb-icon">⌂</span> Home Platform</a>
+      <a class="sb-link" href="cv.html"><span class="sb-icon">◈</span> Executive CV</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-title">Intelligence</div>
+      <a class="sb-link" href="dashboard.html"><span class="sb-icon">▣</span> Market Dashboard<span class="sb-badge">Live</span></a>
+      <a class="sb-link" href="research.html"><span class="sb-icon">◎</span> AI Research Lab<span class="sb-badge">8</span></a>
+      <a class="sb-link active" href="news.html"><span class="sb-icon">◉</span> Textile Newsroom<span class="sb-badge">8</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-title">Community</div>
+      <a class="sb-link" href="forum.html"><span class="sb-icon">◌</span> Industry Forum<span class="sb-badge">6</span></a>
+    </div>
+    <div class="sb-market">
+      <div class="sb-market-title">Market Pulse</div>
+      <div data-sidebar-pulse></div>
+    </div>
+    <div class="sb-bottom">
+      <span style="font-family:var(--f-m);font-size:.58rem;color:var(--stone)">© <span data-year></span> RR</span>
+      <button class="theme-btn" data-theme-toggle>Light</button>
+    </div>
+  </aside>
+
+  <div class="platform-content content" id="main">
+
+    <div class="page-hdr">
+      <div class="page-hdr-row">
+        <div>
+          <div class="page-hdr-breadcrumb"><a href="index.html">Platform</a> / Textile Newsroom</div>
+          <h1>Textile Newsroom</h1>
+          <div class="page-hdr-meta">
+            <span>◉ 8 articoli</span>
+            <span>📅 Mag 2026</span>
+            <span>AI · Sostenibilità · Produzione · Luxury · Certificazioni</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-pad">
+
+      <!-- FEATURED ARTICLE -->
+      <div data-featured-article class="featured-article reveal"></div>
+
+      <!-- SEARCH + FILTER -->
+      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem" class="reveal">
+        <input data-search="news"
+               type="search"
+               placeholder="Cerca notizie…"
+               style="flex:1;min-width:200px;padding:.6rem 1rem;
+                      background:var(--bg-1);border:1px solid var(--bdr-2);
+                      border-radius:var(--r);color:var(--cream);
+                      font-family:var(--f-m);font-size:.75rem;
+                      outline:none;transition:border-color var(--t2)">
+      </div>
+      <div class="filter-bar" data-news-filter></div>
+
+      <!-- NEWS GRID -->
+      <div class="news-grid" data-news-grid></div>
+
+    </div>
+
+    <footer class="platform-footer">
+      <span>© <span data-year></span> Ronaldo Riska · Textile Newsroom</span>
+      <nav style="display:flex;gap:1.25rem;flex-wrap:wrap">
+        <a href="index.html">Home</a><a href="cv.html">CV</a>
+        <a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="forum.html">Forum</a>
+      </nav>
+    </footer>
+
+  </div>
+</div>
+<button class="mob-menu-toggle" aria-label="Menu">☰</button>
+<script src="data.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>

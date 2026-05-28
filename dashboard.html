@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Market Dashboard | Textile Intelligence Platform</title>
+  <meta name="description" content="Dashboard mercato tessile: cotone, poliestere, lana, ESG index, AI adoption, export Italia. Dati aggiornati e indicatori chiave.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://italycircularfashion.github.io/RonaldoRiska/dashboard.html">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Salta al contenuto</a>
+<div class="platform">
+
+  <div class="platform-ticker">
+    <div class="ticker-bar">
+      <div class="ticker-label">LIVE</div>
+      <div class="ticker-track"><div class="ticker-items" aria-hidden="true"></div></div>
+    </div>
+  </div>
+
+  <aside class="platform-sidebar sidebar">
+    <a class="sb-brand" href="index.html">
+      <div class="sb-mark">RR</div>
+      <div class="sb-txt"><div class="sb-name">Ronaldo Riska</div><div class="sb-role">Textile Intelligence</div></div>
+    </a>
+    <div class="sb-section">
+      <div class="sb-section-title">Profilo</div>
+      <a class="sb-link" href="index.html"><span class="sb-icon">⌂</span> Home Platform</a>
+      <a class="sb-link" href="cv.html"><span class="sb-icon">◈</span> Executive CV</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-title">Intelligence</div>
+      <a class="sb-link active" href="dashboard.html"><span class="sb-icon">▣</span> Market Dashboard<span class="sb-badge">Live</span></a>
+      <a class="sb-link" href="research.html"><span class="sb-icon">◎</span> AI Research Lab<span class="sb-badge">8</span></a>
+      <a class="sb-link" href="news.html"><span class="sb-icon">◉</span> Textile Newsroom<span class="sb-badge">8</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-title">Community</div>
+      <a class="sb-link" href="forum.html"><span class="sb-icon">◌</span> Industry Forum<span class="sb-badge">6</span></a>
+    </div>
+    <div class="sb-market">
+      <div class="sb-market-title">Market Pulse</div>
+      <div data-sidebar-pulse></div>
+    </div>
+    <div class="sb-bottom">
+      <span style="font-family:var(--f-m);font-size:.58rem;color:var(--stone)">© <span data-year></span> RR</span>
+      <button class="theme-btn" data-theme-toggle>Light</button>
+    </div>
+  </aside>
+
+  <div class="platform-content content" id="main">
+
+    <div class="page-hdr">
+      <div class="page-hdr-row">
+        <div>
+          <div class="page-hdr-breadcrumb"><a href="index.html">Platform</a> / Market Dashboard</div>
+          <h1>Textile Intelligence Dashboard</h1>
+          <div class="page-hdr-meta">
+            <span>📅 Aggiornato: Maggio 2026</span>
+            <span>📊 Fonti: Textile Exchange · Euratex · ICAC · World Bank</span>
+            <span style="color:var(--up)">● Dati mock — struttura API-ready</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem">
+          <a class="btn btn-outline btn-sm" href="research.html">Ricerche →</a>
+          <a class="btn btn-gold btn-sm" href="news.html">Notizie →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-pad">
+
+      <!-- KPI TOP ROW -->
+      <div class="sec-hdr reveal">
+        <div class="eyebrow">Indicatori chiave · Industria tessile globale</div>
+        <h2>Market KPIs — Q2 2026</h2>
+      </div>
+      <div class="kpi-grid" data-kpi-grid></div>
+
+      <!-- SPARKLINE CHARTS -->
+      <div class="sec-hdr reveal" style="margin-top:1.5rem">
+        <div class="eyebrow">Trend materie prime &amp; indici</div>
+        <h2>Andamento — ultime 12 settimane</h2>
+      </div>
+      <div class="chart-grid" data-charts-grid></div>
+
+      <!-- DATA TABLE: Export tessile IT -->
+      <div class="sec-hdr reveal" style="margin-top:1.5rem">
+        <div class="eyebrow">Commercio estero · ISTAT / ICE 2025</div>
+        <h2>Export tessile-abbigliamento Italia per mercato</h2>
+      </div>
+      <div class="reveal" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Mercato</th>
+              <th>Export 2025 (M€)</th>
+              <th>Var. YoY</th>
+              <th>Quota %</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Francia</td><td class="td-num">2,140</td><td class="td-num td-up">+1.2%</td><td class="td-num">15.1%</td><td class="td-up">↑</td></tr>
+            <tr><td>Germania</td><td class="td-num">1,890</td><td class="td-num td-dn">-0.8%</td><td class="td-num">13.3%</td><td class="td-dn">↓</td></tr>
+            <tr><td>USA</td><td class="td-num">1,650</td><td class="td-num td-up">+4.1%</td><td class="td-num">11.6%</td><td class="td-up">↑</td></tr>
+            <tr><td>Svizzera</td><td class="td-num">1,380</td><td class="td-num td-up">+2.3%</td><td class="td-num">9.7%</td><td class="td-up">↑</td></tr>
+            <tr><td>Spagna</td><td class="td-num">980</td><td class="td-num td-up">+0.6%</td><td class="td-num">6.9%</td><td class="td-up">↑</td></tr>
+            <tr><td>Giappone</td><td class="td-num">720</td><td class="td-num td-up">+3.8%</td><td class="td-num">5.1%</td><td class="td-up">↑</td></tr>
+            <tr><td>Cina</td><td class="td-num">610</td><td class="td-num td-up">+6.2%</td><td class="td-num">4.3%</td><td class="td-up">↑</td></tr>
+            <tr><td>UAE</td><td class="td-num">540</td><td class="td-num td-up">+8.4%</td><td class="td-num">3.8%</td><td class="td-up">↑</td></tr>
+            <tr><td>UK</td><td class="td-num">490</td><td class="td-num td-dn">-2.1%</td><td class="td-num">3.5%</td><td class="td-dn">↓</td></tr>
+            <tr><td>Altri</td><td class="td-num">3,820</td><td class="td-num td-up">+1.9%</td><td class="td-num">26.7%</td><td class="td-up">↑</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ESG + AI SECTION -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem">
+
+        <div class="reveal">
+          <div class="sec-hdr">
+            <div class="eyebrow">Sostenibilità · Textile Exchange 2025</div>
+            <h2>ESG &amp; Certificazioni globali</h2>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Certificazione</th><th>Aziende certificate</th><th>Var. YoY</th></tr></thead>
+            <tbody>
+              <tr><td>GOTS</td><td class="td-num">8,744</td><td class="td-up td-num">+12.4%</td></tr>
+              <tr><td>GRS</td><td class="td-num">6,219</td><td class="td-up td-num">+18.7%</td></tr>
+              <tr><td>OEKO-TEX 100</td><td class="td-num">24,380</td><td class="td-up td-num">+8.1%</td></tr>
+              <tr><td>BLUESIGN</td><td class="td-num">1,124</td><td class="td-up td-num">+21.3%</td></tr>
+              <tr><td>ZDHC MRSL</td><td class="td-num">3,840</td><td class="td-up td-num">+14.2%</td></tr>
+              <tr><td>Cradle-to-Cradle</td><td class="td-num">892</td><td class="td-up td-num">+28.9%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="reveal">
+          <div class="sec-hdr">
+            <div class="eyebrow">AI &amp; Digitale · Industry Report 2026</div>
+            <h2>AI adoption nel tessile</h2>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Applicazione AI</th><th>Adozione %</th><th>ROI medio</th></tr></thead>
+            <tbody>
+              <tr><td>Quality Control CV</td><td class="td-num td-up">34%</td><td class="td-num">+28%</td></tr>
+              <tr><td>Demand Forecasting</td><td class="td-num td-up">41%</td><td class="td-num">+22%</td></tr>
+              <tr><td>Predictive Maintenance</td><td class="td-num">28%</td><td class="td-num">+19%</td></tr>
+              <tr><td>Color Matching AI</td><td class="td-num">22%</td><td class="td-num">+15%</td></tr>
+              <tr><td>Generative Design</td><td class="td-num">18%</td><td class="td-num">+31%</td></tr>
+              <tr><td>Supply Chain Opt.</td><td class="td-num">29%</td><td class="td-num">+24%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /grid -->
+
+      <!-- DISTRETTO PRATO -->
+      <div class="sec-hdr reveal" style="margin-top:1.5rem">
+        <div class="eyebrow">Focus locale · Confindustria Toscana 2025</div>
+        <h2>Distretto di Prato — indicatori</h2>
+      </div>
+      <div class="kpi-grid reveal" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+        <div class="kpi-box"><div class="kpi-label">Aziende attive</div><div class="kpi-val">~7k</div><div class="kpi-sub"><span class="kpi-dn">▼</span> -1.2% YoY</div></div>
+        <div class="kpi-box"><div class="kpi-label">Addetti</div><div class="kpi-val">42k</div><div class="kpi-sub"><span class="kpi-neu">●</span> Stabile</div></div>
+        <div class="kpi-box"><div class="kpi-label">Export Q1 2026</div><div class="kpi-val">€1.2B</div><div class="kpi-sub"><span class="kpi-up">▲</span> +2.1%</div></div>
+        <div class="kpi-box"><div class="kpi-label">Fibre riciclate</div><div class="kpi-val">60%</div><div class="kpi-sub"><span class="kpi-up">▲</span> +4pts YoY</div></div>
+        <div class="kpi-box"><div class="kpi-label">Prato Index</div><div class="kpi-val">104.2</div><div class="kpi-sub"><span class="kpi-up">▲</span> +0.9%</div></div>
+        <div class="kpi-box"><div class="kpi-label">Cert. ESG attive</div><div class="kpi-val">380+</div><div class="kpi-sub"><span class="kpi-up">▲</span> +12%</div></div>
+      </div>
+
+      <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--bg-1);
+                  border:1px solid var(--bdr);border-radius:var(--rm);
+                  font-family:var(--f-m);font-size:.62rem;color:var(--stone);
+                  line-height:1.7" class="reveal">
+        ⚠ <strong style="color:var(--sand)">Nota metodologica:</strong> I dati mostrati sono
+        mock data rappresentativi delle fonti citate (Textile Exchange, ICAC, Euratex, ISTAT/ICE,
+        Confindustria Toscana). La struttura è API-ready: sostituire le costanti in
+        <code style="color:var(--gold)">data.js</code> con fetch() alle API reali per dati live.
+      </div>
+
+    </div>
+
+    <footer class="platform-footer">
+      <span>© <span data-year></span> Ronaldo Riska · Market Dashboard</span>
+      <nav style="display:flex;gap:1.25rem;flex-wrap:wrap">
+        <a href="index.html">Home</a><a href="cv.html">CV</a>
+        <a href="research.html">Research</a><a href="news.html">News</a><a href="forum.html">Forum</a>
+      </nav>
+    </footer>
+
+  </div>
+</div>
+<button class="mob-menu-toggle" aria-label="Menu">☰</button>
+<script src="data.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>

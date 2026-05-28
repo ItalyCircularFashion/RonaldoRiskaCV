@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kanban Industriale</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0C0C0C;--bg2:#111;--bg3:#1A1A1A;--bg4:#222;--bg5:#2A2A2A;
+  --bdr:rgba(255,255,255,.07);--bdr2:rgba(255,255,255,.14);
+  --txt:#F0EDE8;--txt2:#9E9B96;--txt3:#5A5751;
+  --gold:#D4A017;--gold2:#E8B520;--goldbg:rgba(212,160,23,.14);
+  --red:#FF4757;--redbg:rgba(255,71,87,.15);
+  --grn:#2ED573;--grnbg:rgba(46,213,115,.13);
+  --blu:#4FC3F7;--blubg:rgba(79,195,247,.13);
+  --ora:#FFA502;--orabg:rgba(255,165,2,.13);
+  font-family:'Syne',system-ui,sans-serif;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--txt)}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:99px}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:var(--txt)}
+button{cursor:pointer}
+input,select{background:transparent;border:none;outline:none;width:100%}
+input:focus,select:focus{outline:none}
+
+/* ─── LAYOUT ─── */
+#wrap{max-width:1440px;margin:0 auto;padding:24px 20px 60px}
+
+/* ─── HEADER ─── */
+.page-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.logo-area{display:flex;align-items:center;gap:10px}
+.logo-ic{width:40px;height:40px;border-radius:10px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#000;flex-shrink:0}
+.company-name{font-size:24px;font-weight:800;letter-spacing:-.5px;background:none;border:none;outline:none;color:var(--txt);min-width:60px;max-width:340px;border-bottom:2px solid transparent;transition:border-color .15s;padding:2px 0}
+.company-name:hover{border-bottom-color:var(--bdr2)}
+.company-name:focus{border-bottom-color:var(--gold)}
+.page-subtitle{font-size:12px;color:var(--txt2);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:3px}
+.header-sp{flex:1}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:8px 16px;border-radius:8px;border:1px solid var(--bdr2);background:transparent;font-size:12px;font-weight:700;letter-spacing:.3px;transition:all .14s;color:var(--txt2)}
+.btn:hover{color:var(--txt);border-color:var(--gold);background:var(--goldbg)}
+.btn-primary{background:var(--gold);border-color:var(--gold);color:#000}
+.btn-primary:hover{background:var(--gold2);border-color:var(--gold2);color:#000}
+.btn-danger{border-color:rgba(255,71,87,.3);color:var(--red)}
+.btn-danger:hover{background:var(--redbg);border-color:var(--red)}
+
+/* ─── CONFIG BAR ─── */
+.config-bar{display:flex;align-items:stretch;gap:2px;background:var(--bg2);border:1px solid var(--bdr);border-radius:14px;padding:0;overflow:hidden;margin-bottom:24px;flex-wrap:wrap}
+.config-item{display:flex;flex-direction:column;padding:14px 20px;flex:1;min-width:140px;border-right:1px solid var(--bdr);position:relative}
+.config-item:last-child{border-right:none}
+.config-label{font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.config-val{font-size:22px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:6px}
+.config-val input{font-size:22px;font-weight:800;letter-spacing:-.5px;width:100%;background:transparent;border:none;outline:none;color:var(--txt);border-bottom:2px solid transparent;transition:border-color .15s;padding:2px 0}
+.config-val input:hover{border-bottom-color:var(--bdr2)}
+.config-val input:focus{border-bottom-color:var(--gold)}
+.config-unit{font-size:12px;font-weight:600;color:var(--txt2);margin-top:4px;white-space:nowrap}
+.config-hint{font-size:10px;color:var(--txt3);margin-top:4px;font-family:'DM Mono',monospace}
+
+/* ─── FORMULA BOX ─── */
+.formula-box{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:14px 18px;margin-bottom:24px;display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.formula-item{flex:1;min-width:200px}
+.formula-title{font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}
+.formula-text{font-size:12px;color:var(--txt2);font-family:'DM Mono',monospace;line-height:1.7}
+.formula-text strong{color:var(--gold);font-weight:700}
+.formula-text .hl{color:var(--blu)}
+
+/* ─── TABLE ─── */
+.table-wrap{background:var(--bg2);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.table-header{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
+.table-title{font-weight:800;font-size:14px;letter-spacing:-.3px}
+.table-sub{font-size:11px;color:var(--txt2);margin-left:8px}
+.table-sp{flex:1}
+
+table{width:100%;border-collapse:collapse}
+thead th{padding:10px 12px;font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:1.4px;text-transform:uppercase;border-bottom:1px solid var(--bdr);text-align:left;white-space:nowrap;background:var(--bg3)}
+thead th.calc{color:var(--gold);background:rgba(212,160,23,.06)}
+thead th.result{color:var(--grn);background:rgba(46,213,115,.05)}
+thead th.actions{width:60px;text-align:center}
+
+tbody tr{transition:background .12s}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+tbody tr:not(:last-child) td{border-bottom:1px solid var(--bdr)}
+td{padding:0;vertical-align:middle}
+
+/* editable cell */
+.cell{padding:10px 12px;display:flex;align-items:center;height:54px}
+.cell-input{background:transparent;border:none;outline:none;width:100%;color:var(--txt);font-size:13px;font-weight:500;border-bottom:2px solid transparent;transition:border-color .15s;padding:2px 0;font-family:inherit}
+.cell-input:hover{border-bottom-color:var(--bdr2)}
+.cell-input:focus{border-bottom-color:var(--gold)}
+.cell-input.mono{font-family:'DM Mono',monospace;font-size:12px}
+.cell-input.num{text-align:right}
+.cell-input.big{font-size:14px;font-weight:700}
+
+/* unit selector */
+.unit-sel{background:var(--bg4);border:1px solid var(--bdr);border-radius:5px;padding:3px 6px;font-size:11px;font-weight:700;color:var(--txt2);cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;text-align:center;min-width:38px}
+.unit-sel:hover{border-color:var(--bdr2)}
+.unit-sel:focus{border-color:var(--gold)}
+
+/* calc cells */
+.calc-cell{padding:10px 12px;height:54px;display:flex;align-items:center;justify-content:flex-end}
+.calc-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--txt2)}
+.calc-val.accent{color:var(--gold)}
+.calc-val.small{font-size:11px}
+
+/* result cells (N, Nss) */
+.res-cell{padding:8px 10px;height:54px;display:flex;align-items:center;justify-content:center}
+.badge-n{display:inline-flex;flex-direction:column;align-items:center;padding:5px 10px;border-radius:7px;min-width:52px;text-align:center}
+.badge-n .bval{font-size:15px;font-weight:800;font-family:'DM Mono',monospace;line-height:1}
+.badge-n .blbl{font-size:9px;font-weight:700;letter-spacing:.8px;margin-top:2px;text-transform:uppercase;opacity:.7}
+.bn-low{background:var(--grnbg);color:var(--grn)}
+.bn-med{background:var(--blubg);color:var(--blu)}
+.bn-high{background:var(--orabg);color:var(--ora)}
+.bn-xhigh{background:var(--redbg);color:var(--red)}
+
+/* SS badge */
+.ss-badge{display:inline-block;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:700;font-family:'DM Mono',monospace}
+.ss-1{background:var(--redbg);color:var(--red)}
+.ss-05{background:var(--orabg);color:var(--ora)}
+.ss-033{background:var(--blubg);color:var(--blu)}
+
+/* nss total badge */
+.nss-badge{display:inline-flex;flex-direction:column;align-items:center;padding:5px 12px;border-radius:8px;background:var(--goldbg);border:1px solid rgba(212,160,23,.3);min-width:56px}
+.nss-badge .nss-num{font-size:16px;font-weight:800;color:var(--gold);font-family:'DM Mono',monospace;line-height:1}
+.nss-badge .nss-lbl{font-size:9px;color:var(--gold);opacity:.7;font-weight:700;letter-spacing:.8px;margin-top:2px}
+.nss-badge .nss-ceil{font-size:10px;font-weight:700;color:var(--txt3);margin-top:1px;font-family:'DM Mono',monospace}
+
+/* action col */
+.act-cell{padding:6px 10px;height:54px;display:flex;align-items:center;justify-content:center;gap:4px}
+.row-btn{background:none;border:none;color:var(--txt3);font-size:14px;padding:4px 6px;border-radius:5px;transition:color .12s,background .12s;line-height:1}
+.row-btn:hover{color:var(--red);background:var(--redbg)}
+
+/* ─── KANBAN CARDS PREVIEW ─── */
+.cards-section{margin-bottom:24px}
+.cs-title{font-weight:800;font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.cs-sub{font-size:11px;color:var(--txt2);font-weight:500}
+.cards-grid{display:flex;flex-wrap:wrap;gap:12px}
+.kcard{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:14px 16px;min-width:200px;flex:1;max-width:260px;position:relative;overflow:hidden;transition:transform .14s,box-shadow .14s}
+.kcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.kcard-stripe{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:12px 0 0 12px}
+.kcard-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.kcard-comp{font-weight:800;font-size:14px;letter-spacing:-.2px}
+.kcard-nss{font-size:24px;font-weight:800;font-family:'DM Mono',monospace;line-height:1}
+.kcard-rows{display:flex;flex-direction:column;gap:5px}
+.kcard-row{display:flex;justify-content:space-between;font-size:11px}
+.kcard-rl{color:var(--txt3)}
+.kcard-rv{font-weight:700;font-family:'DM Mono',monospace}
+.kcard-foq{margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center}
+.kcard-foq-l{font-size:10px;color:var(--txt3);font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.kcard-foq-v{font-size:13px;font-weight:800;font-family:'DM Mono',monospace}
+
+/* ─── SUMMARY ─── */
+.summary-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+.sum-card{flex:1;min-width:140px;background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:14px 16px}
+.sum-label{font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:1.4px;text-transform:uppercase;margin-bottom:6px}
+.sum-val{font-size:26px;font-weight:800;font-family:'DM Mono',monospace;line-height:1}
+.sum-val.gold{color:var(--gold)}
+.sum-val.grn{color:var(--grn)}
+.sum-sub{font-size:10px;color:var(--txt3);margin-top:4px}
+
+/* ─── ADD ROW BUTTON ─── */
+.add-row-btn{width:100%;padding:12px;background:transparent;border:1.5px dashed var(--bdr2);border-radius:12px;color:var(--txt2);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .14s;margin-bottom:24px}
+.add-row-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--goldbg)}
+
+/* ─── FOOTER NOTES ─── */
+.footnotes{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:14px 18px;font-size:11px;color:var(--txt3);line-height:1.8;font-family:'DM Mono',monospace}
+.footnotes strong{color:var(--txt2)}
+
+/* ─── PRINT ─── */
+@media print{
+  body{background:#fff!important;color:#000!important}
+  :root{--bg:#fff;--bg2:#f9f9f9;--bg3:#f0f0f0;--bg4:#e8e8e8;--bdr:#ddd;--bdr2:#ccc;
+        --txt:#111;--txt2:#444;--txt3:#777;--gold:#B8860B}
+  .no-print{display:none!important}
+  #wrap{padding:10px;max-width:100%}
+  .table-wrap{border:1px solid #ccc}
+  .kcard{border:1px solid #ccc;background:#f9f9f9;break-inside:avoid}
+}
+
+/* ─── TOOLTIP ─── */
+.tooltip{position:relative;display:inline-flex;align-items:center}
+.tooltip-icon{width:14px;height:14px;border-radius:50%;background:var(--bg5);color:var(--txt3);font-size:9px;display:flex;align-items:center;justify-content:center;cursor:help;font-weight:700;flex-shrink:0}
+.tooltip-text{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--bg4);border:1px solid var(--bdr2);border-radius:6px;padding:6px 10px;font-size:10px;color:var(--txt2);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:100;font-family:'DM Mono',monospace;margin-bottom:5px;max-width:220px;white-space:normal;text-align:center}
+.tooltip:hover .tooltip-text{opacity:1}
+
+/* ─── NOTIFICATION ─── */
+.notif{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--bdr2);padding:9px 18px;border-radius:99px;font-size:12px;font-weight:700;z-index:9999;pointer-events:none;animation:nfx 2.5s ease forwards;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+@keyframes nfx{0%{opacity:0;transform:translateX(-50%) translateY(8px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1}100%{opacity:0}}
+</style>
+</head>
+<body>
+<div id="wrap">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="logo-area">
+      <div class="logo-ic">K</div>
+      <div>
+        <input class="company-name" id="company-name" type="text" placeholder="Nome Azienda" title="Clicca per modificare">
+        <div class="page-subtitle">Kanban Industriale · Calcolo Cartellini</div>
+      </div>
+    </div>
+    <div class="header-sp"></div>
+    <div class="header-actions no-print">
+      <button class="btn" onclick="exportCSV()">⬇ Export CSV</button>
+      <button class="btn" onclick="copyExcel()">📋 Copia per Excel</button>
+      <button class="btn btn-primary" onclick="window.print()">🖨 Stampa / PDF</button>
+    </div>
+  </div>
+
+  <!-- CONFIG BAR -->
+  <div class="config-bar">
+    <div class="config-item">
+      <div class="config-label">
+        Articolo / Prodotto
+        <span class="tooltip no-print"><span class="tooltip-icon">?</span><span class="tooltip-text">Nome del prodotto finito che si assembla</span></span>
+      </div>
+      <div class="config-val"><input id="cfg-product" type="text" placeholder="es. Camicia, Giacca…"></div>
+      <div class="config-unit">nome prodotto</div>
+    </div>
+    <div class="config-item">
+      <div class="config-label">
+        Pezzi al Giorno (M)
+        <span class="tooltip no-print"><span class="tooltip-icon">?</span><span class="tooltip-text">Produzione giornaliera del prodotto finito</span></span>
+      </div>
+      <div class="config-val"><input id="cfg-pzgg" type="number" min="1" placeholder="80"> <span style="font-size:14px;color:var(--txt3);font-weight:600">pz/gg</span></div>
+      <div class="config-unit">fabbisogno giornaliero</div>
+    </div>
+    <div class="config-item">
+      <div class="config-label">
+        Giorni Lavorativi / Settimana
+        <span class="tooltip no-print"><span class="tooltip-icon">?</span><span class="tooltip-text">Giorni di produzione per settimana (tipicamente 5)</span></span>
+      </div>
+      <div class="config-val"><input id="cfg-ggset" type="number" min="1" max="7" placeholder="5"> <span style="font-size:14px;color:var(--txt3);font-weight:600">gg/sett</span></div>
+      <div class="config-unit">converte LT sett → giorni</div>
+    </div>
+    <div class="config-item">
+      <div class="config-label">
+        Scorta di Sicurezza
+        <span class="tooltip no-print"><span class="tooltip-icon">?</span><span class="tooltip-text">Settimane di buffer · SS = 1 sett / LT (settimane)</span></span>
+      </div>
+      <div class="config-val"><input id="cfg-ss" type="number" min="0" step="0.5" placeholder="1"> <span style="font-size:14px;color:var(--txt3);font-weight:600">sett</span></div>
+      <div class="config-unit" id="cfg-ss-hint">SS = sett_buffer / LT_sett</div>
+    </div>
+  </div>
+
+  <!-- FORMULA BOX -->
+  <div class="formula-box no-print">
+    <div class="formula-item">
+      <div class="formula-title">Formula N (senza scorta)</div>
+      <div class="formula-text">
+        <strong>N</strong> = <span class="hl">Consumo_gg</span> × LT_giorni / Pz_al_gg<br>
+        = (<strong>M</strong> × necessario) × LT_gg / <strong>M</strong><br>
+        = <strong>necessario × LT_giorni</strong>
+      </div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-title">Formula Nss (con scorta di sicurezza)</div>
+      <div class="formula-text">
+        <strong>SS</strong> = sett_buffer / LT_sett · (var. consegne)<br>
+        <strong>Nss</strong> = N × (1 + SS)<br>
+        = necessario × LT_gg × (1 + SS)
+      </div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-title">Consumo Giornaliero</div>
+      <div class="formula-text">
+        <strong>C_gg</strong> = Pz_al_gg × necessario_per_pezzo<br>
+        <strong>C×LT</strong> = C_gg × LT_giorni<br>
+        = richiesta totale nel ciclo
+      </div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-title">N Batch (cartellini Kanban)</div>
+      <div class="formula-text">
+        <strong>N batch</strong> = ⌈ Nss ⌉<br>
+        (arrotondato per eccesso)<br>
+        ogni batch = 1 giorno di produzione
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    <div class="table-header">
+      <span class="table-title">Componenti</span>
+      <span class="table-sub" id="table-sub"></span>
+      <div class="table-sp"></div>
+    </div>
+    <div style="overflow-x:auto">
+      <table id="main-table">
+        <thead>
+          <tr>
+            <th style="min-width:130px">Componente</th>
+            <th style="min-width:90px">Unità</th>
+            <th style="min-width:100px">Necessario/pz</th>
+            <th style="min-width:100px">LT (sett)</th>
+            <th style="min-width:80px">LT (gg)</th>
+            <th style="min-width:90px">FOQ (lotto)</th>
+            <th class="calc" style="min-width:110px">Consumo/gg</th>
+            <th class="calc" style="min-width:100px">Consumo×LT</th>
+            <th class="calc" style="min-width:60px">SS</th>
+            <th class="result" style="min-width:80px">N</th>
+            <th class="result" style="min-width:90px">Nss</th>
+            <th class="actions no-print"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ADD ROW BUTTON -->
+  <button class="add-row-btn no-print" onclick="addRow()">＋ Aggiungi Componente</button>
+
+  <!-- SUMMARY -->
+  <div class="summary-row" id="summary-row"></div>
+
+  <!-- KANBAN CARDS VISUAL -->
+  <div class="cards-section">
+    <div class="cs-title">
+      Cartellini Kanban
+      <span class="cs-sub">— visualizzazione per componente (Nss arrotondato)</span>
+    </div>
+    <div class="cards-grid" id="cards-grid"></div>
+  </div>
+
+  <!-- FOOTNOTES -->
+  <div class="footnotes">
+    <strong>Legenda:</strong>
+    &nbsp;·&nbsp; <strong>FOQ</strong> = Fixed Order Quantity — lotto minimo di riordino
+    &nbsp;·&nbsp; <strong>N</strong> = numero kanban senza scorta di sicurezza
+    &nbsp;·&nbsp; <strong>Nss</strong> = numero kanban con scorta di sicurezza
+    &nbsp;·&nbsp; <strong>SS</strong> = scorta di sicurezza = sett_buffer / LT_settimane
+    &nbsp;·&nbsp; <strong>LT</strong> = Lead Time di approvvigionamento
+    &nbsp;·&nbsp; <strong>N batch</strong> = ⌈Nss⌉ (arrotondato per eccesso)
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+/* ════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════ */
+const SK = 'kanban_ind_v1';
+
+const COLORS = ['#D4A017','#E07A5F','#2A9D8F','#9B5DE5','#00BBF9','#F15BB5','#80B918','#FFA502'];
+
+const SEED = {
+  company: 'SuperBlash',
+  product: 'Camicia',
+  pzGiorno: 80,
+  giorniSett: 5,
+  ssSettimane: 1,
+  rows: [
+    { id: 1, nome: 'Tessuto',  unita: 'mt', necessario: 1.5,  ltSett: 2, foq: 13  },
+    { id: 2, nome: 'Bottoni',  unita: 'pz', necessario: 8,    ltSett: 1, foq: 100 },
+    { id: 3, nome: 'Filo',     unita: 'mt', necessario: 10,   ltSett: 1, foq: 200 },
+    { id: 4, nome: 'Stecche',  unita: 'pz', necessario: 2,    ltSett: 3, foq: 100 },
+  ]
+};
+
+let S;
+let nextId = 10;
+try {
+  const sv = localStorage.getItem(SK);
+  S = sv ? JSON.parse(sv) : JSON.parse(JSON.stringify(SEED));
+  nextId = Math.max(...S.rows.map(r => r.id), 0) + 1;
+} catch(e) {
+  S = JSON.parse(JSON.stringify(SEED));
+}
+
+function save() {
+  try { localStorage.setItem(SK, JSON.stringify(S)); } catch(e) {}
+}
+
+/* ════════════════════════════════════════════
+   CALC
+════════════════════════════════════════════ */
+function calc(row) {
+  const M   = S.pzGiorno || 0;
+  const ggs = S.giorniSett || 5;
+  const ssS = S.ssSettimane !== undefined ? S.ssSettimane : 1;
+  const n   = row.necessario || 0;
+  const lt  = row.ltSett || 0;
+  const ltGg = lt * ggs;
+  const cGg  = M * n;
+  const cLT  = cGg * ltGg;
+  const ss   = lt > 0 ? ssS / lt : 0;
+  const N    = n * ltGg;            // = cGg * ltGg / M
+  const Nss  = N * (1 + ss);
+  const Nbatch = Math.ceil(Nss);
+  return { ltGg, cGg, cLT, ss: parseFloat(ss.toFixed(4)), N: parseFloat(N.toFixed(4)), Nss: parseFloat(Nss.toFixed(4)), Nbatch };
+}
+
+function fmt2(v) { return isNaN(v) ? '—' : parseFloat(v.toFixed(2)).toLocaleString('it-IT'); }
+function fmt0(v) { return isNaN(v) ? '—' : Math.round(v).toLocaleString('it-IT'); }
+
+/* ════════════════════════════════════════════
+   BADGE HELPERS
+════════════════════════════════════════════ */
+function badgeClass(n) {
+  if (n <= 10) return 'bn-low';
+  if (n <= 30) return 'bn-med';
+  if (n <= 60) return 'bn-high';
+  return 'bn-xhigh';
+}
+function ssBadgeClass(ss) {
+  if (ss >= 1)   return 'ss-1';
+  if (ss >= 0.5) return 'ss-05';
+  return 'ss-033';
+}
+function rowColor(idx) { return COLORS[idx % COLORS.length]; }
+
+/* ════════════════════════════════════════════
+   RENDER CONFIG INPUTS
+════════════════════════════════════════════ */
+function renderConfig() {
+  document.getElementById('company-name').value = S.company || '';
+  document.getElementById('cfg-product').value  = S.product || '';
+  document.getElementById('cfg-pzgg').value     = S.pzGiorno || '';
+  document.getElementById('cfg-ggset').value    = S.giorniSett || 5;
+  document.getElementById('cfg-ss').value       = S.ssSettimane !== undefined ? S.ssSettimane : 1;
+  document.getElementById('cfg-ss-hint').textContent = `SS = ${S.ssSettimane || 1} sett / LT_sett`;
+}
+
+/* ════════════════════════════════════════════
+   RENDER TABLE
+════════════════════════════════════════════ */
+function renderTable() {
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+
+  S.rows.forEach((row, idx) => {
+    const c = calc(row);
+    const color = rowColor(idx);
+    const cls = badgeClass(c.Nss);
+
+    const tr = document.createElement('tr');
+    tr.dataset.id = row.id;
+
+    tr.innerHTML = `
+      <td>
+        <div class="cell">
+          <input class="cell-input big" type="text" value="${esc(row.nome)}" placeholder="Componente"
+            onchange="updateRow(${row.id},'nome',this.value)" oninput="updateRow(${row.id},'nome',this.value)">
+        </div>
+      </td>
+      <td>
+        <div class="cell" style="justify-content:center">
+          <select class="unit-sel" onchange="updateRow(${row.id},'unita',this.value)">
+            ${['pz','mt','kg','lt','m','cm','g','conf','set','box'].map(u=>`<option value="${u}"${row.unita===u?' selected':''}>${u}</option>`).join('')}
+          </select>
+        </div>
+      </td>
+      <td>
+        <div class="cell" style="justify-content:flex-end">
+          <input class="cell-input mono num" type="number" min="0" step="any" value="${row.necessario||''}" placeholder="0"
+            style="max-width:80px" onchange="updateRow(${row.id},'necessario',parseFloat(this.value)||0)" oninput="updateRow(${row.id},'necessario',parseFloat(this.value)||0)">
+          <span style="font-size:11px;color:var(--txt3);margin-left:4px;white-space:nowrap">${esc(row.unita)}/pz</span>
+        </div>
+      </td>
+      <td>
+        <div class="cell" style="justify-content:flex-end">
+          <input class="cell-input mono num" type="number" min="0" step="0.5" value="${row.ltSett||''}" placeholder="0"
+            style="max-width:60px" onchange="updateRow(${row.id},'ltSett',parseFloat(this.value)||0)" oninput="updateRow(${row.id},'ltSett',parseFloat(this.value)||0)">
+          <span style="font-size:11px;color:var(--txt3);margin-left:4px">sett</span>
+        </div>
+      </td>
+      <td>
+        <div class="calc-cell">
+          <span class="calc-val accent">${c.ltGg}</span>
+          <span style="font-size:10px;color:var(--txt3);margin-left:3px">gg</span>
+        </div>
+      </td>
+      <td>
+        <div class="cell" style="justify-content:flex-end">
+          <input class="cell-input mono num" type="number" min="0" value="${row.foq||''}" placeholder="0"
+            style="max-width:80px" onchange="updateRow(${row.id},'foq',parseFloat(this.value)||0)" oninput="updateRow(${row.id},'foq',parseFloat(this.value)||0)">
+          <span style="font-size:11px;color:var(--txt3);margin-left:4px;white-space:nowrap">${esc(row.unita)}</span>
+        </div>
+      </td>
+      <td>
+        <div class="calc-cell">
+          <span class="calc-val">${fmt2(c.cGg)}</span>
+          <span style="font-size:10px;color:var(--txt3);margin-left:3px;white-space:nowrap">${esc(row.unita)}/gg</span>
+        </div>
+      </td>
+      <td>
+        <div class="calc-cell">
+          <span class="calc-val small">${fmt0(c.cLT)}</span>
+          <span style="font-size:10px;color:var(--txt3);margin-left:3px">${esc(row.unita)}</span>
+        </div>
+      </td>
+      <td>
+        <div class="res-cell">
+          <span class="ss-badge ${ssBadgeClass(c.ss)}">${fmt2(c.ss)}</span>
+        </div>
+      </td>
+      <td>
+        <div class="res-cell">
+          <div class="badge-n ${cls}">
+            <span class="bval">${fmt2(c.N)}</span>
+            <span class="blbl">N</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="res-cell">
+          <div class="nss-badge">
+            <span class="nss-num">${fmt2(c.Nss)}</span>
+            <span class="nss-lbl">Nss</span>
+            <span class="nss-ceil">⌈${c.Nbatch}⌉ batch</span>
+          </div>
+        </div>
+      </td>
+      <td class="no-print">
+        <div class="act-cell">
+          <button class="row-btn" onclick="deleteRow(${row.id})" title="Elimina">🗑</button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // table subtitle
+  const ts = document.getElementById('table-sub');
+  ts.textContent = `${S.rows.length} componenti · ${S.pzGiorno||0} pz/gg · ${S.giorniSett||5} gg/sett`;
+}
+
+/* ════════════════════════════════════════════
+   RENDER SUMMARY
+════════════════════════════════════════════ */
+function renderSummary() {
+  const el = document.getElementById('summary-row');
+  const totNbatch = S.rows.reduce((a,r)=>a+calc(r).Nbatch,0);
+  const totCLT    = S.rows.reduce((a,r)=>a+calc(r).cLT,0);
+  const maxLT     = S.rows.reduce((a,r)=>Math.max(a,r.ltSett||0),0);
+  const avgSS     = S.rows.length ? S.rows.reduce((a,r)=>a+calc(r).ss,0)/S.rows.length : 0;
+  el.innerHTML = `
+    <div class="sum-card">
+      <div class="sum-label">Componenti</div>
+      <div class="sum-val gold">${S.rows.length}</div>
+      <div class="sum-sub">tipi di componente</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-label">Tot. Cartellini (Nss)</div>
+      <div class="sum-val gold">${totNbatch}</div>
+      <div class="sum-sub">batch totali in circolazione</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-label">Lead Time Massimo</div>
+      <div class="sum-val">${maxLT}</div>
+      <div class="sum-sub">settimane (componente critico)</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-label">SS medio</div>
+      <div class="sum-val grn">${fmt2(avgSS)}</div>
+      <div class="sum-sub">scorta di sicurezza media</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-label">Pezzi / Giorno</div>
+      <div class="sum-val">${S.pzGiorno||0}</div>
+      <div class="sum-sub">${S.product||'prodotto'}</div>
+    </div>
+  `;
+}
+
+/* ════════════════════════════════════════════
+   RENDER KANBAN CARDS
+════════════════════════════════════════════ */
+function renderCards() {
+  const grid = document.getElementById('cards-grid');
+  grid.innerHTML = '';
+  S.rows.forEach((row, idx) => {
+    const c = calc(row);
+    const color = rowColor(idx);
+    const card = document.createElement('div');
+    card.className = 'kcard';
+    card.innerHTML = `
+      <div class="kcard-stripe" style="background:${color}"></div>
+      <div class="kcard-head">
+        <div>
+          <div class="kcard-comp">${esc(row.nome)}</div>
+          <div style="font-size:10px;color:var(--txt3);margin-top:2px">${esc(S.company||'')}</div>
+        </div>
+        <div class="kcard-nss" style="color:${color}">${c.Nbatch}</div>
+      </div>
+      <div class="kcard-rows">
+        <div class="kcard-row">
+          <span class="kcard-rl">Articolo</span>
+          <span class="kcard-rv">${esc(S.product||'—')}</span>
+        </div>
+        <div class="kcard-row">
+          <span class="kcard-rl">Necessario</span>
+          <span class="kcard-rv">${row.necessario} ${esc(row.unita)}/pz</span>
+        </div>
+        <div class="kcard-row">
+          <span class="kcard-rl">Lead Time</span>
+          <span class="kcard-rv">${row.ltSett} sett / ${c.ltGg} gg</span>
+        </div>
+        <div class="kcard-row">
+          <span class="kcard-rl">Consumo/gg</span>
+          <span class="kcard-rv">${fmt2(c.cGg)} ${esc(row.unita)}</span>
+        </div>
+        <div class="kcard-row">
+          <span class="kcard-rl">N / Nss</span>
+          <span class="kcard-rv">${fmt2(c.N)} / ${fmt2(c.Nss)}</span>
+        </div>
+        <div class="kcard-row">
+          <span class="kcard-rl">SS</span>
+          <span class="kcard-rv" style="color:${color}">${fmt2(c.ss)}</span>
+        </div>
+      </div>
+      <div class="kcard-foq">
+        <span class="kcard-foq-l">FOQ lotto min.</span>
+        <span class="kcard-foq-v" style="color:${color}">${row.foq||'—'} ${esc(row.unita)}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ════════════════════════════════════════════
+   FULL RENDER
+════════════════════════════════════════════ */
+function renderAll() {
+  renderConfig();
+  renderTable();
+  renderSummary();
+  renderCards();
+}
+
+/* ════════════════════════════════════════════
+   MUTATIONS
+════════════════════════════════════════════ */
+function updateRow(id, field, value) {
+  const row = S.rows.find(r => r.id === id);
+  if (!row) return;
+  row[field] = value;
+  save();
+  renderTable();
+  renderSummary();
+  renderCards();
+}
+
+function addRow() {
+  S.rows.push({ id: nextId++, nome: 'Nuovo Componente', unita: 'pz', necessario: 1, ltSett: 1, foq: 100 });
+  save();
+  renderAll();
+  // focus last row nome input
+  setTimeout(() => {
+    const rows = document.querySelectorAll('#tbody tr');
+    const last = rows[rows.length - 1];
+    if (last) last.querySelector('.cell-input.big')?.focus();
+  }, 50);
+}
+
+function deleteRow(id) {
+  if (S.rows.length <= 1) { notify('Deve esserci almeno un componente'); return; }
+  S.rows = S.rows.filter(r => r.id !== id);
+  save();
+  renderAll();
+  notify('Componente eliminato');
+}
+
+/* ════════════════════════════════════════════
+   CONFIG LISTENERS
+════════════════════════════════════════════ */
+function initConfigListeners() {
+  document.getElementById('company-name').addEventListener('input', e => {
+    S.company = e.target.value; save(); renderCards();
+  });
+  document.getElementById('cfg-product').addEventListener('input', e => {
+    S.product = e.target.value; save(); renderTable(); renderSummary(); renderCards();
+  });
+  document.getElementById('cfg-pzgg').addEventListener('input', e => {
+    S.pzGiorno = parseFloat(e.target.value) || 0; save(); renderTable(); renderSummary(); renderCards();
+  });
+  document.getElementById('cfg-ggset').addEventListener('input', e => {
+    S.giorniSett = parseInt(e.target.value) || 5; save(); renderTable(); renderSummary(); renderCards();
+  });
+  document.getElementById('cfg-ss').addEventListener('input', e => {
+    S.ssSettimane = parseFloat(e.target.value) || 0;
+    document.getElementById('cfg-ss-hint').textContent = `SS = ${S.ssSettimane} sett / LT_sett`;
+    save(); renderTable(); renderSummary(); renderCards();
+  });
+}
+
+/* ════════════════════════════════════════════
+   EXPORT
+════════════════════════════════════════════ */
+function exportCSV() {
+  const sep = ';'; // Italian Excel uses semicolon
+  const header = ['Componente','Unità','Necessario/pz','LT (sett)','LT (gg)','FOQ',
+    'Consumo/gg','Consumo×LT','SS','N','Nss','N batch (⌈Nss⌉)'].join(sep);
+  const meta = [
+    `Azienda${sep}${S.company||''}`,
+    `Articolo${sep}${S.product||''}`,
+    `Pezzi/gg${sep}${S.pzGiorno||0}`,
+    `Giorni/sett${sep}${S.giorniSett||5}`,
+    `SS settimane${sep}${S.ssSettimane||1}`,
+    '',
+  ];
+  const dataRows = S.rows.map(row => {
+    const c = calc(row);
+    return [
+      row.nome, row.unita, row.necessario, row.ltSett, c.ltGg, row.foq,
+      c.cGg.toFixed(2), c.cLT.toFixed(0), c.ss.toFixed(4),
+      c.N.toFixed(4), c.Nss.toFixed(4), c.Nbatch
+    ].join(sep);
+  });
+  const csv = [...meta, header, ...dataRows].join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `kanban_${(S.company||'azienda').replace(/\s+/g,'_')}.csv`;
+  a.click();
+  notify('CSV esportato ✓');
+}
+
+function copyExcel() {
+  const header = ['Componente','Unità','Necessario/pz','LT sett','LT gg','FOQ',
+    'Consumo/gg','Consumo×LT','SS','N','Nss','N batch'].join('\t');
+  const rows = S.rows.map(row => {
+    const c = calc(row);
+    return [
+      row.nome, row.unita, row.necessario, row.ltSett, c.ltGg, row.foq,
+      c.cGg.toFixed(2), c.cLT.toFixed(0), c.ss.toFixed(4),
+      c.N.toFixed(4), c.Nss.toFixed(4), c.Nbatch
+    ].join('\t');
+  });
+  const text = [header, ...rows].join('\n');
+  navigator.clipboard.writeText(text)
+    .then(() => notify('Copiato — incolla direttamente in Excel ✓'))
+    .catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); ta.remove();
+      notify('Copiato negli appunti ✓');
+    });
+}
+
+/* ════════════════════════════════════════════
+   NOTIFICATION
+════════════════════════════════════════════ */
+function notify(msg) {
+  document.getElementById('notif-el')?.remove();
+  const d = document.createElement('div');
+  d.id = 'notif-el'; d.className = 'notif'; d.textContent = msg;
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 2500);
+}
+
+/* ════════════════════════════════════════════
+   UTILS
+════════════════════════════════════════════ */
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════ */
+initConfigListeners();
+renderAll();
+</script>
+</body>
+</html>
