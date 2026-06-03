@@ -121,39 +121,82 @@ function highlightNavLink(){
   });
 }
 
-/* ═══ REVEAL ═══ */
-function initReveal(){
-  const els=document.querySelectorAll('.reveal');
-  if(!els.length)return;
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(!entry.isIntersecting)return;
-      const el=entry.target;
-      const siblings=[...el.parentElement.querySelectorAll(':scope > .reveal')];
-      el.style.transitionDelay=`${Math.min(siblings.indexOf(el)*0.06,0.36)}s`;
+/* ═══ REVEAL (optimized) ═══ */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+
+  // Precompute sibling indices ONCE (no runtime DOM queries in observer)
+  const groups = new Map();
+
+  els.forEach(el => {
+    const parent = el.parentElement;
+    if (!groups.has(parent)) {
+      const siblings = [...parent.querySelectorAll(':scope > .reveal')];
+      siblings.forEach((s, i) => {
+        groups.set(s, i);
+      });
+    }
+  });
+
+  const io = new IntersectionObserver((entries, observer) => {
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
+      if (!entry.isIntersecting) continue;
+
+      const el = entry.target;
+
+      const index = groups.get(el) || 0;
+      el.style.transitionDelay = `${Math.min(index * 0.06, 0.36)}s`;
+
       el.classList.add('visible');
-      io.unobserve(el);
-    });
-  },{threshold:0.10,rootMargin:'0px 0px -30px 0px'});
-  els.forEach(el=>io.observe(el));
+      observer.unobserve(el);
+    }
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  for (let i = 0; i < els.length; i++) {
+    io.observe(els[i]);
+  }
 }
 
-/* ═══ KPI CARDS ═══ */
-function renderKpis(){
-  const grid=document.querySelector('[data-kpi-grid]');
-  if(!grid||typeof MARKET_KPIS==='undefined')return;
-  grid.innerHTML=MARKET_KPIS.map(k=>`
-    <div class="kpi-box reveal">
-      <div class="kpi-label">${k.label}</div>
-      <div class="kpi-val">${k.val}</div>
-      <div class="kpi-sub">
-        <span class="kpi-${k.dir}">${k.dir==='up'?'▲':k.dir==='dn'?'▼':'●'}</span>
-        ${k.sub}
-      </div>
-      <div class="kpi-trend">${k.dir==='up'?'↑':k.dir==='dn'?'↓':'→'}</div>
-    </div>`).join('');
-}
+/* ═══ KPI CARDS (optimized) ═══ */
+function renderKpis() {
+  const grid = document.querySelector('[data-kpi-grid]');
+  if (!grid || !Array.isArray(MARKET_KPIS)) return;
 
+  const frag = document.createDocumentFragment();
+
+  for (let i = 0; i < MARKET_KPIS.length; i++) {
+    const k = MARKET_KPIS[i];
+
+    const el = document.createElement('div');
+    el.className = 'kpi-box reveal';
+
+    const dir = k.dir;
+    const isUp = dir === 'up';
+    const isDown = dir === 'dn';
+
+    el.innerHTML =
+      '<div class="kpi-label">' + k.label + '</div>' +
+      '<div class="kpi-val">' + k.val + '</div>' +
+      '<div class="kpi-sub">' +
+        '<span class="kpi-' + dir + '">' +
+          (isUp ? '▲' : isDown ? '▼' : '●') +
+        '</span>' +
+        k.sub +
+      '</div>' +
+      '<div class="kpi-trend">' +
+        (isUp ? '↑' : isDown ? '↓' : '→') +
+      '</div>';
+
+    frag.appendChild(el);
+  }
+
+  grid.replaceChildren(frag);
+}
 /* ═══ CHARTS ═══ */
 function initCharts(){
   // KPI grid charts (sparklines inside chart cards)
