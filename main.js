@@ -24,17 +24,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   initTicker();
   initSidebar();
   initReveal();
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    el.style.opacity = 1;
-    el.style.transform = 'none';
-  });
-
   initCharts();
   renderNews();
   renderResearch();
   renderForum();
   renderKpis();
+  renderArticles();
   populateSidebarPulse();
   highlightNavLink();
   initMobMenu();
@@ -418,6 +413,73 @@ function renderForum(){
       });
     });
   }
+}
+
+/* ═══ BIBLIOTECA TESSILE ═══ */
+function renderArticles() {
+  if (typeof ARTICLES === 'undefined') return;
+
+  const grid = document.querySelector('[data-biblioteca-grid]');
+  if (!grid) return;
+
+  // Split into left (odd indices) and right (even indices)
+  const left  = ARTICLES.filter((_, i) => i % 2 === 0);
+  const right = ARTICLES.filter((_, i) => i % 2 !== 0);
+
+  const buildCol = (items) => items.map(buildArticleCard).join('');
+
+  grid.innerHTML = `
+    <div class="bib-col">${buildCol(left)}</div>
+    <div class="bib-col">${buildCol(right)}</div>
+  `;
+
+  // Trigger reveals
+  setTimeout(() => {
+    grid.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.04}s`;
+      requestAnimationFrame(() => el.classList.add('visible'));
+    });
+  }, 80);
+
+  // Toggle expand/collapse
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.art-toggle');
+    if (!btn) return;
+    const card = btn.closest('.art-card');
+    const body = card.querySelector('.art-body-wrap');
+    const isOpen = card.classList.contains('expanded');
+
+    card.classList.toggle('expanded', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    btn.querySelector('.lbl').textContent = isOpen ? 'Leggi tutto' : 'Chiudi';
+  });
+}
+
+function buildArticleCard(a) {
+  return `
+<article class="art-card reveal" style="--art-color:${a.catColor}">
+  <div class="art-head">
+    <div class="art-meta">
+      <span class="art-num">${a.num}</span>
+      <span class="art-cat" style="color:${a.catColor};border-color:${a.catColor}44">${a.catLabel}</span>
+    </div>
+    <h3 class="art-title">${a.title}</h3>
+  </div>
+  <p class="art-preview">${a.preview}</p>
+  <div class="art-body-wrap">
+    <div class="art-body">${a.body}</div>
+  </div>
+  <div class="art-footer">
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span class="art-readtime">⏱ ${a.readTime}</span>
+      <div class="art-tags">${a.tags.map(t => `<span class="art-tag">${t}</span>`).join('')}</div>
+    </div>
+    <button class="art-toggle">
+      <span class="lbl">Leggi tutto</span>
+      <span class="arr">↓</span>
+    </button>
+  </div>
+</article>`.trim();
 }
 
 /* ═══ SEARCH (newsroom + research) ═══ */
