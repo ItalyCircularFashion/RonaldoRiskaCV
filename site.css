@@ -308,7 +308,7 @@ ul   { list-style:none; }
   border: 1px solid var(--bdr);
   border-radius: var(--rm);
 
-  overflow: hidden; /* FIX: evita bleed visivo tra card */
+  overflow: visible; /* FIX: evita bleed visivo tra card */
   background: var(--bg-2); /* FIX: base canvas visivo */
   margin-bottom: 1.75rem;
 }
