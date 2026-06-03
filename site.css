@@ -3,7 +3,7 @@
    Ronaldo Riska  ·  Bloomberg × McKinsey × FT aesthetic
 ══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
 /* ─── TOKENS ─── */
 :root {
@@ -42,7 +42,6 @@
   --header-h:    54px;
 
   --f-h: 'Syne', sans-serif;
-  --f-b: 'Inter', system-ui, -apple-system, sans-serif;
   --f-m: 'DM Mono', monospace;
 
   --r:  4px;
@@ -80,7 +79,7 @@ html {
 ::-webkit-scrollbar-thumb:hover { background:var(--gold); }
 
 body {
-  font-family: var(--f-b);
+  font-family: var(--f-h);
   background: var(--bg);
   color: var(--cream);
   line-height: 1.6;
@@ -299,81 +298,36 @@ ul   { list-style:none; }
   content: ''; width: 20px; height: 1px; background: var(--gold); opacity: .5;
 }
 
-/* ─── KPI GRID (FIXED RENDER PIPELINE) ─── */
+/* ─── KPI CARDS ─── */
 .kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 1px;
-
-  border: 1px solid var(--bdr);
-  border-radius: var(--rm);
-
-  overflow: visible; /* FIX: evita bleed visivo tra card */
-  background: var(--bg-2); /* FIX: base canvas visivo */
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 1px;
+  border: 1px solid var(--bdr); border-radius: var(--rm); overflow: hidden;
   margin-bottom: 1.75rem;
 }
-
-/* KPI BOX */
 .kpi-box {
-  background: var(--bg-1);
-  padding: 1.1rem 1.25rem;
-
-  transition: background var(--t2), transform var(--t2);
-
+  background: var(--bg-1); padding: 1.1rem 1.25rem;
+  transition: background var(--t2);
   position: relative;
-  min-height: 92px; /* FIX: stabilità layout */
 }
-
-/* hover state */
-.kpi-box:hover {
-  background: var(--bg-2);
-  transform: translateY(-1px); /* micro feedback UX */
-}
-
-/* label */
+.kpi-box:hover { background: var(--bg-2); }
 .kpi-label {
-  font-family: var(--f-m);
-  font-size: .55rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--stone);
-  margin-bottom: .45rem;
+  font-family: var(--f-m); font-size: .55rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--stone); margin-bottom: .45rem;
 }
-
-/* value */
 .kpi-val {
-  font-size: 1.75rem;
-  font-weight: 800;
-  font-family: var(--f-m);
-  color: var(--cream);
-  line-height: 1;
+  font-size: 1.75rem; font-weight: 800; font-family: var(--f-m);
+  color: var(--cream); line-height: 1;
 }
-
-/* sub */
 .kpi-sub {
-  font-family: var(--f-m);
-  font-size: .58rem;
-  color: var(--stone);
-  margin-top: .3rem;
-
-  display: flex;
-  align-items: center;
-  gap: .3rem;
+  font-family: var(--f-m); font-size: .58rem; color: var(--stone);
+  margin-top: .3rem; display: flex; align-items: center; gap: .3rem;
 }
-
-/* states */
 .kpi-up  { color: var(--up); }
 .kpi-dn  { color: var(--dn); }
 .kpi-neu { color: var(--neutral); }
-
-/* trend indicator */
 .kpi-trend {
-  position: absolute;
-  top: .75rem;
-  right: .75rem;
-
+  position: absolute; top: .75rem; right: .75rem;
   font-size: .65rem;
-  opacity: .85;
 }
 
 /* ─── CHART CARDS ─── */
@@ -674,7 +628,108 @@ canvas.sparkline { width:100%; height:60px; display:block; }
   margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;
 }
 
-/* ─── SKIP LINK ─── */
+/* ─── BIBLIOTECA TESSILE — ARTICLE CARDS ─── */
+.biblioteca-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+.art-card {
+  background: var(--bg-1);
+  border: 1px solid var(--bdr);
+  border-radius: var(--rm);
+  padding: 0;
+  overflow: hidden;
+  transition: border-color var(--t2), box-shadow var(--t2);
+  position: relative;
+}
+.art-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--art-color, var(--gold));
+  border-radius: 0;
+}
+.art-card:hover {
+  border-color: var(--bdr-2);
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+.art-head {
+  padding: 1.1rem 1.25rem 0 1.5rem;
+}
+.art-meta {
+  display: flex; align-items: center; gap: .6rem;
+  margin-bottom: .5rem;
+}
+.art-num {
+  font-family: var(--f-m); font-size: .6rem; font-weight: 500;
+  color: var(--stone); letter-spacing: .06em;
+}
+.art-cat {
+  font-family: var(--f-m); font-size: .56rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: .18rem .55rem; border-radius: 99px;
+  border: 1px solid;
+}
+.art-title {
+  font-size: .95rem; font-weight: 800;
+  letter-spacing: -.03em; line-height: 1.25;
+  margin-bottom: .55rem;
+}
+.art-preview {
+  font-size: .78rem; color: var(--sand); line-height: 1.65;
+  padding: 0 1.25rem 0 1.5rem;
+}
+.art-body-wrap {
+  max-height: 0; overflow: hidden;
+  transition: max-height .45s cubic-bezier(.4,0,.2,1);
+}
+.art-body-wrap.open {
+  max-height: 900px;
+}
+.art-body {
+  padding: .75rem 1.25rem .2rem 1.5rem;
+  font-size: .78rem; color: var(--sand); line-height: 1.75;
+  border-top: 1px solid var(--bdr);
+  margin-top: .65rem;
+}
+.art-body p { margin-bottom: .7rem; }
+.art-body p:last-child { margin-bottom: 0; }
+.art-body strong { color: var(--cream); }
+.art-footer {
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap;
+  padding: .7rem 1.25rem .9rem 1.5rem;
+  gap: .5rem;
+}
+.art-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+.art-tag {
+  font-family: var(--f-m); font-size: .54rem;
+  padding: .15rem .48rem; border-radius: 99px;
+  background: var(--bg-3); color: var(--stone);
+  border: 1px solid var(--bdr);
+}
+.art-toggle {
+  font-family: var(--f-m); font-size: .62rem; font-weight: 500;
+  color: var(--gold); letter-spacing: .04em;
+  display: flex; align-items: center; gap: .3rem;
+  transition: gap var(--t1); padding: .3rem .6rem;
+  border-radius: var(--r); border: 1px solid var(--bdr-2);
+  white-space: nowrap;
+}
+.art-toggle:hover { border-color: var(--gold); gap: .5rem; }
+.art-toggle .arr { transition: transform var(--t2); }
+.art-card.expanded .art-toggle .arr { transform: rotate(180deg); }
+.art-readtime {
+  font-family: var(--f-m); font-size: .58rem; color: var(--stone);
+}
+
+@media (max-width: 800px) {
+  .biblioteca-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── PLATFORM FOOTER ─── (already defined, keep here as safety) */
 .skip-link {
   position:fixed; top:.75rem; left:.75rem; z-index:9999;
   padding:.38rem .9rem; background:var(--gold); color:var(--ink);
@@ -723,13 +778,4 @@ canvas.sparkline { width:100%; height:60px; display:block; }
   .kpi-grid { grid-template-columns:repeat(2,1fr); }
   .news-grid { grid-template-columns:1fr; }
   .research-grid { grid-template-columns:1fr; }
-}
-/* Migliora le prestazioni di rendering delle aree non visibili (esclusi KPI e chart) */
-.data-table,
-.news-grid,
-.research-grid,
-.thread-list,
-[data-sidebar-pulse] {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 200px;
 }
