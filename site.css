@@ -679,3 +679,17 @@ canvas.sparkline { width:100%; height:60px; display:block; }
   .news-grid { grid-template-columns:1fr; }
   .research-grid { grid-template-columns:1fr; }
 }
+/* Migliora le prestazioni di rendering delle aree non visibili */
+.kpi-grid,
+.chart-grid,
+.data-table,
+.news-grid,
+.research-grid,
+.thread-list,
+[data-sidebar-pulse] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px; /* stima di altezza, evita scatti */
+}
+
+/* Per le griglie di card è utile un'intrinsic-size più precisa,
+   ma 200px è una buona media. Puoi regolarla sezione per sezione. */
