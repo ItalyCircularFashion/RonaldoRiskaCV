@@ -3,7 +3,7 @@
    Ronaldo Riska  ·  Bloomberg × McKinsey × FT aesthetic
 ══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ─── TOKENS ─── */
 :root {
@@ -42,6 +42,7 @@
   --header-h:    54px;
 
   --f-h: 'Syne', sans-serif;
+  --f-b: 'Inter', system-ui, -apple-system, sans-serif;
   --f-m: 'DM Mono', monospace;
 
   --r:  4px;
@@ -79,7 +80,7 @@ html {
 ::-webkit-scrollbar-thumb:hover { background:var(--gold); }
 
 body {
-  font-family: var(--f-h);
+  font-family: var(--f-b);
   background: var(--bg);
   color: var(--cream);
   line-height: 1.6;
