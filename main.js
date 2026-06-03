@@ -16,23 +16,47 @@ document.addEventListener('click',e=>{
   syncTheme();
   requestAnimationFrame(()=>renderCharts());
 });
+function initReveal(){
+  const reveals = document.querySelectorAll('.reveal');
 
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15
+  });
+
+  reveals.forEach(el => observer.observe(el));
+}
 /* ═══ INIT ═══ */
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', () => {
+
+  // layer 1: UI system init (lightweight)
   syncTheme();
   setYear();
   initTicker();
   initSidebar();
   initReveal();
+  initMobMenu();
+
+  // layer 2: visual systems
   initCharts();
-  renderNews();
-  renderResearch();
-  renderForum();
-  renderKpis();
-  renderArticles();
   populateSidebarPulse();
   highlightNavLink();
-  initMobMenu();
+
+  // layer 3: heavy render (data-driven)
+  requestAnimationFrame(() => {
+    renderNews();
+    renderResearch();
+    renderForum();
+    renderKpis();
+    renderArticles();
+  });
+
 });
 
 /* ═══ YEAR ═══ */
