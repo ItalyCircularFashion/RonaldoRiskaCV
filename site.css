@@ -299,36 +299,81 @@ ul   { list-style:none; }
   content: ''; width: 20px; height: 1px; background: var(--gold); opacity: .5;
 }
 
-/* ─── KPI CARDS ─── */
+/* ─── KPI GRID (FIXED RENDER PIPELINE) ─── */
 .kpi-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 1px;
-  border: 1px solid var(--bdr); border-radius: var(--rm); overflow: visible;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1px;
+
+  border: 1px solid var(--bdr);
+  border-radius: var(--rm);
+
+  overflow: hidden; /* FIX: evita bleed visivo tra card */
+  background: var(--bg-2); /* FIX: base canvas visivo */
   margin-bottom: 1.75rem;
 }
+
+/* KPI BOX */
 .kpi-box {
-  background: var(--bg-1); padding: 1.1rem 1.25rem;
-  transition: background var(--t2);
+  background: var(--bg-1);
+  padding: 1.1rem 1.25rem;
+
+  transition: background var(--t2), transform var(--t2);
+
   position: relative;
+  min-height: 92px; /* FIX: stabilità layout */
 }
-.kpi-box:hover { background: var(--bg-2); }
+
+/* hover state */
+.kpi-box:hover {
+  background: var(--bg-2);
+  transform: translateY(-1px); /* micro feedback UX */
+}
+
+/* label */
 .kpi-label {
-  font-family: var(--f-m); font-size: .55rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--stone); margin-bottom: .45rem;
+  font-family: var(--f-m);
+  font-size: .55rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: .45rem;
 }
+
+/* value */
 .kpi-val {
-  font-size: 1.75rem; font-weight: 800; font-family: var(--f-m);
-  color: var(--cream); line-height: 1;
+  font-size: 1.75rem;
+  font-weight: 800;
+  font-family: var(--f-m);
+  color: var(--cream);
+  line-height: 1;
 }
+
+/* sub */
 .kpi-sub {
-  font-family: var(--f-m); font-size: .58rem; color: var(--stone);
-  margin-top: .3rem; display: flex; align-items: center; gap: .3rem;
+  font-family: var(--f-m);
+  font-size: .58rem;
+  color: var(--stone);
+  margin-top: .3rem;
+
+  display: flex;
+  align-items: center;
+  gap: .3rem;
 }
+
+/* states */
 .kpi-up  { color: var(--up); }
 .kpi-dn  { color: var(--dn); }
 .kpi-neu { color: var(--neutral); }
+
+/* trend indicator */
 .kpi-trend {
-  position: absolute; top: .75rem; right: .75rem;
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+
   font-size: .65rem;
+  opacity: .85;
 }
 
 /* ─── CHART CARDS ─── */
