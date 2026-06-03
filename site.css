@@ -300,23 +300,74 @@ ul   { list-style:none; }
 
 /* ─── KPI CARDS ─── */
 .kpi-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 1px;
-  border: 1px solid var(--bdr); border-radius: var(--rm); overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1px;
+
+  border: 1px solid var(--bdr);
+  border-radius: var(--rm);
+
+  overflow: visible;
+  contain: layout paint;
+
+  background: var(--bg-2);
   margin-bottom: 1.75rem;
 }
 .kpi-box {
-  background: var(--bg-1); padding: 1.1rem 1.25rem;
-  transition: background var(--t2);
+  background: var(--bg-1);
+  padding: 1.1rem 1.25rem;
+
   position: relative;
+  min-height: 92px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  transition: transform .25s ease, background .25s ease;
+
+  will-change: transform;
+  backface-visibility: hidden;
 }
-.kpi-box:hover { background: var(--bg-2); }
+/* ─── KPI ANIMATION STATE ─── */
+
+/* stato base (sempre stabile) */
+.kpi-box {
+  background: var(--bg-1);
+  transition: background .25s ease, transform .25s ease, opacity .25s ease;
+  will-change: transform, opacity;
+}
+
+/* entry animation pipeline */
+.kpi-box.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.kpi-box.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* hover SOLO quando è visibile (evita conflitti con reveal) */
+.kpi-box.reveal.visible:hover {
+  background: var(--bg-2);
+  transform: translateY(-2px);
+}
 .kpi-label {
-  font-family: var(--f-m); font-size: .55rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--stone); margin-bottom: .45rem;
+  font-family: var(--f-m);
+  font-size: .55rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: .35rem;
 }
+
 .kpi-val {
-  font-size: 1.75rem; font-weight: 800; font-family: var(--f-m);
-  color: var(--cream); line-height: 1;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.05;
 }
 .kpi-sub {
   font-family: var(--f-m); font-size: .58rem; color: var(--stone);
@@ -326,8 +377,12 @@ ul   { list-style:none; }
 .kpi-dn  { color: var(--dn); }
 .kpi-neu { color: var(--neutral); }
 .kpi-trend {
-  position: absolute; top: .75rem; right: .75rem;
-  font-size: .65rem;
+  position: absolute;
+  top: .7rem;
+  right: .7rem;
+
+  font-size: .7rem;
+  opacity: .8;
 }
 
 /* ─── CHART CARDS ─── */
