@@ -148,7 +148,8 @@ function initReveal() {
 }
 
 /* ═══ KPI CARDS (optimized) ═══ */
-function renderKpis() {
+function renderKpis() 
+initReveal();{
   const grid = document.querySelector('[data-kpi-grid]');
   if (!grid || !Array.isArray(MARKET_KPIS)) return;
 
@@ -354,13 +355,7 @@ function buildNewsFilterBar(bar){
 
 function setupNewsFilter(grid){
   // trigger reveals after render
-  setTimeout(()=>{
-    grid.querySelectorAll('.reveal').forEach((el,i)=>{
-      el.style.transitionDelay=`${i*0.05}s`;
-      requestAnimationFrame(()=>el.classList.add('visible'));
-    });
-  },60);
-}
+ initReveal();
 
 /* ═══ RESEARCH ═══ */
 function renderResearch(){
