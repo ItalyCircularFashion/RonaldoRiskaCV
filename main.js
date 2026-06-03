@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   initTicker();
   initSidebar();
   initReveal();
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.style.opacity = 1;
+    el.style.transform = 'none';
+  });
+
   initCharts();
   renderNews();
   renderResearch();
