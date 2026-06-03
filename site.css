@@ -304,78 +304,101 @@ ul   { list-style:none; }
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 1px;
 
+  margin-bottom: 1.75rem;
+
   border: 1px solid var(--bdr);
   border-radius: var(--rm);
 
-  overflow: visible;
-  contain: layout paint;
-
   background: var(--bg-2);
-  margin-bottom: 1.75rem;
-}
-.kpi-box {
-  background: var(--bg-1);
-  padding: 1.1rem 1.25rem;
 
+  contain: layout paint;
+}
+
+/* ─── KPI BOX ─── */
+.kpi-box {
   position: relative;
-  min-height: 92px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  transition: transform .25s ease, background .25s ease;
+  min-height: 92px;
+  padding: 1.1rem 1.25rem;
 
-  will-change: transform;
-  backface-visibility: hidden;
-}
-/* ─── KPI ANIMATION STATE ─── */
-
-/* stato base (sempre stabile) */
-.kpi-box {
   background: var(--bg-1);
-  transition: background .25s ease, transform .25s ease, opacity .25s ease;
+
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+
+  transition:
+    transform .25s ease,
+    background-color .25s ease,
+    opacity .25s ease;
+
   will-change: transform, opacity;
 }
 
-/* entry animation pipeline */
+/* ─── REVEAL STATE ─── */
 .kpi-box.reveal {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translate3d(0, 12px, 0);
 }
 
 .kpi-box.reveal.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
-/* hover SOLO quando è visibile (evita conflitti con reveal) */
+/* ─── HOVER STATE ─── */
 .kpi-box.reveal.visible:hover {
-  background: var(--bg-2);
-  transform: translateY(-2px);
+  background-color: var(--bg-2);
+  transform: translate3d(0, -2px, 0);
 }
+
+/* ─── LABEL ─── */
 .kpi-label {
+  margin-bottom: .35rem;
+
   font-family: var(--f-m);
   font-size: .55rem;
   letter-spacing: .14em;
   text-transform: uppercase;
+
   color: var(--stone);
-  margin-bottom: .35rem;
 }
 
+/* ─── VALUE ─── */
 .kpi-val {
   font-size: 1.85rem;
   font-weight: 800;
-  color: var(--cream);
   line-height: 1.05;
+
+  color: var(--cream);
+
+  /* stabilizza l'allineamento dei numeri */
+  font-variant-numeric: tabular-nums;
 }
+
+/* ─── SUBTEXT ─── */
 .kpi-sub {
-  font-family: var(--f-m); font-size: .58rem; color: var(--stone);
-  margin-top: .3rem; display: flex; align-items: center; gap: .3rem;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+
+  margin-top: .3rem;
+
+  font-family: var(--f-m);
+  font-size: .58rem;
+
+  color: var(--stone);
 }
+
+/* ─── KPI STATUS COLORS ─── */
 .kpi-up  { color: var(--up); }
 .kpi-dn  { color: var(--dn); }
 .kpi-neu { color: var(--neutral); }
+
+/* ─── TREND ICON ─── */
 .kpi-trend {
   position: absolute;
   top: .7rem;
@@ -383,6 +406,8 @@ ul   { list-style:none; }
 
   font-size: .7rem;
   opacity: .8;
+
+  pointer-events: none;
 }
 
 /* ─── CHART CARDS ─── */
