@@ -97,21 +97,33 @@ function highlightNavLink(){
   });
 }
 
-/* ═══ REVEAL ═══ */
+/* ═══ REVEAL ON SCROLL ═══ */
+let revealObserver = null;
+
 function initReveal(){
   const els=document.querySelectorAll('.reveal');
   if(!els.length)return;
-  const io=new IntersectionObserver(entries=>{
+
+  revealObserver = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(!entry.isIntersecting)return;
       const el=entry.target;
       const siblings=[...el.parentElement.querySelectorAll(':scope > .reveal')];
       el.style.transitionDelay=`${Math.min(siblings.indexOf(el)*0.06,0.36)}s`;
       el.classList.add('visible');
-      io.unobserve(el);
+      revealObserver.unobserve(el);
     });
   },{threshold:0.10,rootMargin:'0px 0px -30px 0px'});
-  els.forEach(el=>io.observe(el));
+
+  els.forEach(el=>revealObserver.observe(el));
+}
+
+/* Helper: observe reveals injected after init (news, research, forum, kpis) */
+function observeNewReveals(container){
+  if(!revealObserver) return;
+  container.querySelectorAll('.reveal:not(.visible)').forEach(el=>{
+    revealObserver.observe(el);
+  });
 }
 
 /* ═══ KPI CARDS ═══ */
@@ -128,6 +140,14 @@ function renderKpis(){
       </div>
       <div class="kpi-trend">${k.dir==='up'?'↑':k.dir==='dn'?'↓':'→'}</div>
     </div>`).join('');
+
+  /* ── KPI sono above-the-fold: visibili subito, nessun delay ── */
+  requestAnimationFrame(()=>{
+    grid.querySelectorAll('.reveal').forEach((el,i)=>{
+      el.style.transitionDelay = `${i * 0.06}s`;
+      el.classList.add('visible');
+    });
+  });
 }
 
 /* ═══ CHARTS ═══ */
@@ -301,12 +321,8 @@ function buildNewsFilterBar(bar){
 }
 
 function setupNewsFilter(grid){
-  // trigger reveals after render
   setTimeout(()=>{
-    grid.querySelectorAll('.reveal').forEach((el,i)=>{
-      el.style.transitionDelay=`${i*0.05}s`;
-      requestAnimationFrame(()=>el.classList.add('visible'));
-    });
+    observeNewReveals(grid);
   },60);
 }
 
@@ -329,10 +345,7 @@ function renderResearch(){
 </article>`).join('');
 
     setTimeout(()=>{
-      grid.querySelectorAll('.reveal').forEach((el,i)=>{
-        el.style.transitionDelay=`${i*0.05}s`;
-        requestAnimationFrame(()=>el.classList.add('visible'));
-      });
+      observeNewReveals(grid);
     },80);
   });
 
@@ -381,10 +394,7 @@ function renderForum(){
 </div>`).join('');
 
     setTimeout(()=>{
-      list.querySelectorAll('.reveal').forEach((el,i)=>{
-        el.style.transitionDelay=`${i*0.05}s`;
-        requestAnimationFrame(()=>el.classList.add('visible'));
-      });
+      observeNewReveals(list);
     },80);
   });
 
@@ -433,12 +443,9 @@ function renderArticles() {
     <div class="bib-col">${buildCol(right)}</div>
   `;
 
-  // Trigger reveals
+  // Trigger reveals (IntersectionObserver non li vede: sono iniettati dopo init)
   setTimeout(() => {
-    grid.querySelectorAll('.reveal').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 0.04}s`;
-      requestAnimationFrame(() => el.classList.add('visible'));
-    });
+    observeNewReveals(grid);
   }, 80);
 
   // Toggle expand/collapse
