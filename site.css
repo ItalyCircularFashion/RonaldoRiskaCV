@@ -628,6 +628,17 @@ canvas.sparkline { width:100%; height:60px; display:block; }
   margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;
 }
 
+/* ─── FADE-IN per elementi above-the-fold iniettati da JS ─── */
+@keyframes fadeKpi {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:none; }
+}
+/* chart-card non usa .reveal: sempre visibile, sparkline disegnata dopo layout */
+.chart-card {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ─── BIBLIOTECA TESSILE — ARTICLE CARDS ─── */
 .biblioteca-grid {
   display: grid;
