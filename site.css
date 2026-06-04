@@ -300,114 +300,34 @@ ul   { list-style:none; }
 
 /* ─── KPI CARDS ─── */
 .kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 1px;
-
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 1px;
+  border: 1px solid var(--bdr); border-radius: var(--rm); overflow: hidden;
   margin-bottom: 1.75rem;
-
-  border: 1px solid var(--bdr);
-  border-radius: var(--rm);
-
-  background: var(--bg-2);
-
-  contain: layout paint;
 }
-
-/* ─── KPI BOX ─── */
 .kpi-box {
+  background: var(--bg-1); padding: 1.1rem 1.25rem;
+  transition: background var(--t2);
   position: relative;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  min-height: 92px;
-  padding: 1.1rem 1.25rem;
-
-  background: var(--bg-1);
-
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-
-  transition:
-    transform .25s ease,
-    background-color .25s ease,
-    opacity .25s ease;
-
-  will-change: transform, opacity;
 }
-
-/* ─── REVEAL STATE ─── */
-.kpi-box.reveal {
-  opacity: 0;
-  transform: translate3d(0, 12px, 0);
-}
-
-.kpi-box.reveal.visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/* ─── HOVER STATE ─── */
-.kpi-box.reveal.visible:hover {
-  background-color: var(--bg-2);
-  transform: translate3d(0, -2px, 0);
-}
-
-/* ─── LABEL ─── */
+.kpi-box:hover { background: var(--bg-2); }
 .kpi-label {
-  margin-bottom: .35rem;
-
-  font-family: var(--f-m);
-  font-size: .55rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-
-  color: var(--stone);
+  font-family: var(--f-m); font-size: .55rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--stone); margin-bottom: .45rem;
 }
-
-/* ─── VALUE ─── */
 .kpi-val {
-  font-size: 1.85rem;
-  font-weight: 800;
-  line-height: 1.05;
-
-  color: var(--cream);
-
-  /* stabilizza l'allineamento dei numeri */
-  font-variant-numeric: tabular-nums;
+  font-size: 1.75rem; font-weight: 800; font-family: var(--f-m);
+  color: var(--cream); line-height: 1;
 }
-
-/* ─── SUBTEXT ─── */
 .kpi-sub {
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-
-  margin-top: .3rem;
-
-  font-family: var(--f-m);
-  font-size: .58rem;
-
-  color: var(--stone);
+  font-family: var(--f-m); font-size: .58rem; color: var(--stone);
+  margin-top: .3rem; display: flex; align-items: center; gap: .3rem;
 }
-
-/* ─── KPI STATUS COLORS ─── */
 .kpi-up  { color: var(--up); }
 .kpi-dn  { color: var(--dn); }
 .kpi-neu { color: var(--neutral); }
-
-/* ─── TREND ICON ─── */
 .kpi-trend {
-  position: absolute;
-  top: .7rem;
-  right: .7rem;
-
-  font-size: .7rem;
-  opacity: .8;
-
-  pointer-events: none;
+  position: absolute; top: .75rem; right: .75rem;
+  font-size: .65rem;
 }
 
 /* ─── CHART CARDS ─── */
@@ -661,8 +581,11 @@ canvas.sparkline { width:100%; height:60px; display:block; }
 .kib-lbl { font-family:var(--f-m); font-size:.52rem; color:var(--stone); margin-top:.2rem; letter-spacing:.08em; }
 
 /* ─── REVEAL ─── */
-[data-reveal="hidden"] { opacity:0; transform:translate3d(0,12px,0); }
-[data-reveal="visible"] { opacity:1; transform:translate3d(0,0,0); }
+.reveal {
+  opacity:0; transform:translateY(18px);
+  transition: opacity .5s var(--smooth), transform .5s var(--smooth);
+}
+.reveal.visible { opacity:1; transform:none; }
 
 /* ─── FOOTER ─── */
 .platform-footer {
@@ -711,6 +634,11 @@ canvas.sparkline { width:100%; height:60px; display:block; }
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
   align-items: start;
+}
+.bib-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 .art-card {
   background: var(--bg-1);
@@ -805,7 +733,6 @@ canvas.sparkline { width:100%; height:60px; display:block; }
 @media (max-width: 800px) {
   .biblioteca-grid { grid-template-columns: 1fr; }
 }
-
 /* ─── PLATFORM FOOTER ─── (already defined, keep here as safety) */
 .skip-link {
   position:fixed; top:.75rem; left:.75rem; z-index:9999;
