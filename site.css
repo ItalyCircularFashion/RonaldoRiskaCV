@@ -1,9 +1,9 @@
 /* ══════════════════════════════════════════════════════════
-   TEXTILE INTELLIGENCE PLATFORM  ·  site.css v3.0
+   TEXTILE INTELLIGENCE PLATFORM  ·  site.css v4.0
    Ronaldo Riska  ·  Bloomberg × McKinsey × FT aesthetic
 ══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
 /* ─── TOKENS ─── */
 :root {
@@ -37,16 +37,29 @@
   --bdr-2:    rgba(212,168,67,.16);
   --bdr-3:    rgba(212,168,67,.32);
 
-  --sidebar-w:   240px;
-  --ticker-h:    38px;
-  --header-h:    54px;
+  --sidebar-w:  220px;
+  --ticker-h:   36px;
 
-  --f-h: 'Syne', sans-serif;
-  --f-m: 'DM Mono', monospace;
+  /* Inter per UI, IBM Plex Mono per dati numerici */
+  --f-h: 'Inter', system-ui, sans-serif;
+  --f-m: 'IBM Plex Mono', 'Courier New', monospace;
 
-  --r:  4px;
-  --rm: 10px;
-  --rl: 16px;
+  /* Scala tipografica proporzionale */
+  --text-xs:   0.68rem;   /* label, badge        */
+  --text-sm:   0.78rem;   /* body secondario      */
+  --text-base: 0.875rem;  /* body principale      */
+  --text-md:   1rem;      /* titoli card          */
+  --text-lg:   1.2rem;    /* titoli sezione       */
+  --text-xl:   clamp(1.3rem, 2.5vw, 1.7rem);   /* page h1     */
+  --text-2xl:  clamp(1.6rem, 3.5vw, 2.4rem);   /* hero title  */
+
+  --r:   4px;
+  --rm:  10px;
+  --rl:  16px;
+
+  /* Spaziatura responsiva */
+  --pad:    clamp(1rem, 2.5vw, 2rem);
+  --pad-lg: clamp(1.25rem, 3vw, 2.5rem);
 
   --smooth: cubic-bezier(.4,0,.2,1);
   --spring: cubic-bezier(.34,1.56,.64,1);
@@ -80,6 +93,7 @@ html {
 
 body {
   font-family: var(--f-h);
+  font-size: var(--text-base);
   background: var(--bg);
   color: var(--cream);
   line-height: 1.6;
@@ -253,81 +267,83 @@ ul   { list-style:none; }
 
 /* ─── PAGE HEADER (content area) ─── */
 .page-hdr {
-  padding: 2rem 2.5rem 1.5rem;
+  padding: var(--pad) var(--pad-lg) calc(var(--pad) * .75);
   border-bottom: 1px solid var(--bdr);
   background: var(--bg);
   position: sticky; top: var(--ticker-h); z-index: 10;
 }
 .page-hdr-row {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem;
+  flex-wrap: wrap;
 }
 .page-hdr-breadcrumb {
-  font-family: var(--f-m); font-size: .6rem; color: var(--stone);
-  letter-spacing: .08em; margin-bottom: .4rem;
+  font-family: var(--f-m); font-size: var(--text-xs); color: var(--stone);
+  letter-spacing: .06em; margin-bottom: .35rem;
   display: flex; align-items: center; gap: .4rem;
 }
 .page-hdr-breadcrumb a { color: var(--stone); transition: color var(--t1); }
 .page-hdr-breadcrumb a:hover { color: var(--gold); }
 .page-hdr h1 {
-  font-size: clamp(1.4rem,3vw,2.2rem); font-weight: 800;
-  letter-spacing: -.04em; line-height: 1.0;
+  font-size: var(--text-xl); font-weight: 700;
+  letter-spacing: -.03em; line-height: 1.1;
 }
 .page-hdr-meta {
-  font-family: var(--f-m); font-size: .62rem; color: var(--stone);
-  margin-top: .35rem; display: flex; align-items: center; gap: 1rem;
+  font-family: var(--f-m); font-size: var(--text-xs); color: var(--stone);
+  margin-top: .3rem; display: flex; align-items: center; gap: 1rem;
   flex-wrap: wrap;
 }
 .page-hdr-meta span { display: flex; align-items: center; gap: .3rem; }
 
-/* ─── MAIN GRID (content) ─── */
-.main-pad { padding: 2rem 2.5rem; }
-.main-pad-sm { padding: 1.5rem 2.5rem; }
+/* ─── MAIN PADDING ─── */
+.main-pad    { padding: var(--pad-lg); }
+.main-pad-sm { padding: calc(var(--pad) * .75) var(--pad-lg); }
 
 /* ─── SECTION HEADING ─── */
-.sec-hdr { margin-bottom: 1.4rem; }
+.sec-hdr { margin-bottom: 1.25rem; }
 .sec-hdr h2 {
-  font-size: clamp(1.1rem,2.5vw,1.6rem); font-weight: 800;
-  letter-spacing: -.03em; line-height: 1.1;
+  font-size: var(--text-lg); font-weight: 700;
+  letter-spacing: -.025em; line-height: 1.2; margin-top: .25rem;
 }
 .sec-hdr .eyebrow {
-  font-family: var(--f-m); font-size: .58rem; font-weight: 500;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
-  margin-bottom: .35rem; display: flex; align-items: center; gap: .5rem;
+  font-family: var(--f-m); font-size: var(--text-xs); font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: .3rem; display: flex; align-items: center; gap: .45rem;
 }
 .sec-hdr .eyebrow::before {
-  content: ''; width: 20px; height: 1px; background: var(--gold); opacity: .5;
+  content: ''; width: 18px; height: 1px; background: var(--gold); opacity: .5;
 }
 
 /* ─── KPI CARDS ─── */
 .kpi-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 1px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 1px;
   border: 1px solid var(--bdr); border-radius: var(--rm); overflow: hidden;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 .kpi-box {
-  background: var(--bg-1); padding: 1.1rem 1.25rem;
+  background: var(--bg-1); padding: clamp(.85rem,1.5vw,1.1rem) clamp(.9rem,1.5vw,1.25rem);
   transition: background var(--t2);
   position: relative;
 }
 .kpi-box:hover { background: var(--bg-2); }
 .kpi-label {
-  font-family: var(--f-m); font-size: .55rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--stone); margin-bottom: .45rem;
+  font-family: var(--f-m); font-size: var(--text-xs); letter-spacing: .1em;
+  text-transform: uppercase; color: var(--stone); margin-bottom: .4rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .kpi-val {
-  font-size: 1.75rem; font-weight: 800; font-family: var(--f-m);
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem); font-weight: 700; font-family: var(--f-m);
   color: var(--cream); line-height: 1;
 }
 .kpi-sub {
-  font-family: var(--f-m); font-size: .58rem; color: var(--stone);
-  margin-top: .3rem; display: flex; align-items: center; gap: .3rem;
+  font-family: var(--f-m); font-size: var(--text-xs); color: var(--stone);
+  margin-top: .3rem; display: flex; align-items: center; gap: .28rem;
 }
 .kpi-up  { color: var(--up); }
 .kpi-dn  { color: var(--dn); }
 .kpi-neu { color: var(--neutral); }
 .kpi-trend {
-  position: absolute; top: .75rem; right: .75rem;
-  font-size: .65rem;
+  position: absolute; top: .6rem; right: .75rem;
+  font-size: .6rem; color: var(--stone);
 }
 
 /* ─── CHART CARDS ─── */
