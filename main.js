@@ -128,10 +128,11 @@ function observeNewReveals(container){
 
 /* ═══ KPI CARDS ═══ */
 function renderKpis(){
-  const grid=document.querySelector('[data-kpi-grid]');
-  if(!grid||typeof MARKET_KPIS==='undefined')return;
-  grid.innerHTML=MARKET_KPIS.map(k=>`
-    <div class="kpi-box reveal">
+  const grid = document.querySelector('[data-kpi-grid]');
+  if(!grid || typeof MARKET_KPIS === 'undefined') return;
+
+  grid.innerHTML = MARKET_KPIS.map((k,i) => `
+    <div class="kpi-box" style="animation:fadeKpi .4s ${i*0.06}s both">
       <div class="kpi-label">${k.label}</div>
       <div class="kpi-val">${k.val}</div>
       <div class="kpi-sub">
@@ -140,23 +141,14 @@ function renderKpis(){
       </div>
       <div class="kpi-trend">${k.dir==='up'?'↑':k.dir==='dn'?'↓':'→'}</div>
     </div>`).join('');
-
-  /* ── KPI sono above-the-fold: visibili subito, nessun delay ── */
-  requestAnimationFrame(()=>{
-    grid.querySelectorAll('.reveal').forEach((el,i)=>{
-      el.style.transitionDelay = `${i * 0.06}s`;
-      el.classList.add('visible');
-    });
-  });
 }
 
 /* ═══ CHARTS ═══ */
 function initCharts(){
-  // KPI grid charts (sparklines inside chart cards)
-  const wrap=document.querySelector('[data-charts-grid]');
-  if(wrap&&typeof CHARTS!=='undefined'){
-    wrap.innerHTML=CHARTS.map(c=>`
-      <div class="chart-card reveal">
+  const wrap = document.querySelector('[data-charts-grid]');
+  if(wrap && typeof CHARTS !== 'undefined'){
+    wrap.innerHTML = CHARTS.map(c=>`
+      <div class="chart-card" id="wrap-${c.id}">
         <div class="chart-card-hdr">
           <div>
             <div class="chart-card-title">${c.title}</div>
@@ -169,10 +161,11 @@ function initCharts(){
         </div>
         <canvas class="sparkline" id="${c.id}" aria-label="${c.title}"></canvas>
       </div>`).join('');
-    requestAnimationFrame(renderCharts);
+
+    /* chart-card non usa .reveal — visibili subito, poi disegno sparkline
+       dopo un frame per garantire che il layout sia calcolato e offsetWidth > 0 */
+    setTimeout(renderCharts, 60);
   }
-  // Also render any static canvas elements
-  requestAnimationFrame(renderCharts);
 }
 
 function renderCharts(){
