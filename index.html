@@ -20,7 +20,7 @@
    "address":{"@type":"PostalAddress","addressLocality":"Prato","addressCountry":"IT"}}
   </script>
 </head>
-<body>
+<body class="page-index">
 <a class="skip-link" href="#main">Salta al contenuto</a>
 
 <div class="platform">
@@ -115,37 +115,25 @@
     <div class="main-pad">
 
       <!-- HERO PROFILE -->
-      <div style="display:grid;grid-template-columns:auto 1fr;gap:1.5rem;
-                  align-items:center;margin-bottom:2rem;
-                  padding:1.5rem;background:var(--bg-1);
-                  border:1px solid var(--bdr-2);border-radius:var(--rm);
-                  position:relative;overflow:hidden" class="reveal">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;
-                    background:linear-gradient(90deg,var(--gold),var(--pine))"></div>
-        <div style="width:70px;height:70px;border-radius:var(--rm);overflow:hidden;
-                    border:1px solid var(--bdr-2);flex-shrink:0">
+      <div class="hero reveal">
+        <div class="hero-avatar">
           <img src="profile.jpg" alt="Ronaldo Riska"
-               style="width:100%;height:100%;object-fit:cover;object-position:center top"
                onerror="this.parentElement.innerHTML='<div style=\'background:var(--gold);width:100%;height:100%;display:grid;place-items:center;font-weight:800;color:var(--ink);font-size:1.4rem\'>RR</div>'">
         </div>
         <div>
           <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem">
-            <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-.04em">Ronaldo Riska</h2>
-            <span style="font-family:var(--f-m);font-size:.6rem;color:var(--gold);
-                         border:1px solid var(--bdr-3);padding:.2rem .6rem;border-radius:99px">
-              Textile Engineer · AI Applied · Circular Fashion
-            </span>
+            <h2 class="hero-title">Ronaldo Riska</h2>
+            <span class="hero-tag">Textile Engineer · AI Applied · Circular Fashion</span>
           </div>
-          <p style="font-size:.84rem;color:var(--sand);line-height:1.65;max-width:70ch">
+          <p class="hero-body">
             Questa piattaforma non è un portfolio statico: è un
             <strong style="color:var(--cream)">knowledge hub sul tessile × digitale</strong>.
             Trovi il mio CV in formato executive report, una dashboard di mercato aggiornata,
             ricerca applicata su AI e tessile, newsroom categorizzata e un forum professionale.
           </p>
-          <div style="display:flex;gap:.6rem;margin-top:.9rem;flex-wrap:wrap">
+          <div class="hero-actions">
             <a class="btn btn-gold btn-sm" href="mailto:ronaldo.riska@gmail.com">✉ Contatto</a>
             <a class="btn btn-outline btn-sm" href="Ronaldo-Riska-CV-2026.pdf" download>↓ CV PDF</a>
-            <a class="btn btn-outline btn-sm" href="https://github.com/italycircularfashion" target="_blank" rel="noopener">GitHub →</a>
           </div>
         </div>
       </div>
@@ -155,7 +143,9 @@
         <div class="eyebrow">Market Intelligence — aggiornato mag 2026</div>
         <h2>Indicatori chiave industria tessile</h2>
       </div>
-      <div class="kpi-grid" data-kpi-grid></div>
+      <div class="section-card reveal" style="padding:0;overflow:hidden">
+        <div class="kpi-grid" data-kpi-grid style="margin-bottom:0"></div>
+      </div>
 
       <!-- 2-COL: NEWS + RESEARCH -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;margin-bottom:2rem">
@@ -171,7 +161,6 @@
           </div>
           <div class="news-grid" style="grid-template-columns:1fr" data-news-grid data-limit="3"></div>
         </div>
-
         <!-- Latest Research -->
         <div>
           <div class="sec-hdr reveal" style="display:flex;align-items:center;justify-content:space-between">
@@ -194,7 +183,9 @@
         </div>
         <a class="btn btn-ghost" href="forum.html">Tutto →</a>
       </div>
-      <div class="thread-list" data-forum-threads data-limit="3"></div>
+      <div class="section-card reveal">
+        <div class="thread-list" data-forum-threads data-limit="3"></div>
+      </div>
 
       <!-- BIBLIOTECA TESSILE -->
       <div style="margin-top:2rem">
@@ -209,8 +200,10 @@
           <a class="btn btn-outline btn-sm" href="research.html">Vai al Research Lab →</a>
         </div>
 
-        <!-- 2 colonne, 6 articoli ciascuna — popolate da JS -->
-        <div class="biblioteca-grid" data-biblioteca-grid style="margin-top:1.25rem"></div>
+        <div class="section-card reveal" style="margin-top:1.25rem;padding:1.25rem">
+          <!-- 2 colonne, 6 articoli ciascuna — popolate da JS -->
+          <div class="biblioteca-grid" data-biblioteca-grid></div>
+        </div>
       </div>
 
     </div><!-- /main-pad -->

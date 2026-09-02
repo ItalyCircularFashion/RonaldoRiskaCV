@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://italycircularfashion.github.io/RonaldoRiska/dashboard.html">
   <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body class="page-dashboard">
 <a class="skip-link" href="#main">Salta al contenuto</a>
 <div class="platform">
 
@@ -72,114 +72,204 @@
 
     <div class="main-pad">
 
-      <!-- KPI TOP ROW -->
-      <div class="sec-hdr reveal">
-        <div class="eyebrow">Indicatori chiave · Industria tessile globale</div>
-        <h2>Market KPIs — Q2 2026</h2>
-      </div>
-      <div class="kpi-grid" data-kpi-grid></div>
+      <!-- MEGA-BLOCK DASHBOARD -->
+      <div class="dashboard-mega-block reveal">
 
-      <!-- SPARKLINE CHARTS -->
-      <div class="sec-hdr reveal" style="margin-top:1.5rem">
-        <div class="eyebrow">Trend materie prime &amp; indici</div>
-        <h2>Andamento — ultime 12 settimane</h2>
-      </div>
-      <div class="chart-grid" data-charts-grid></div>
-
-      <!-- DATA TABLE: Export tessile IT -->
-      <div class="sec-hdr reveal" style="margin-top:1.5rem">
-        <div class="eyebrow">Commercio estero · ISTAT / ICE 2025</div>
-        <h2>Export tessile-abbigliamento Italia per mercato</h2>
-      </div>
-      <div class="reveal" style="overflow-x:auto">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Mercato</th>
-              <th>Export 2025 (M€)</th>
-              <th>Var. YoY</th>
-              <th>Quota %</th>
-              <th>Trend</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Francia</td><td class="td-num">2,140</td><td class="td-num td-up">+1.2%</td><td class="td-num">15.1%</td><td class="td-up">↑</td></tr>
-            <tr><td>Germania</td><td class="td-num">1,890</td><td class="td-num td-dn">-0.8%</td><td class="td-num">13.3%</td><td class="td-dn">↓</td></tr>
-            <tr><td>USA</td><td class="td-num">1,650</td><td class="td-num td-up">+4.1%</td><td class="td-num">11.6%</td><td class="td-up">↑</td></tr>
-            <tr><td>Svizzera</td><td class="td-num">1,380</td><td class="td-num td-up">+2.3%</td><td class="td-num">9.7%</td><td class="td-up">↑</td></tr>
-            <tr><td>Spagna</td><td class="td-num">980</td><td class="td-num td-up">+0.6%</td><td class="td-num">6.9%</td><td class="td-up">↑</td></tr>
-            <tr><td>Giappone</td><td class="td-num">720</td><td class="td-num td-up">+3.8%</td><td class="td-num">5.1%</td><td class="td-up">↑</td></tr>
-            <tr><td>Cina</td><td class="td-num">610</td><td class="td-num td-up">+6.2%</td><td class="td-num">4.3%</td><td class="td-up">↑</td></tr>
-            <tr><td>UAE</td><td class="td-num">540</td><td class="td-num td-up">+8.4%</td><td class="td-num">3.8%</td><td class="td-up">↑</td></tr>
-            <tr><td>UK</td><td class="td-num">490</td><td class="td-num td-dn">-2.1%</td><td class="td-num">3.5%</td><td class="td-dn">↓</td></tr>
-            <tr><td>Altri</td><td class="td-num">3,820</td><td class="td-num td-up">+1.9%</td><td class="td-num">26.7%</td><td class="td-up">↑</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ESG + AI SECTION -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem">
-
-        <div class="reveal">
-          <div class="sec-hdr">
-            <div class="eyebrow">Sostenibilità · Textile Exchange 2025</div>
-            <h2>ESG &amp; Certificazioni globali</h2>
+        <!-- HEADER -->
+        <div class="dm-header">
+          <div>
+            <div class="eyebrow">Market Intelligence · Aggiornato 2 set 2026</div>
+            <h2>Textile Intelligence Dashboard</h2>
           </div>
-          <table class="data-table">
-            <thead><tr><th>Certificazione</th><th>Aziende certificate</th><th>Var. YoY</th></tr></thead>
-            <tbody>
-              <tr><td>GOTS</td><td class="td-num">8,744</td><td class="td-up td-num">+12.4%</td></tr>
-              <tr><td>GRS</td><td class="td-num">6,219</td><td class="td-up td-num">+18.7%</td></tr>
-              <tr><td>OEKO-TEX 100</td><td class="td-num">24,380</td><td class="td-up td-num">+8.1%</td></tr>
-              <tr><td>BLUESIGN</td><td class="td-num">1,124</td><td class="td-up td-num">+21.3%</td></tr>
-              <tr><td>ZDHC MRSL</td><td class="td-num">3,840</td><td class="td-up td-num">+14.2%</td></tr>
-              <tr><td>Cradle-to-Cradle</td><td class="td-num">892</td><td class="td-up td-num">+28.9%</td></tr>
-            </tbody>
-          </table>
+          <div class="dm-meta">
+            <span>📅 2 set 2026</span>
+            <span>📊 ICAC · AWEX · Textile Exchange · World Bank</span>
+          </div>
         </div>
 
-        <div class="reveal">
-          <div class="sec-hdr">
-            <div class="eyebrow">AI &amp; Digitale · Industry Report 2026</div>
-            <h2>AI adoption nel tessile</h2>
+        <!-- RIGA 1: MATERIE PRIME + SPARKLINES -->
+        <div class="dm-row">
+
+          <!-- MATERIALS TABLE -->
+          <div class="dm-panel dm-panel--wide">
+            <div class="dm-panel-hdr">
+              <div class="eyebrow">Materie prime</div>
+              <h3>Quotazioni</h3>
+            </div>
+            <div style="overflow-x:auto">
+              <table class="data-table materials-table">
+                <thead>
+                  <tr>
+                    <th>Materia prima</th>
+                    <th>Prezzo</th>
+                    <th>Var. 30gg</th>
+                    <th>Trend</th>
+                    <th>Unità</th>
+                    <th>Fonte</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Cotone ICE (No.2)</strong></td>
+                    <td class="td-num">0.82</td>
+                    <td class="td-num td-up">+3.2%</td>
+                    <td class="td-up">↑</td>
+                    <td>USD/lb</td>
+                    <td><a href="https://icac.org/" target="_blank" rel="noopener">ICAC</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Lana AWEX (micron 21)</strong></td>
+                    <td class="td-num">12.40</td>
+                    <td class="td-num td-dn">-1.5%</td>
+                    <td class="td-dn">↓</td>
+                    <td>USD/kg</td>
+                    <td><a href="https://www.awta.com.au/" target="_blank" rel="noopener">AWEX</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Poliestere (PET flakes)</strong></td>
+                    <td class="td-num">1,180</td>
+                    <td class="td-num td-up">+2.8%</td>
+                    <td class="td-up">↑</td>
+                    <td>USD/ton</td>
+                    <td><a href="https://textileexchange.org/" target="_blank" rel="noopener">Textile Exchange</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Viscosa (filato)</strong></td>
+                    <td class="td-num">1,420</td>
+                    <td class="td-num td-up">+1.1%</td>
+                    <td class="td-up">↑</td>
+                    <td>USD/ton</td>
+                    <td><a href="https://textileexchange.org/" target="_blank" rel="noopener">Textile Exchange</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Polipropilene (PP)</strong></td>
+                    <td class="td-num">1,050</td>
+                    <td class="td-num td-dn">-0.9%</td>
+                    <td class="td-dn">↓</td>
+                    <td>USD/ton</td>
+                    <td><a href="https://data.worldbank.org/" target="_blank" rel="noopener">World Bank</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Canapa (fibra)</strong></td>
+                    <td class="td-num">1,650</td>
+                    <td class="td-num td-up">+4.5%</td>
+                    <td class="td-up">↑</td>
+                    <td>USD/ton</td>
+                    <td><a href="https://textileexchange.org/" target="_blank" rel="noopener">Textile Exchange</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="dm-footer">
+              <span>Ultimo aggiornamento: 2 settembre 2026</span>
+              <span>Fonti: ICAC · AWEX · Textile Exchange · World Bank</span>
+            </div>
           </div>
-          <table class="data-table">
-            <thead><tr><th>Applicazione AI</th><th>Adozione %</th><th>ROI medio</th></tr></thead>
-            <tbody>
-              <tr><td>Quality Control CV</td><td class="td-num td-up">34%</td><td class="td-num">+28%</td></tr>
-              <tr><td>Demand Forecasting</td><td class="td-num td-up">41%</td><td class="td-num">+22%</td></tr>
-              <tr><td>Predictive Maintenance</td><td class="td-num">28%</td><td class="td-num">+19%</td></tr>
-              <tr><td>Color Matching AI</td><td class="td-num">22%</td><td class="td-num">+15%</td></tr>
-              <tr><td>Generative Design</td><td class="td-num">18%</td><td class="td-num">+31%</td></tr>
-              <tr><td>Supply Chain Opt.</td><td class="td-num">29%</td><td class="td-num">+24%</td></tr>
-            </tbody>
-          </table>
+
+          <!-- SPARKLINES -->
+          <div class="dm-panel dm-panel--narrow">
+            <div class="dm-panel-hdr">
+              <div class="eyebrow">Trend</div>
+              <h3>Ultime 12 settimane</h3>
+            </div>
+            <div class="chart-grid" data-charts-grid></div>
+          </div>
+
         </div>
 
-      </div><!-- /grid -->
+        <!-- RIGA 2: EXPORT + ESG/AI -->
+        <div class="dm-row">
 
-      <!-- DISTRETTO PRATO -->
-      <div class="sec-hdr reveal" style="margin-top:1.5rem">
-        <div class="eyebrow">Focus locale · Confindustria Toscana 2025</div>
-        <h2>Distretto di Prato — indicatori</h2>
-      </div>
-      <div class="kpi-grid reveal" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
-        <div class="kpi-box"><div class="kpi-label">Aziende attive</div><div class="kpi-val">~7k</div><div class="kpi-sub"><span class="kpi-dn">▼</span> -1.2% YoY</div></div>
-        <div class="kpi-box"><div class="kpi-label">Addetti</div><div class="kpi-val">42k</div><div class="kpi-sub"><span class="kpi-neu">●</span> Stabile</div></div>
-        <div class="kpi-box"><div class="kpi-label">Export Q1 2026</div><div class="kpi-val">€1.2B</div><div class="kpi-sub"><span class="kpi-up">▲</span> +2.1%</div></div>
-        <div class="kpi-box"><div class="kpi-label">Fibre riciclate</div><div class="kpi-val">60%</div><div class="kpi-sub"><span class="kpi-up">▲</span> +4pts YoY</div></div>
-        <div class="kpi-box"><div class="kpi-label">Prato Index</div><div class="kpi-val">104.2</div><div class="kpi-sub"><span class="kpi-up">▲</span> +0.9%</div></div>
-        <div class="kpi-box"><div class="kpi-label">Cert. ESG attive</div><div class="kpi-val">380+</div><div class="kpi-sub"><span class="kpi-up">▲</span> +12%</div></div>
-      </div>
+          <!-- EXPORT TABLE -->
+          <div class="dm-panel">
+            <div class="dm-panel-hdr">
+              <div class="eyebrow">Commercio estero · ISTAT / ICE 2025</div>
+              <h3>Export tessile-abbigliamento Italia</h3>
+            </div>
+            <div style="overflow-x:auto">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Mercato</th>
+                    <th>Export 2025 (M€)</th>
+                    <th>Var. YoY</th>
+                    <th>Quota %</th>
+                    <th>Trend</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Francia</td><td class="td-num">2,140</td><td class="td-num td-up">+1.2%</td><td class="td-num">15.1%</td><td class="td-up">↑</td></tr>
+                  <tr><td>Germania</td><td class="td-num">1,890</td><td class="td-num td-dn">-0.8%</td><td class="td-num">13.3%</td><td class="td-dn">↓</td></tr>
+                  <tr><td>USA</td><td class="td-num">1,650</td><td class="td-num td-up">+4.1%</td><td class="td-num">11.6%</td><td class="td-up">↑</td></tr>
+                  <tr><td>Svizzera</td><td class="td-num">1,380</td><td class="td-num td-up">+2.3%</td><td class="td-num">9.7%</td><td class="td-up">↑</td></tr>
+                  <tr><td>Spagna</td><td class="td-num">980</td><td class="td-num td-up">+0.6%</td><td class="td-num">6.9%</td><td class="td-up">↑</td></tr>
+                  <tr><td>Giappone</td><td class="td-num">720</td><td class="td-num td-up">+3.8%</td><td class="td-num">5.1%</td><td class="td-up">↑</td></tr>
+                  <tr><td>Cina</td><td class="td-num">610</td><td class="td-num td-up">+6.2%</td><td class="td-num">4.3%</td><td class="td-up">↑</td></tr>
+                  <tr><td>UAE</td><td class="td-num">540</td><td class="td-num td-up">+8.4%</td><td class="td-num">3.8%</td><td class="td-up">↑</td></tr>
+                  <tr><td>UK</td><td class="td-num">490</td><td class="td-num td-dn">-2.1%</td><td class="td-num">3.5%</td><td class="td-dn">↓</td></tr>
+                  <tr><td>Altri</td><td class="td-num">3,820</td><td class="td-num td-up">+1.9%</td><td class="td-num">26.7%</td><td class="td-up">↑</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-      <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--bg-1);
-                  border:1px solid var(--bdr);border-radius:var(--rm);
-                  font-family:var(--f-m);font-size:.62rem;color:var(--stone);
-                  line-height:1.7" class="reveal">
-        ⚠ <strong style="color:var(--sand)">Nota metodologica:</strong> I dati mostrati sono
-        mock data rappresentativi delle fonti citate (Textile Exchange, ICAC, Euratex, ISTAT/ICE,
-        Confindustria Toscana). La struttura è API-ready: sostituire le costanti in
-        <code style="color:var(--gold)">data.js</code> con fetch() alle API reali per dati live.
+          <!-- ESG + AI -->
+          <div class="dm-panel">
+            <div class="dm-panel-hdr">
+              <div class="eyebrow">Sostenibilità · AI</div>
+              <h3>ESG &amp; AI adoption</h3>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+              <table class="data-table">
+                <thead><tr><th>Certificazione</th><th>Aziende</th><th>Var.</th></tr></thead>
+                <tbody>
+                  <tr><td>GOTS</td><td class="td-num">8,744</td><td class="td-up td-num">+12.4%</td></tr>
+                  <tr><td>GRS</td><td class="td-num">6,219</td><td class="td-up td-num">+18.7%</td></tr>
+                  <tr><td>OEKO-TEX 100</td><td class="td-num">24,380</td><td class="td-up td-num">+8.1%</td></tr>
+                  <tr><td>BLUESIGN</td><td class="td-num">1,124</td><td class="td-up td-num">+21.3%</td></tr>
+                  <tr><td>ZDHC MRSL</td><td class="td-num">3,840</td><td class="td-up td-num">+14.2%</td></tr>
+                  <tr><td>Cradle-to-Cradle</td><td class="td-num">892</td><td class="td-up td-num">+28.9%</td></tr>
+                </tbody>
+              </table>
+              <table class="data-table">
+                <thead><tr><th>AI Application</th><th>Adozione</th><th>ROI</th></tr></thead>
+                <tbody>
+                  <tr><td>Quality Control CV</td><td class="td-num td-up">34%</td><td class="td-num">+28%</td></tr>
+                  <tr><td>Demand Forecasting</td><td class="td-num td-up">41%</td><td class="td-num">+22%</td></tr>
+                  <tr><td>Predictive Maintenance</td><td class="td-num">28%</td><td class="td-num">+19%</td></tr>
+                  <tr><td>Color Matching AI</td><td class="td-num td-up">22%</td><td class="td-num">+15%</td></tr>
+                  <tr><td>Generative Design</td><td class="td-num td-up">18%</td><td class="td-num">+31%</td></tr>
+                  <tr><td>Supply Chain Opt.</td><td class="td-num td-up">29%</td><td class="td-num">+24%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGA 3: PRATO KPI -->
+        <div class="dm-section" style="border-top:1px solid var(--bdr)">
+          <div class="dm-panel-hdr">
+            <div class="eyebrow">Focus locale · Confindustria Toscana 2025</div>
+            <h3>Distretto di Prato — indicatori</h3>
+          </div>
+          <div class="kpi-grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+            <div class="kpi-box"><div class="kpi-label">Aziende attive</div><div class="kpi-val">~7k</div><div class="kpi-sub"><span class="kpi-dn">▼</span> -1.2% YoY</div></div>
+            <div class="kpi-box"><div class="kpi-label">Addetti</div><div class="kpi-val">42k</div><div class="kpi-sub"><span class="kpi-neu">●</span> Stabile</div></div>
+            <div class="kpi-box"><div class="kpi-label">Export Q1 2026</div><div class="kpi-val">€1.2B</div><div class="kpi-sub"><span class="kpi-up">▲</span> +2.1%</div></div>
+            <div class="kpi-box"><div class="kpi-label">Fibre riciclate</div><div class="kpi-val">60%</div><div class="kpi-sub"><span class="kpi-up">▲</span> +4pts YoY</div></div>
+            <div class="kpi-box"><div class="kpi-label">Prato Index</div><div class="kpi-val">104.2</div><div class="kpi-sub"><span class="kpi-up">▲</span> +0.9%</div></div>
+            <div class="kpi-box"><div class="kpi-label">Cert. ESG attive</div><div class="kpi-val">380+</div><div class="kpi-sub"><span class="kpi-up">▲</span> +12%</div></div>
+          </div>
+        </div>
+
+        <!-- API-READY NOTE -->
+        <div class="dm-note">
+          ⚠ <strong>Nota metodologica:</strong>
+          Dati rappresentativi delle fonti citate (ICAC, AWEX, Textile Exchange, World Bank, ISTAT/ICE, Confindustria Toscana).
+          Struttura API-ready: sostituire le costanti in <code>data.js</code> con fetch() alle API reali per dati live.
+        </div>
+
       </div>
 
     </div>

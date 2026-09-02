@@ -3,19 +3,208 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Industry Forum | Textile Intelligence Platform</title>
-  <meta name="description" content="Forum professionale per l'industria tessile: AI, supply chain, sostenibilità, certificazioni, produzione. Discussioni tra esperti del distretto di Prato e della filiera moda.">
+  <title>Distretto Tessile di Prato | Textile Intelligence Platform</title>
+  <meta name="description" content="Directory delle aziende più rinomate del distretto tessile di Prato: filatura, tessitura, tintoria, nobilitazione, macchine tessili. Caratteristiche, specializzazioni e anni di attività.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://italycircularfashion.github.io/RonaldoRiska/forum.html">
   <link rel="stylesheet" href="site.css">
+  <style>
+    /* Company directory specific styles */
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .company-card {
+      background: var(--bg-1);
+      border: 1px solid var(--bdr);
+      border-radius: var(--rm);
+      padding: 1.5rem;
+      transition: border-color var(--t2), box-shadow var(--t2), transform var(--t2);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .company-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-hi));
+      opacity: 0;
+      transition: opacity var(--t2);
+    }
+    .company-card:hover {
+      border-color: var(--bdr-2);
+      box-shadow: 0 8px 24px rgba(37,99,235,.10);
+      transform: translateY(-2px);
+    }
+    .company-card:hover::before {
+      opacity: 1;
+    }
+    .company-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--rm);
+      background: var(--bg-2);
+      border: 1px solid var(--bdr);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      margin: 0 auto;
+    }
+    .company-name {
+      font-size: var(--text-md);
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -.02em;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .company-addr {
+      font-size: .72rem;
+      color: var(--stone);
+      font-family: var(--f-m);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+    }
+    .company-spec {
+      font-size: .78rem;
+      color: var(--sand);
+      line-height: 1.6;
+      text-align: center;
+    }
+    .company-meta {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+    }
+    .company-years {
+      font-size: .68rem;
+      font-family: var(--f-m);
+      color: var(--gold);
+      background: var(--gold-lo);
+      border: 1px solid var(--bdr-2);
+      padding: .2rem .6rem;
+      border-radius: 99px;
+    }
+    .company-ateco {
+      font-size: .62rem;
+      font-family: var(--f-m);
+      color: var(--stone);
+      background: var(--bg-2);
+      border: 1px solid var(--bdr);
+      padding: .15rem .5rem;
+      border-radius: 99px;
+      letter-spacing: .04em;
+    }
+    .company-cat {
+      font-size: .62rem;
+      font-family: var(--f-m);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .2rem .6rem;
+      border-radius: 99px;
+      border: 1px solid var(--bdr);
+    }
+    .cat-filatura { background: rgba(37,99,235,.08); color: #2563EB; border-color: rgba(37,99,235,.20); }
+    .cat-tessitura { background: rgba(59,130,246,.08); color: #2563EB; border-color: rgba(59,130,246,.20); }
+    .cat-tintoria { background: rgba(100,116,139,.08); color: #475569; border-color: rgba(100,116,139,.20); }
+    .cat-macchine { background: rgba(37,99,235,.08); color: #2563EB; border-color: rgba(37,99,235,.20); }
+    .cat-finissaggio { background: rgba(16,185,129,.08); color: #059669; border-color: rgba(16,185,129,.20); }
+    .cat-consorzio { background: var(--gold-lo); color: var(--gold); border-color: var(--bdr-2); }
+
+    .filter-bar {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .filter-btn {
+      font-size: .72rem;
+      font-family: var(--f-m);
+      padding: .35rem .9rem;
+      border-radius: 99px;
+      border: 1px solid var(--bdr-2);
+      background: var(--bg-1);
+      color: var(--sand);
+      cursor: pointer;
+      transition: all var(--t2);
+      letter-spacing: .02em;
+    }
+    .filter-btn:hover {
+      border-color: var(--bdr-2);
+      color: var(--cream);
+      background: var(--bg-2);
+    }
+    .filter-btn.active {
+      background: var(--gold);
+      color: #fff;
+      border-color: var(--gold);
+    }
+
+    .district-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--bg-1);
+      border: 1px solid var(--bdr);
+      border-radius: var(--rm);
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gold);
+      font-family: var(--f-m);
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+    .stat-label {
+      font-size: .68rem;
+      color: var(--stone);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .section-intro h1 {
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      color: var(--cream);
+      letter-spacing: -.03em;
+      margin-bottom: .5rem;
+    }
+    .section-intro p {
+      color: var(--sand);
+      font-size: .84rem;
+      line-height: 1.7;
+      max-width: 70ch;
+    }
+    @media (max-width: 768px) {
+      .company-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="page-forum">
 <a class="skip-link" href="#main">Salta al contenuto</a>
 <div class="platform">
 
   <div class="platform-ticker">
     <div class="ticker-bar">
-      <div class="ticker-label">LIVE</div>
+      <div class="ticker-label">DISTRICT</div>
       <div class="ticker-track"><div class="ticker-items" aria-hidden="true"></div></div>
     </div>
   </div>
@@ -38,7 +227,7 @@
     </div>
     <div class="sb-section">
       <div class="sb-section-title">Community</div>
-      <a class="sb-link active" href="forum.html"><span class="sb-icon">◌</span> Industry Forum<span class="sb-badge">6</span></a>
+      <a class="sb-link active" href="forum.html"><span class="sb-icon">◌</span> Industry Forum<span class="sb-badge">25</span></a>
     </div>
     <div class="sb-market">
       <div class="sb-market-title">Market Pulse</div>
@@ -58,81 +247,350 @@
           <div class="page-hdr-breadcrumb"><a href="index.html">Platform</a> / Industry Forum</div>
           <h1>Industry Forum</h1>
           <div class="page-hdr-meta">
-            <span>◌ 6 thread attivi</span>
-            <span>💬 62 risposte totali</span>
-            <span>👥 Community professionale B2B</span>
+            <span>🏭 25 aziende</span>
+            <span>📍 Distretto di Prato</span>
+            <span>🧵 Filiera completa</span>
           </div>
         </div>
-        <a class="btn btn-gold btn-sm" href="mailto:ronaldo.riska@gmail.com?subject=Nuovo thread forum tessile">
-          + Nuovo thread
+        <a class="btn btn-gold btn-sm" href="mailto:ronaldo.riska@gmail.com?subject=Nuova azienda directory">
+          + Aggiungi azienda
         </a>
       </div>
     </div>
 
     <div class="main-pad">
 
-      <!-- BANNER MVP -->
-      <div style="padding:1.1rem 1.4rem;background:var(--bg-1);
-                  border:1px solid var(--bdr-2);border-radius:var(--rm);
-                  margin-bottom:1.75rem;display:flex;gap:1rem;align-items:flex-start" class="reveal">
-        <div style="font-size:1.3rem;flex-shrink:0;margin-top:.1rem">◌</div>
-        <div>
-          <div style="font-family:var(--f-m);font-size:.62rem;letter-spacing:.14em;
-                      text-transform:uppercase;color:var(--gold);margin-bottom:.3rem">
-            Community MVP — Fase 1
+      <!-- INTRO -->
+      <div class="section-card reveal" style="margin-bottom:1.75rem">
+        <div style="display:flex;gap:1rem;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0;margin-top:.1rem">🏭</div>
+          <div>
+            <div style="font-family:var(--f-m);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem">
+              Directory del Distretto Tessile Pratese
+            </div>
+            <p style="font-size:.82rem;color:var(--sand);line-height:1.7">
+              Il distretto di Prato è il più grande distretto tessile d'Europa, con oltre <strong style="color:var(--cream)">1.286 aziende</strong> attive nella filiera.
+              Questa directory raccoglie le <strong style="color:var(--cream)">25 eccellenze</strong> più rinomate: dai lanifici storici del XIX secolo
+              alla piattaforma digitale <strong style="color:var(--gold)">Didip</strong> (31 aziende consortili, 2026).
+              Ogni scheda include ragione sociale, indirizzo, specializzazione, anni di attività e codice ATECO.
+            </p>
           </div>
-          <p style="font-size:.8rem;color:var(--sand);line-height:1.65">
-            Forum professionale B2B per la filiera tessile. Attualmente in fase MVP con
-            <strong style="color:var(--cream)">thread moderati e curati</strong>.
-            Per partecipare, contribuire a un thread o aprirne uno nuovo, scrivi a
-            <a href="mailto:ronaldo.riska@gmail.com" style="color:var(--gold)">ronaldo.riska@gmail.com</a>.
-            Roadmap: autenticazione, thread live e sistema reputazione nella fase successiva.
-          </p>
         </div>
       </div>
 
-      <!-- STATS ROW -->
-      <div class="kpi-grid reveal" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.75rem">
-        <div class="kpi-box"><div class="kpi-label">Thread attivi</div><div class="kpi-val">6</div></div>
-        <div class="kpi-box"><div class="kpi-label">Risposte totali</div><div class="kpi-val">81</div><div class="kpi-sub"><span class="kpi-up">▲</span> Questa settimana</div></div>
-        <div class="kpi-box"><div class="kpi-label">Visualizzazioni</div><div class="kpi-val">1.9k</div></div>
-        <div class="kpi-box"><div class="kpi-label">Categorie</div><div class="kpi-val">5</div></div>
+      <!-- STATS -->
+      <div class="district-stats reveal">
+        <div class="stat-card">
+          <div class="stat-val">25</div>
+          <div class="stat-label">Aziende selezionate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">7</div>
+          <div class="stat-label">Categorie ATECO</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">1862</div>
+          <div class="stat-label">Anno più antico</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">31</div>
+          <div class="stat-label">Aziende Didip</div>
+        </div>
       </div>
 
-      <!-- CATEGORY FILTER -->
-      <div class="forum-cats" data-forum-cats></div>
-
-      <!-- THREAD LIST -->
-      <div class="thread-list" data-forum-threads></div>
-
-      <!-- LINEE GUIDA -->
-      <div style="margin-top:2rem;padding:1.25rem 1.5rem;
-                  background:var(--bg-1);border:1px solid var(--bdr);
-                  border-radius:var(--rm)" class="reveal">
-        <div style="font-family:var(--f-m);font-size:.6rem;letter-spacing:.16em;
-                    text-transform:uppercase;color:var(--stone);margin-bottom:.75rem">
-          Linee guida community
+      <!-- FILTRI -->
+      <div class="section-card reveal" style="padding:1rem 1.25rem;margin-bottom:1.5rem">
+        <div class="filter-bar" data-company-filter>
+          <button class="filter-btn active" data-filter="all">Tutte</button>
+          <button class="filter-btn" data-filter="filatura">Filatura</button>
+          <button class="filter-btn" data-filter="tessitura">Tessitura</button>
+          <button class="filter-btn" data-filter="tintoria">Tintoria / Nobilitazione</button>
+          <button class="filter-btn" data-filter="finissaggio">Finissaggio</button>
+          <button class="filter-btn" data-filter="macchine">Macchine</button>
+          <button class="filter-btn" data-filter="consorzio">Consorzio / Piattaforma</button>
+          <button class="filter-btn" data-filter="13.10.00">Filatura (13.10)</button>
+          <button class="filter-btn" data-filter="13.20.00">Tessitura (13.20)</button>
+          <button class="filter-btn" data-filter="13.30.00">Tintoria (13.30)</button>
+          <button class="filter-btn" data-filter="28.15.00">Macchine (28.15)</button>
+          <button class="filter-btn" data-filter="70.22.00">Consulenza (70.22)</button>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem">
-          <div style="font-size:.78rem;color:var(--sand);line-height:1.6;
-                      padding:.75rem;background:var(--bg-2);border-radius:var(--r)">
-            <strong style="color:var(--cream)">✓ Contenuti tecnici</strong><br>
-            Privilegia dati, esperienze reali, benchmark e metodologie concrete.
+      </div>
+
+      <!-- GRIGLIA AZIENDE -->
+      <div class="company-grid" data-company-grid>
+        <div class="company-card reveal" data-category="tessitura">
+          <div class="company-logo">🏭</div>
+          <div class="company-name">Lanificio Mario Bellucci</div>
+          <div class="company-addr"><span>📍</span> Via Valderia, 59100 Prato (PO)</div>
+          <div class="company-spec">Tessitura lana/poliestere di alta gamma per abbigliamento e arredamento. Produzione di tessuti per brand luxury e contract.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1862</span>
+            <span class="company-ateco">13.20.00</span>
+            <span class="company-cat cat-tessitura">Tessitura</span>
           </div>
-          <div style="font-size:.78rem;color:var(--sand);line-height:1.6;
-                      padding:.75rem;background:var(--bg-2);border-radius:var(--r)">
-            <strong style="color:var(--cream)">✓ Professionalità B2B</strong><br>
-            Tono da industria, non da social media. Citare fonti quando possibile.
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Pecci Filati</div>
+          <div class="company-addr"><span>📍</span> Via di Iolo, 59100 Prato (PO)</div>
+          <div class="company-spec">Filatura lana/cotone riciclato e rigenerato. Specializzati in filati GRS (Global Recycle Standard) per economia circolare.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1884</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
           </div>
-          <div style="font-size:.78rem;color:var(--sand);line-height:1.6;
-                      padding:.75rem;background:var(--bg-2);border-radius:var(--r)">
-            <strong style="color:var(--cream)">✓ Nessuna pubblicità</strong><br>
-            Post promozionali non ammessi. Menzioni di prodotti solo se contestuali.
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Filati Biagioli Modesto</div>
+          <div class="company-addr"><span>📍</span> Via delle Serre, 59100 Prato (PO)</div>
+          <div class="company-spec">Filatura lana merino e superfine per maglieria di lusso. Fornitori di filati per brand di alta moda italiana.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1902</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
           </div>
-          <div style="font-size:.78rem;color:var(--sand);line-height:1.6;
-                      padding:.75rem;background:var(--bg-2);border-radius:var(--r)">
-            <strong style="color:var(--cream)">✓ Rispetto NDA</strong><br>
-            Non condividere dati riservati aziendali. Anonimizzare i casi studio.
+        </div>
+        <div class="company-card reveal" data-category="tessitura">
+          <div class="company-logo">🏭</div>
+          <div class="company-name">Marini Industrie</div>
+          <div class="company-addr"><span>📍</span> Via di Santa Chiara, 59100 Prato (PO)</div>
+          <div class="company-spec">Tessitura cotone/organico e fibre rigenerate. Certificata GOTS, Oeko-Tex. Focus su sostenibilità e tracciabilità.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1956</span>
+            <span class="company-ateco">13.20.00</span>
+            <span class="company-cat cat-tessitura">Tessitura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tintoria">
+          <div class="company-logo">💧</div>
+          <div class="company-name">Tintoria Cometa</div>
+          <div class="company-addr"><span>📍</span> Via delle Barche, 59100 Prato (PO)</div>
+          <div class="company-spec">Tintoria e nobilitazione filati. Processi a basso impatto ambientale, aderente al progetto Detox di Greenpeace.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1968</span>
+            <span class="company-ateco">13.30.00</span>
+            <span class="company-cat cat-tintoria">Tintoria</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tintoria">
+          <div class="company-logo">💧</div>
+          <div class="company-name">Jersey Mode</div>
+          <div class="company-addr"><span>📍</span> Via di Capraia, 59100 Prato (PO)</div>
+          <div class="company-spec">Nobilitazione tessuti jersey e maglieria. Finissaggi mano seta, peccato, cimosatura e sanforizzazione.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1972</span>
+            <span class="company-ateco">13.30.00</span>
+            <span class="company-cat cat-tintoria">Tintoria</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Gruppo Bisentino</div>
+          <div class="company-addr"><span>📍</span> Via delle Fontane, 59100 Prato (PO)</div>
+          <div class="company-spec">Filatura/tessitura integrata. Presidente della società consortile Didip (Digital District Platform, 2026).</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1985</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tessitura">
+          <div class="company-logo">🏭</div>
+          <div class="company-name">Ritorcitura Grazia</div>
+          <div class="company-addr"><span>📍</span> Via di Gabbiano, 59100 Prato (PO)</div>
+          <div class="company-spec">Ritorcitura cotone/sintetico. Processi di torsione e ritortatura per filati tecnici e abbigliamento sportivo.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1991</span>
+            <span class="company-ateco">13.20.00</span>
+            <span class="company-cat cat-tessitura">Tessitura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tessitura">
+          <div class="company-logo">🏭</div>
+          <div class="company-name">Woven Color</div>
+          <div class="company-addr"><span>📍</span> Via di Filettole, 59100 Prato (PO)</div>
+          <div class="company-spec">Tessitura tecnica/industriale per arredamento e contract. Tessuti ignifughi, blackout, tecnici per ospedali e hotel.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 2004</span>
+            <span class="company-ateco">13.20.00</span>
+            <span class="company-cat cat-tessitura">Tessitura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="finissaggio">
+          <div class="company-logo">✨</div>
+          <div class="company-name">Tergotex</div>
+          <div class="company-addr"><span>📍</span> Via delle Scee, 59100 Prato (PO)</div>
+          <div class="company-spec">Finissaggio e lavaggio tessuti. 7 reparti produttivi per offrire qualsiasi tipo di lavorazione: tintura, finissaggio, lavaggio.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1956</span>
+            <span class="company-ateco">13.30.00</span>
+            <span class="company-cat cat-finissaggio">Finissaggio</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="macchine">
+          <div class="company-logo">⚙️</div>
+          <div class="company-name">Unitech Textile Machinery</div>
+          <div class="company-addr"><span>📍</span> Via Parugiano, 59013 Montemurlo (PO)</div>
+          <div class="company-spec">Macchine tessili e automazione. Progettazione di telai, ritorciture e sistemi di controllo qualità per filiere industriali.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1978</span>
+            <span class="company-ateco">28.15.00</span>
+            <span class="company-cat cat-macchine">Macchine</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Gruppo Colle</div>
+          <div class="company-addr"><span>📍</span> Via G. di Vittorio, 59025 Cantagallo (PO)</div>
+          <div class="company-spec">Filatura e lanificio integrato. Lana vergine e rigenerata, filati per maglieria e tessuti per arredamento.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1965</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Filati Omega</div>
+          <div class="company-addr"><span>📍</span> Via di Malavolta, 59100 Prato (PO)</div>
+          <div class="company-spec">Filatura cotone e fibre riciclate. Filati per maglieria e tessuti tecnici. Fornitore di brand sostenibili europei.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1995</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tessitura">
+          <div class="company-logo">🏭</div>
+          <div class="company-name">Tessitura Innocenti e Nesi</div>
+          <div class="company-addr"><span>📍</span> Via di Poggio a Caiano, 59016 Poggio a Caiano (PO)</div>
+          <div class="company-spec">Tessitura lana/cotone per abbigliamento e biancheria. Produzione di tessuti classici e moderni per il mercato italiano ed estero.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1970</span>
+            <span class="company-ateco">13.20.00</span>
+            <span class="company-cat cat-tessitura">Tessitura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="consorzio">
+          <div class="company-logo">💻</div>
+          <div class="company-name">Didip</div>
+          <div class="company-addr"><span>📍</span> Prato — Società Consortile SCRL</div>
+          <div class="company-spec">Piattaforma digitale consortile fondata nel 2026 da 31 imprese tessili pratesi. Integra i dati di produzione per tracciabilità, sostenibilità e competitività della filiera. Promossa da Confindustria Toscana Nord, Cna Toscana Centro e Confartigianato Imprese Prato.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 2026</span>
+            <span class="company-ateco">70.22.00</span>
+            <span class="company-cat cat-consorzio">Consorzio</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tessitura">
+          <div class="company-logo">🏭</div>
+          <div class="company-name">Albini & Pitigliani</div>
+          <div class="company-addr"><span>📍</span> Viale Marconi 46, 59100 Prato (PO)</div>
+          <div class="company-spec">Tessitura cotone/organico per abbigliamento e arredamento. Fornitori di tessuti per brand internazionali e private label.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1948</span>
+            <span class="company-ateco">13.20.00</span>
+            <span class="company-cat cat-tessitura">Tessitura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Filatura Valfilo</div>
+          <div class="company-addr"><span>📍</span> Via degli Stampatori 24, 59021 Vaiano (PO)</div>
+          <div class="company-spec">Filatura cotone e lana per tessuti tecnici e abbigliamento. Specializzati in filati ritorti per maglieria e tessuti da camiceria.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1974</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Lanificio dell'Olivo</div>
+          <div class="company-addr"><span>📍</span> Via dell'Olivo, 59100 Prato (PO)</div>
+          <div class="company-spec">Filatura lana vergine e rigenerata. Produzione di filati per maglieria e tessuti per arredamento. Aderente al progetto Detox.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1912</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tintoria">
+          <div class="company-logo">💧</div>
+          <div class="company-name">Tintoria Alessandrini</div>
+          <div class="company-addr"><span>📍</span> Via delle Campane, 59100 Prato (PO)</div>
+          <div class="company-spec">Nobilitazione filati con processi a basso impatto. Coloranti naturali e tecnici, certificati Oeko-Tex e GOTS.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1976</span>
+            <span class="company-ateco">13.30.00</span>
+            <span class="company-cat cat-tintoria">Tintoria</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tintoria">
+          <div class="company-logo">💧</div>
+          <div class="company-name">Tintoria Fiordiluce</div>
+          <div class="company-addr"><span>📍</span> Via di Iolo, 59100 Prato (PO)</div>
+          <div class="company-spec">Nobilitazione filati per maglieria e tessuti. Finissaggi mano seta, cimosatura e trattimenti ignifughi.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1982</span>
+            <span class="company-ateco">13.30.00</span>
+            <span class="company-cat cat-tintoria">Tintoria</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Progetto Lana</div>
+          <div class="company-addr"><span>📍</span> Via di Malavolta, 59100 Prato (PO)</div>
+          <div class="company-spec">Materie prime tessili: lana vergine, lana rigenerata, fibre naturali. Selezione e lavorazione per filieri sostenibili.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1998</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="finissaggio">
+          <div class="company-logo">✨</div>
+          <div class="company-name">Rifinizione Alan</div>
+          <div class="company-addr"><span>📍</span> Via delle Scee, 59100 Prato (PO)</div>
+          <div class="company-spec">Rifinizione tessuti: sanforizzazione, calandratura, vaporatura. Processi finali per tessuti di cotone e lana.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1988</span>
+            <span class="company-ateco">13.30.00</span>
+            <span class="company-cat cat-finissaggio">Finissaggio</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tintoria">
+          <div class="company-logo">💧</div>
+          <div class="company-name">Tintoria Martelli</div>
+          <div class="company-addr"><span>📍</span> Via di Gabbiano, 59100 Prato (PO)</div>
+          <div class="company-spec">Tintoria filati e tessuti. Processi sostenibili, aderente al progetto Detox. Coloranti a basso impatto ambientale.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1965</span>
+            <span class="company-ateco">13.30.00</span>
+            <span class="company-cat cat-tintoria">Tintoria</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="filatura">
+          <div class="company-logo">🧶</div>
+          <div class="company-name">Lane di Prato</div>
+          <div class="company-addr"><span>📍</span> Via Valderia, 59100 Prato (PO)</div>
+          <div class="company-spec">Filatura e cardatura lana vergine e rigenerata. Filati per maglieria, arredamento e accessori. Specializzati in lana merino.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1952</span>
+            <span class="company-ateco">13.10.00</span>
+            <span class="company-cat cat-filatura">Filatura</span>
+          </div>
+        </div>
+        <div class="company-card reveal" data-category="tessitura">
+          <div class="company-logo">🏭</div>
+          <div class="company-name">Manifattura del Prato</div>
+          <div class="company-addr"><span>📍</span> Via di Capraia, 59100 Prato (PO)</div>
+          <div class="company-spec">Tessitura cotone/poliestere per abbigliamento e tessuti per la casa. Produzione di tessuti stampati e tinti in filo.</div>
+          <div class="company-meta">
+            <span class="company-years">Dal 1968</span>
+            <span class="company-ateco">13.20.00</span>
+            <span class="company-cat cat-tessitura">Tessitura</span>
           </div>
         </div>
       </div>
@@ -140,7 +598,7 @@
     </div>
 
     <footer class="platform-footer">
-      <span>© <span data-year></span> Ronaldo Riska · Industry Forum</span>
+      <span>© <span data-year></span> Ronaldo Riska · Industry Forum — Distretto di Prato</span>
       <nav style="display:flex;gap:1.25rem;flex-wrap:wrap">
         <a href="index.html">Home</a><a href="cv.html">CV</a>
         <a href="dashboard.html">Dashboard</a><a href="research.html">Research</a><a href="news.html">News</a>
@@ -152,5 +610,32 @@
 <button class="mob-menu-toggle" aria-label="Menu">☰</button>
 <script src="data.js" defer></script>
 <script src="main.js" defer></script>
+<script>
+  // Company + ATECO filter
+  document.addEventListener('DOMContentLoaded', () => {
+    const btns = document.querySelectorAll('[data-company-filter] .filter-btn');
+    const cards = document.querySelectorAll('[data-company-grid] .company-card');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(c => {
+          const catMatch = c.dataset.category === f;
+          const atecoEl = c.querySelector('.company-ateco');
+          const atecoText = atecoEl ? atecoEl.textContent.trim() : '';
+          const atecoMatch = f !== 'all' && f !== 'filatura' && f !== 'tessitura' && f !== 'tintoria' && f !== 'finissaggio' && f !== 'macchine' && f !== 'consorzio'
+            ? atecoText.startsWith(f.slice(0, 5))
+            : false;
+          if (f === 'all' || catMatch || atecoMatch) {
+            c.style.display = '';
+          } else {
+            c.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
 </body>
 </html>
