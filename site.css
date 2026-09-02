@@ -2073,3 +2073,204 @@ input, textarea, select {
     color: black;
   }
 }
+
+
+/* ═══════ HOME TILE GRID ═══════ */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: var(--bg-2);
+  border: 1px solid var(--bdr);
+  border-radius: var(--rm);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--t2);
+  overflow: hidden;
+  min-height: 160px;
+}
+
+.tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--teal), var(--blue));
+  opacity: 0;
+  transition: opacity var(--t2);
+}
+
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(52,152,219,0.08) 0%, 
+    transparent 60%);
+  opacity: 0;
+  transition: opacity var(--t2);
+  pointer-events: none;
+}
+
+.tile:hover {
+  border-color: var(--teal);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(52,152,219,.12), 0 0 0 1px rgba(52,152,219,.08);
+}
+
+.tile:hover::before {
+  opacity: 1;
+}
+
+.tile:hover::after {
+  opacity: 1;
+}
+
+.tile:active {
+  transform: translateY(-2px);
+}
+
+.tile-icon {
+  font-size: 1.6rem;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-1);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  color: var(--gold);
+  transition: all var(--t2);
+}
+
+.tile:hover .tile-icon {
+  border-color: var(--teal);
+  box-shadow: 0 0 12px rgba(52,152,219,.15);
+  color: var(--teal);
+}
+
+.tile-label {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+
+.tile-desc {
+  font-size: .72rem;
+  color: var(--sand);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.tile-meta {
+  font-family: var(--f-m);
+  font-size: .62rem;
+  color: var(--stone);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--bdr);
+}
+
+/* Tile color accents */
+.tile[data-tile="dashboard"] .tile-icon { color: var(--teal); }
+.tile[data-tile="forum"] .tile-icon { color: var(--purple); }
+.tile[data-tile="cv"] .tile-icon { color: var(--gold); }
+.tile[data-tile="news"] .tile-icon { color: var(--blue); }
+.tile[data-tile="research"] .tile-icon { color: var(--blue); }
+.tile[data-tile="materials"] .tile-icon { color: #A3BE8C; }
+
+/* Tile hover glow per tipo */
+.tile[data-tile="dashboard"]:hover { box-shadow: 0 8px 32px rgba(26,188,156,.12), 0 0 0 1px rgba(26,188,156,.08); }
+.tile[data-tile="forum"]:hover { box-shadow: 0 8px 32px rgba(155,89,182,.12), 0 0 0 1px rgba(155,89,182,.08); }
+.tile[data-tile="cv"]:hover { box-shadow: 0 8px 32px rgba(212,168,67,.12), 0 0 0 1px rgba(212,168,67,.08); }
+.tile[data-tile="news"]:hover { box-shadow: 0 8px 32px rgba(52,152,219,.12), 0 0 0 1px rgba(52,152,219,.08); }
+.tile[data-tile="research"]:hover { box-shadow: 0 8px 32px rgba(52,152,219,.12), 0 0 0 1px rgba(52,152,219,.08); }
+.tile[data-tile="materials"]:hover { box-shadow: 0 8px 32px rgba(163,190,140,.12), 0 0 0 1px rgba(163,190,140,.08); }
+
+/* Hero enhancements */
+body.page-index .hero {
+  position: relative;
+  overflow: hidden;
+}
+
+body.page-index .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--teal), var(--blue));
+}
+
+/* Mission card pulse */
+body.page-index .section-card[style*="border-left:3px solid var(--teal)"] {
+  position: relative;
+}
+
+body.page-index .section-card[style*="border-left:3px solid var(--teal)"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--teal), var(--blue), var(--gold));
+  opacity: 0;
+  animation: mission-pulse 3s ease-in-out infinite;
+}
+
+@keyframes mission-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tile-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tile {
+    min-height: auto;
+    padding: 1rem;
+  }
+  
+  .tile-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tile-grid {
+    gap: 0.75rem;
+  }
+  
+  .tile {
+    padding: 0.85rem;
+  }
+  
+  .tile-label {
+    font-size: .82rem;
+  }
+  
+  .tile-desc {
+    font-size: .68rem;
+  }
+}
