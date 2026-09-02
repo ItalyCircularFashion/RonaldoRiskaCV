@@ -1187,6 +1187,346 @@ canvas.sparkline { width:100%; height:60px; display:block; }
   .news-grid { grid-template-columns:1fr; }
   .research-grid { grid-template-columns:1fr; }
 }
+/* ═══════ MOBILE OPTIMIZATIONS ═══════ */
+
+/* Touch optimization */
+button, a, .filter-btn, .fcat-btn, .mob-menu-toggle {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Prevent overscroll bounce on main content */
+.platform-content {
+  overscroll-behavior: none;
+}
+
+/* Tablet landscape / small desktop */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-w: 240px;
+  }
+  
+  .platform {
+    grid-template-columns: var(--sidebar-w) 1fr;
+  }
+  
+  .platform-sidebar {
+    display: flex;
+  }
+  
+  .platform-content {
+    grid-column: 2;
+  }
+  
+  /* Dashboard table scroll */
+  .dm-row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .data-table {
+    min-width: 600px;
+    font-size: 0.72rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.6rem 0.5rem;
+  }
+  
+  /* Forum cards */
+  .forum-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  
+  /* News cards */
+  .news-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  /* Research grid */
+  .research-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-w: 0px;
+    --ticker-h: 36px;
+  }
+  
+  .platform {
+    grid-template-columns: 1fr;
+  }
+  
+  .platform-sidebar {
+    display: none;
+  }
+  
+  .platform-sidebar.open {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: var(--ticker-h);
+    bottom: 0;
+    width: 260px;
+    z-index: 150;
+    box-shadow: 4px 0 24px rgba(0,0,0,.6);
+  }
+  
+  .platform-content {
+    grid-column: 1;
+  }
+  
+  .mob-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .main-pad, .main-pad-sm {
+    padding: 1rem;
+  }
+  
+  .page-hdr {
+    padding: 1rem;
+  }
+  
+  .page-hdr h1 {
+    font-size: 1.4rem;
+  }
+  
+  .page-hdr-meta {
+    font-size: 0.72rem;
+  }
+  
+  /* KPI grid */
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .kpi-box {
+    padding: 0.75rem;
+  }
+  
+  .kpi-val {
+    font-size: 1.1rem;
+  }
+  
+  /* CV responsive */
+  .cv-report {
+    grid-template-columns: 1fr;
+  }
+  
+  .cv-col {
+    border-right: none;
+    border-bottom: 1px solid var(--bdr);
+    padding-right: 0;
+    padding-bottom: 1.25rem;
+  }
+  
+  /* Dashboard */
+  .dm-header {
+    padding: 1rem;
+  }
+  
+  .dm-panel {
+    padding: 1rem;
+  }
+  
+  .dm-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .dm-meta {
+    font-size: 0.65rem;
+  }
+  
+  /* Forum */
+  .forum-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-bar {
+    flex-wrap: wrap;
+  }
+  
+  /* News */
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featured-article {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Research */
+  .research-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Chart grid */
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+  }
+  
+  /* Sidebar pulse hide on mobile */
+  .sb-market {
+    display: none;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  :root {
+    --ticker-h: 32px;
+  }
+  
+  .main-pad, .main-pad-sm {
+    padding: 0.85rem;
+  }
+  
+  .page-hdr {
+    padding: 0.85rem;
+  }
+  
+  .page-hdr h1 {
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+  
+  .page-hdr-breadcrumb {
+    font-size: 0.65rem;
+  }
+  
+  .page-hdr-meta {
+    font-size: 0.68rem;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .kpi-box {
+    padding: 0.65rem;
+  }
+  
+  .kpi-val {
+    font-size: 1rem;
+  }
+  
+  .section-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .cv-sec-ttl {
+    font-size: 0.62rem;
+  }
+  
+  .cv-e-title {
+    font-size: 0.82rem;
+  }
+  
+  .cv-e-body {
+    font-size: 0.75rem;
+  }
+  
+  .filter-btn, .fcat-btn {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.7rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.72rem;
+  }
+  
+  /* Reduce motion on mobile for performance */
+  .section-card,
+  .cv-entry,
+  .kpi-inline-box,
+  .cv-tag {
+    transition: none;
+  }
+  
+  /* Forum cards full width */
+  .forum-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Table minimal */
+  .data-table {
+    min-width: 500px;
+    font-size: 0.68rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.5rem 0.4rem;
+  }
+  
+  /* Footer compact */
+  .platform-footer {
+    padding: 0.75rem 1rem;
+    font-size: 0.65rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .main-pad, .main-pad-sm {
+    padding: 0.75rem;
+  }
+  
+  .page-hdr {
+    padding: 0.75rem;
+  }
+  
+  .page-hdr h1 {
+    font-size: 1.05rem;
+  }
+  
+  .kpi-val {
+    font-size: 0.9rem;
+  }
+  
+  .section-card {
+    padding: 0.85rem;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .platform-ticker {
+    display: none;
+  }
+  
+  .page-hdr {
+    padding: 0.75rem;
+  }
+  
+  .main-pad, .main-pad-sm {
+    padding: 0.75rem;
+  }
+  
+  .kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 
 
 /* Dashboard mega-block */
@@ -1557,5 +1897,179 @@ body.page-cv .section-card[style*="padding:.6rem"]:hover {
     border-bottom: 1px solid var(--bdr);
     padding-right: 0;
     padding-bottom: 1.5rem;
+  }
+}
+
+
+/* ═══════ ADVANCED MOBILE OPTIMIZATIONS ═══════ */
+
+/* Font rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+/* Prevent iOS font-size inflation */
+button, input, textarea, select {
+  font-size: 16px;
+}
+
+/* Global image constraints */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Table wrapper for horizontal scroll */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.data-table {
+  min-width: 600px;
+}
+
+/* Sidebar close when clicking outside */
+.platform-sidebar::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.platform-sidebar.open::before {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Card touch optimization */
+.section-card, .cv-entry, .forum-card, .news-card {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+/* Minimum touch target */
+a, button, .filter-btn, .fcat-btn, .cv-tag {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Forum card images */
+.forum-card img {
+  max-height: 120px;
+  object-fit: contain;
+}
+
+/* News card images */
+.news-card img, .research-card img {
+  max-height: 180px;
+  object-fit: cover;
+}
+
+/* KPI value sizing */
+.kpi-val {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  word-break: break-word;
+}
+
+.kpi-label {
+  font-size: clamp(0.6rem, 1.5vw, 0.72rem);
+}
+
+/* Forum filter sticky */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  background: var(--bg-1);
+  z-index: 10;
+  padding: 0.75rem 0;
+}
+
+/* Ticker sizing */
+.platform-ticker {
+  max-height: 36px;
+}
+
+.ticker-items > * {
+  white-space: nowrap;
+  font-size: 0.65rem;
+}
+
+/* Dashboard panel spacing */
+.dm-panel, .dm-section {
+  padding: 1rem;
+}
+
+.dm-panel-hdr h3 {
+  font-size: 1rem;
+}
+
+/* Form inputs if any */
+input, textarea, select {
+  font-size: 16px;
+  padding: 0.75rem;
+}
+
+/* Reduce motion for performance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide sidebar animation on mobile for performance */
+@media (max-width: 768px) {
+  .section-card,
+  .cv-entry,
+  .kpi-inline-box,
+  .cv-tag,
+  .forum-card,
+  .news-card,
+  .research-card {
+    transition: none;
+  }
+  
+  .section-card::before {
+    display: none;
+  }
+}
+
+/* Print optimization */
+@media print {
+  .platform-sidebar,
+  .platform-ticker,
+  .mob-menu-toggle,
+  .sb-market {
+    display: none !important;
+  }
+  
+  .platform {
+    display: block;
+  }
+  
+  .platform-content {
+    padding: 0;
+  }
+  
+  body {
+    background: white;
+    color: black;
   }
 }
