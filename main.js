@@ -333,7 +333,7 @@ function renderResearch(){
   <div class="rc-tags">${r.tags.map(t=>`<span class="rc-tag">${t}</span>`).join('')}</div>
   <div class="rc-footer">
     <span>${r.date} · ${r.pages}p · ${r.readTime}</span>
-    <span class="rc-cta">Leggi</span>
+    <a class="rc-cta" href="${r.url || '#'}" target="_blank" rel="noopener">Leggi</a>
   </div>
 </article>`).join('');
 
