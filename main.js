@@ -252,7 +252,10 @@ function renderNews(){
   if(fa){
     const f=NEWS.find(n=>n.featured)||NEWS[0];
     fa.innerHTML=`
-      <div>
+      <div class="fa-photo">
+        <img src="assets/prato.jpg" alt="Panorama del distretto tessile di Prato" loading="lazy">
+      </div>
+      <div class="fa-content">
         <div class="fa-label">📰 Articolo in evidenza</div>
         <h2 class="fa-title">${f.title}</h2>
         <p class="fa-summary">${f.summary}</p>
