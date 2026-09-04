@@ -253,7 +253,7 @@ function renderNews(){
           <span>📌 ${f.source}</span>
         </div>
         <div style="margin-top:1.25rem">
-          <a class="btn btn-gold btn-sm" href="#">Leggi articolo →</a>
+          <a class="btn btn-gold btn-sm" href="${f.url||'#'}" target="_blank" rel="noopener">Leggi articolo →</a>
         </div>
       </div>
       <div class="nc-cat cat-${f.cat}" style="font-size:.75rem;font-weight:700;writing-mode:vertical-rl;
