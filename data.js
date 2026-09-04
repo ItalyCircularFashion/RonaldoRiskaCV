@@ -216,6 +216,86 @@ const RESEARCH = [
     pages:72, type2:'Technical Report',
     url:'#'
   },
+  {
+    id:'r09',
+    type:'Sustainability',
+    title:'EU Textile Strategy 2030: analisi dell\'impatto sulle PMI italiane',
+    abstract:'La strategia europea per il tessile sostenibile al 2030 prevede obiettivi vincolanti di riciclo, tracciabilità e riduzione chimica. Per le PMI italiane, l\'impatto è duplice: da un lato la compliance costerà in media €18k-35k per sito, dall\'altro la standardizzazione creerà un mercato unico per i prodotti tracciabili. Prato, con 23 aziende GOTS e 78% aderenti Detox, è già avanti: il distretto può diventare il benchmark nazionale.',
+    tags:['EU Strategy','2030','Sustainability','PMI','Prato','Compliance'],
+    date:'Apr 2026', readTime:'22 min',
+    pages:96, type2:'Policy Brief',
+    url:'https://environment.ec.europa.eu/'
+  },
+  {
+    id:'r10',
+    type:'Technology',
+    title:'Digital Twin nella tessitura: riduzione scarti del 28% su 5 linee pratesi',
+    abstract:'Progetto pilota condotto da un consorzio di 3 aziende tessili di Prato con supporto del PIN. Risultati dopo 12 mesi: riduzione scarti del 28%, OEE +15%, tempo di setup dimezzato. Il gemello digitale replica il telaio in tempo reale, anticipando rotture e ottimizzando i parametri. Investimento medio: €45k per macchina. Payback: 18 mesi. Il dato chiave: il 92% degli operatori ha accettato la nuova interfaccia dopo un mese di formazione.',
+    tags:['Digital Twin','Tessitura','Prato','PIN','OEE','Settup','Riduzione Scarti'],
+    date:'Mar 2026', readTime:'16 min',
+    pages:42, type2:'Case Study',
+    url:'#'
+  },
+  {
+    id:'r11',
+    type:'AI Application',
+    title:'Demand Forecasting con Transformer: previsioni più accurate per il pronto moda',
+    abstract:'I modelli Transformer applicati alla previsione della domanda nel pronto moda raggiungono un MAPE dell\'11,8% su dati reali di 4 brand italiani. Rispetto a LSTM e XGBoost, gestiscono meglio i cambiamenti di trend e le promozioni stagionali. Il paper include dataset anonimizzato di 3 aziende pratesi e codice open-source su GitHub. Per le PMI: non serve un data lake, basta una pulizia dei dati storici di vendita.',
+    tags:['Transformer','Forecasting','Deep Learning','Pronto Moda','Open Source','PMI'],
+    date:'Feb 2026', readTime:'19 min',
+    pages:58, type2:'Research Paper',
+    url:'https://arxiv.org/search/?query=textile+demand+forecasting+transformer'
+  },
+  {
+    id:'r12',
+    type:'Technology',
+    title:'Waterless Dyeing: tecnologie a confronto e applicabilità nel distretto di Prato',
+    abstract:'Supercritical CO₂, dyeing con schiuma e tintura a plasma sono le tre tecnologie waterless più mature. Il report analizza costi, consumi idrici e qualità del colore su campioni di cotone e poliestere. Risultato: il supercritical CO₂ riduce i consumi idrici del 95% ma ha un costo operativo +35% rispetto alla tintura tradizionale. Per Prato, la via più realistica è la tintura a schiuma: minore investimento, compatibile con le tintorie esistenti, riduzione acqua del 70%.',
+    tags:['Waterless Dyeing','Tintoria','Sostenibilità','Prato','CO₂','Schiuma','Plasma'],
+    date:'Gen 2026', readTime:'14 min',
+    pages:36, type2:'Technical Report',
+    url:'#'
+  },
+  {
+    id:'r13',
+    type:'Supply Chain',
+    title:'Tracciabilità Blockchain: Textile Genesis vs FibreTrace — costo e integrazione ERP',
+    abstract:'Confronto pratico tra le due piattaforme blockchain più usate nel tessile. Textile Genesis: costo €12k-20k/anno, integrazione nativa con SAP e Oracle. FibreTrace: costo €8k-15k/anno, compatibile con Odoo e ERPNext. Il fattore critico non è la tecnologia, ma l\'onboarding dei fornitori: nel distretto di Prato, la concentrazione geografica riduce i tempi del 40%. Consiglio: iniziare con 5 fornitori chiave e scalare.',
+    tags:['Blockchain','Tracciabilità','Textile Genesis','FibreTrace','ERP','PMI','Prato'],
+    date:'Nov 2025', readTime:'12 min',
+    pages:29, type2:'Analysis',
+    url:'#'
+  },
+  {
+    id:'r14',
+    type:'Technology',
+    title:'3D Knitting e on-demand production: il caso di Uniqlo e Decathlon',
+    abstract:'La maglieria 3D senza scarto sta uscendo dai laboratori. Uniqlo ha ridotto gli scarti del 92% con macchine Shima Seiki integrate a un configuratore online. Decathlon produce 30.000 pezzi/mese on-demand con lead time di 7 giorni. Per il distretto di Prato, l\'opportunità è nella personalizzazione di fascia media: fewer stock, higher margin, zero waste. Il limite attuale è la velocità: 1 maglia ogni 4 minuti contro i 30 secondi della maglieria tradizionale.',
+    tags:['3D Knitting','On-Demand','Zero Waste','Prato','Shima Seiki','Maglieria'],
+    date:'Ott 2025', readTime:'11 min',
+    pages:24, type2:'Case Study',
+    url:'#'
+  },
+  {
+    id:'r15',
+    type:'Market Intelligence',
+    title:'Euratex 2026: il tessile europeo vale €180B, ma la produttività è ferma al 2,1%',
+    abstract:'Il rapporto annuale di Euratex conferma: l\'industria tessile europea fattura €180 miliardi con 1,2 milioni di addetti. La produttività cresce solo del 2,1% annuo, contro il 4,5% di automotive e il 3,8% di farmaceutico. Il collo di bottiglia? Competenze digitali: solo il 18% degli operai ha ricevuto formazione su AI/robotica negli ultimi 2 anni. Il distretto di Prato può invertire la tendenza investendo in academy locali come il PIN.',
+    tags:['Euratex','Produttività','Europa','Competenze Digitali','Formazione','Prato'],
+    date:'Set 2025', readTime:'15 min',
+    pages:68, type2:'Industry Report',
+    url:'https://www.euratex.eu/'
+  },
+  {
+    id:'r16',
+    type:'Sustainability',
+    title:'LCA of Regenerated Wool: Prato District Shows 62% Lower CO₂ vs Virgin Australian Wool',
+    abstract:'Peer-reviewed life cycle assessment of 3 wool recycling pathways in Prato. Results show regenerated wool from post-consument textiles achieves 62% lower CO₂ emissions, 78% lower water consumption, and 89% lower land use compared to virgin Australian wool. The study includes sensitivity analysis on transport, energy mix, and recycling rate. Key recommendation: Prato should brand itself as the global hub for low-impact wool.',
+    tags:['LCA','Wool','Regenerated Wool','Prato','Carbon Footprint','Peer Review'],
+    date:'Ago 2025', readTime:'24 min',
+    pages:52, type2:'Research Paper',
+    url:'https://www.sciencedirect.com/'
+  },
 ];
 
 /* ═══ FORUM THREADS ═══ */
