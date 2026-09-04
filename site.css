@@ -179,7 +179,7 @@ body.page-dashboard .chart-card { background: var(--bg-1); border-color: var(--b
 body.page-dashboard .data-table th { color: var(--gold); font-weight: 600; }
 body.page-dashboard .data-table td { color: var(--sand); }
 
-/* News: editoriale FT — carta calda, titoli grandi, rosso accento */
+/* ─── NEWSROOM: economic-journalistic layout ─── */
 body.page-news {
   --bg: #F0F4FF; --bg-1: #E6ECFF; --bg-2: #DDE4FF; --bg-3: #D4DCFF; --bg-4: #CBD4FF;
   --cream: #1A1A2E; --sand: #445566; --stone: #778899;
@@ -210,10 +210,156 @@ body.page-news .nc-cat.cat-scm { color: #00F0FF; }
 body.page-news .nc-cat.cat-circ { color: #00FF88; }
 body.page-news .nc-read { color: var(--gold); }
 body.page-news .featured-article { background: var(--bg-1); border-color: var(--bdr-2); }
-body.page-news .featured-article::before { background: linear-gradient(90deg, #FF3366, #00F0FF); }
+body.page-news .featured-article::before { background: var(--cream); }
 body.page-news .platform-footer { background: var(--bg-2); border-top-color: var(--bdr); }
 body.page-news .platform-footer a { color: var(--stone); }
 body.page-news .platform-footer a:hover { color: var(--gold); }
+/* ─── NEWSROOM: economic-journalistic layout ─── */
+body.page-news {
+  --bg: #F6F8FB;
+  --bg-1: #FFFFFF;
+  --bg-2: #E8ECF2;
+  --bg-3: #DDE3EC;
+  --bg-4: #CDD4E0;
+  --cream: #0F1724;
+  --sand: #334155;
+  --stone: #64748B;
+  --bdr: rgba(15,23,36,.08);
+  --bdr-2: rgba(15,23,36,.14);
+  --bdr-3: rgba(15,23,36,.22);
+  --gold: #0F1724;
+  --gold-hi: #0F1724;
+  --gold-lo: rgba(15,23,36,.06);
+  --gold-xs: rgba(15,23,36,.03);
+}
+body.page-news .platform-sidebar { background:#EEF1F6; border-right-color: rgba(15,23,36,.08); }
+body.page-news .sb-brand { border-bottom-color: rgba(15,23,36,.08); }
+body.page-news .sb-section { border-bottom-color: rgba(15,23,36,.06); }
+body.page-news .sb-link { color: var(--sand); }
+body.page-news .sb-link:hover { color: var(--cream); background: var(--bg-3); }
+body.page-news .sb-link.active { color: var(--cream); }
+body.page-news .sb-link.active::before { background: var(--cream); }
+body.page-news .sb-name { color: var(--cream); }
+body.page-news .page-hdr { background: var(--bg-1); border-bottom-color: var(--bdr-2); }
+body.page-news .page-hdr-breadcrumb a { color: var(--stone); }
+body.page-news .page-hdr-breadcrumb a:hover { color: var(--cream); }
+body.page-news .news-card { background: var(--bg-1); border-color: var(--bdr-2); box-shadow:none; }
+body.page-news .news-card:hover { border-color: var(--bdr-3); box-shadow: 0 2px 8px rgba(15,23,36,.06); }
+body.page-news .nc-read { color: var(--cream); }
+body.page-news .featured-article { background: var(--bg-1); border-color: var(--bdr-2); box-shadow:none; }
+body.page-news .featured-article::before { background: var(--cream); }
+body.page-news .platform-footer { background: var(--bg-2); border-top-color: var(--bdr); }
+body.page-news .platform-footer a { color: var(--stone); }
+body.page-news .platform-footer a:hover { color: var(--cream); }
+body.page-news .filter-btn.active { background: var(--cream); color:#fff; border-color: var(--cream); }
+body.page-news .mob-menu-toggle { background: var(--cream); color:#fff; }
+
+/* Hero dati stile giornalismo economico */
+.news-hero {
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  background: var(--bg-1);
+  border: 1px solid var(--bdr-2);
+  border-radius: var(--rm);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+.news-hero-kpi {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+  gap: 1px;
+  border: 1px solid var(--bdr-2);
+  border-radius: var(--rm);
+  overflow:hidden;
+  background: var(--bdr-2);
+}
+.news-hero-kpi .kpi {
+  background: var(--bg-1);
+  padding: 1rem .9rem;
+}
+.news-hero-kpi .kpi-val {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 800;
+  font-family: var(--f-m);
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.news-hero-kpi .kpi-label {
+  font-family: var(--f-m);
+  font-size: .65rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--stone);
+  margin-top: .45rem;
+  line-height: 1.35;
+}
+.news-hero-lede {
+  font-family: var(--f-m);
+  font-size: .82rem;
+  color: var(--sand);
+  line-height: 1.7;
+  border-top: 1px solid var(--bdr-2);
+  padding-top: .85rem;
+}
+
+/* Comparazione Prato vs Italia */
+.news-compare {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.news-compare-card {
+  background: var(--bg-1);
+  border: 1px solid var(--bdr-2);
+  border-radius: var(--rm);
+  padding: 1rem;
+}
+.news-compare-card .ncc-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family: var(--f-m);
+  font-size: .72rem;
+  color: var(--stone);
+  padding: .35rem 0;
+  border-bottom: 1px solid var(--bdr);
+}
+.news-compare-card .ncc-row:last-child { border-bottom:none; }
+.news-compare-card .ncc-v { font-weight:700; color: var(--cream); }
+.news-compare-card .ncc-delta { font-size:.65rem; font-weight:700; }
+.ncc-delta.pos { color:#0A8F6A; }
+.ncc-delta.neg { color:#C0392B; }
+
+/* Schemini barre */
+.news-bar-wrap { margin-top:.45rem; }
+.news-bar {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--bg-4);
+  overflow:hidden;
+}
+.news-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--cream);
+}
+.news-bar-label {
+  display:flex;
+  justify-content:space-between;
+  font-family: var(--f-m);
+  font-size:.58rem;
+  color: var(--stone);
+  margin-top:.25rem;
+}
+
+@media (max-width: 768px) {
+  .news-hero-kpi { grid-template-columns: repeat(2,1fr); }
+  .news-compare { grid-template-columns: 1fr; }
+}
+
 body.page-news .filter-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
 body.page-news .mob-menu-toggle { background: var(--gold); color: #fff; }
 

@@ -281,7 +281,7 @@ function buildNewsCard(n){
   <p class="nc-summary">${n.summary.slice(0,140)}…</p>
   <div class="nc-meta">
     <span>${n.date} · ${n.source}</span>
-    <span class="nc-read">${n.readTime} →</span>
+    <a class="nc-read" href="${n.url || '#'}" target="_blank" rel="noopener">Leggi →</a>
   </div>
 </article>`.trim();
 }
@@ -289,6 +289,7 @@ function buildNewsCard(n){
 function buildNewsFilterBar(bar){
   const cats=[
     {key:'all',label:'Tutte'},
+    {key:'econ',label:'Economia Locale'},
     {key:'ai',label:'AI'},
     {key:'sus',label:'Sostenibilità'},
     {key:'mfg',label:'Produzione'},

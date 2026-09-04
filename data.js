@@ -68,6 +68,7 @@ const NEWS = [
     date:'02 set 2026', readTime:'7 min',
     source:'Camera di Commercio di Prato · Confindustria Toscana Nord · 2025 Yearbook',
     tags:['Prato','Fatturato','Economia Locale','Confronto Italia'],
+    url:'https://www.ccp.prato.it/'
   },
   {
     id:'n02', featured:false,
@@ -77,6 +78,7 @@ const NEWS = [
     date:'30 ago 2026', readTime:'6 min',
     source:'Istat · Ice Agenzia · Elaborazione Camera Commercio Prato',
     tags:['Export','Extra-UE','Prato','Italia','Mercati'],
+    url:'https://www.ice.it/'
   },
   {
     id:'n03', featured:false,
@@ -86,6 +88,7 @@ const NEWS = [
     date:'27 ago 2026', readTime:'5 min',
     source:'Confindustria Toscana Nord · Inapp · 2025 Labour Market Report',
     tags:['Occupazione','Prato','Italia','Competenze Digitali'],
+    url:'https://www.unioncamere.gov.it/'
   },
   {
     id:'n04', featured:false,
@@ -95,6 +98,7 @@ const NEWS = [
     date:'24 ago 2026', readTime:'5 min',
     source:'Aida Bureau van Dijk · Confindustria Moda · Elaborazione 2025',
     tags:['Fatturato','PMI','Prato','Italia','Confronto'],
+    url:'https://www.bureauvandijk.com/'
   },
   {
     id:'n05', featured:false,
@@ -104,6 +108,7 @@ const NEWS = [
     date:'21 ago 2026', readTime:'6 min',
     source:'Aida Bureau van Dijk · Euratex · Elaborazione 2025',
     tags:['Produttività','Prato','Italia','Europa','Benchmark'],
+    url:'https://www.euratex.eu/'
   },
   {
     id:'n06', featured:false,
@@ -113,6 +118,7 @@ const NEWS = [
     date:'18 ago 2026', readTime:'5 min',
     source:'Confindustria Toscana Nord · Envitech Textile Index 2025',
     tags:['Sostenibilità','Investimenti','Prato','Italia','Green'],
+    url:'https://www.confindustriatoscananord.it/'
   },
   {
     id:'n07', featured:false,
@@ -122,6 +128,7 @@ const NEWS = [
     date:'15 ago 2026', readTime:'4 min',
     source:'Camera Commercio Prato · Movimprese · Unioncamere 2025',
     tags:['Demografia','Nuove Imprese','Prato','Italia'],
+    url:'https://www.ccp.prato.it/'
   },
   {
     id:'n08', featured:false,
@@ -131,6 +138,7 @@ const NEWS = [
     date:'12 ago 2026', readTime:'6 min',
     source:'Istat · Prezzi alla Produzione · Confindustria Toscana Nord 2025',
     tags:['Prezzi','Energia','Margini','Prato','Italia'],
+    url:'https://www.istat.it/'
   },
 ];
 
