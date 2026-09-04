@@ -70,7 +70,16 @@ function initMobMenu(){
   const btn=document.querySelector('.mob-menu-toggle');
   const sb=document.querySelector('.platform-sidebar');
   if(!btn||!sb)return;
-  btn.addEventListener('click',()=>sb.classList.toggle('open'));
+  let backdrop = document.querySelector('.sidebar-backdrop');
+  if(!backdrop){
+    backdrop = document.createElement('div');
+    backdrop.className = 'sidebar-backdrop';
+    document.body.appendChild(backdrop);
+  }
+  const open = () => { sb.classList.add('open'); backdrop.classList.add('open'); };
+  const close = () => { sb.classList.remove('open'); backdrop.classList.remove('open'); };
+  btn.addEventListener('click', () => sb.classList.contains('open') ? close() : open());
+  backdrop.addEventListener('click', close);
 }
 function populateSidebarPulse(){
   const el=document.querySelector('[data-sidebar-pulse]');
