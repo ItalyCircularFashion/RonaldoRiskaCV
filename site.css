@@ -662,6 +662,13 @@ body.page-kanban .mob-menu-toggle { background: var(--gold); color: var(--ink); 
 }
 .sidebar::-webkit-scrollbar { display:none; }
 
+@media (min-width: 901px) {
+  .sidebar:hover { scrollbar-width: thin; scrollbar-color: var(--bg-4) transparent; }
+  .sidebar:hover::-webkit-scrollbar { width: 4px; }
+  .sidebar:hover::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 99px; }
+  .sidebar:hover::-webkit-scrollbar-track { background: transparent; }
+}
+
 .sb-brand {
   padding: 1.1rem 1.2rem;
   border-bottom: 1px solid var(--bdr);
