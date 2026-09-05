@@ -37,4 +37,16 @@
     <changefreq>daily</changefreq>
   </url>
 
+  <url>
+    <loc>https://italycircularfashion.github.io/RonaldoRiskaCV/kanban_industriale.html</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://italycircularfashion.github.io/RonaldoRiskaCV/kanbanflow.html</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
 </urlset>
