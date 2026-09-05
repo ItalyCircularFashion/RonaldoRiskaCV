@@ -262,7 +262,7 @@ function renderNews(){
     const f=NEWS.find(n=>n.featured)||NEWS[0];
     fa.innerHTML=`
       <div class="fa-photo">
-        <img src="assets/prato.jpg" alt="Panorama del distretto tessile di Prato" loading="lazy">
+        <img src="assets/tessuto-ragamazzo.jpg" alt="Tessuto stoffa distretto Prato" loading="lazy">
       </div>
       <div class="fa-content">
         <div class="fa-label">📰 Articolo in evidenza</div>
