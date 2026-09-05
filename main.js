@@ -58,11 +58,20 @@ function initTicker(){
 function initSidebar(){
   const sb=document.querySelector('.platform-sidebar');
   if(!sb)return;
+  sb.addEventListener('wheel', (e) => {
+    if (sb.scrollHeight <= sb.clientHeight) return;
+    const atTop = sb.scrollTop === 0;
+    const atBottom = sb.scrollTop + sb.clientHeight >= sb.scrollHeight - 1;
+    if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
+      window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+    }
+  }, { passive: true });
   // close on backdrop click (mobile)
   document.addEventListener('click',e=>{
     if(window.innerWidth>900)return;
     if(!sb.contains(e.target)&&!e.target.matches('.mob-menu-toggle')){
       sb.classList.remove('open');
+      document.querySelector('.sidebar-backdrop')?.classList.remove('open');
     }
   });
 }
