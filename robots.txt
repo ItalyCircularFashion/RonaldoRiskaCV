@@ -1,13 +1,6 @@
-# robots.txt - Ronaldo Riska CV Platform
-
 User-agent: *
 Allow: /
 
-# Blocco aree non necessarie all’indicizzazione (se future implementazioni)
 Disallow: /assets/
-Disallow: /scripts/
-Disallow: /private/
-Disallow: /config/
 
-# Sitemap reference
 Sitemap: https://italycircularfashion.github.io/RonaldoRiskaCV/sitemap.xml
