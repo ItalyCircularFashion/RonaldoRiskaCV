@@ -116,6 +116,10 @@ function highlightNavLink(){
 }
 
 /* ═══ REVEAL ON SCROLL ═══ */
+/* main.js — Textile Intelligence Platform
+   HTML class: .js added on <html> so .reveal is visible without JS. */
+document.documentElement.classList.add('js');
+
 let revealObserver = null;
 
 function initReveal(){
@@ -302,7 +306,7 @@ function buildNewsCard(n){
   <p class="nc-summary">${n.summary.slice(0,140)}…</p>
   <div class="nc-meta">
     <span>${n.date} · ${n.source}</span>
-    <a class="nc-read" href="${n.url || '#'}" target="_blank" rel="noopener">Leggi →</a>
+    <a class="nc-read" href="${n.url || '#'}" target="_blank" rel="noopener noreferrer">Leggi →</a>
   </div>
 </article>`.trim();
 }
