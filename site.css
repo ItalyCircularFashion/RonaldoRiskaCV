@@ -129,9 +129,9 @@ ul   { list-style:none; }
   background: var(--bg-1);
   border-right: 1px solid var(--bdr);
   display: flex; flex-direction: column;
-  position: fixed; top: var(--ticker-h); left: 0;
+  position: sticky; top: var(--ticker-h);
   width: var(--sidebar-w);
-  height: calc(100vh - var(--ticker-h));
+  height: calc(100dvh - var(--ticker-h));
   overflow-y: auto;
   z-index: 100;
 }
@@ -671,7 +671,7 @@ body.page-kanban .mob-menu-toggle { background: var(--gold); color: var(--ink); 
   border-right: 1px solid var(--bdr);
   display: flex; flex-direction: column;
   position: sticky; top: var(--ticker-h);
-  height: calc(100vh - var(--ticker-h));
+  height: calc(100dvh - var(--ticker-h));
   overflow-y: auto; overflow-x: hidden;
   scrollbar-width: none;
 }
@@ -769,7 +769,7 @@ body.page-kanban .mob-menu-toggle { background: var(--gold); color: var(--ink); 
 
 /* ─── CONTENT AREA ─── */
 .content {
-  min-height: calc(100vh - var(--ticker-h));
+  min-height: calc(100dvh - var(--ticker-h));
   display: flex; flex-direction: column;
 }
 
@@ -2926,7 +2926,7 @@ body.page-index .tile-grid {
   
   .platform-content {
     grid-column: 1;
-    min-height: 100vh;
+    min-height: 100dvh;
   }
   
   .mob-menu-toggle {
