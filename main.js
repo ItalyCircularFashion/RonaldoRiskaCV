@@ -525,3 +525,21 @@ window.addEventListener('resize',()=>{
   clearTimeout(resizeTimer);
   resizeTimer=setTimeout(renderCharts,200);
 });
+
+/* ═══ BACK TO TOP ═══ */
+(function(){
+  const btn=document.createElement('button');
+  btn.className='back-to-top';
+  btn.setAttribute('aria-label','Torna su');
+  btn.textContent='↑';
+  document.body.appendChild(btn);
+
+  const observer=new IntersectionObserver(([e])=>{
+    btn.classList.toggle('visible',!e.isIntersecting);
+  },{threshold:0});
+  observer.observe(document.querySelector('#main')||document.body);
+
+  btn.addEventListener('click',()=>{
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
