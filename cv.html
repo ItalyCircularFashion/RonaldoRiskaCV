@@ -131,37 +131,37 @@
             <div class="cv-skill-row">
               <span class="cv-skill-label">Computer Vision QC</span>
               <span class="cv-skill-pct">85%</span>
-              <div class="cv-skill-track"><div class="cv-skill-fill" data-w="85"></div></div>
+              <div class="cv-skill-bar"><div class="cv-skill-fill" data-w="85"></div></div>
             </div>
             <div class="cv-skill-row">
               <span class="cv-skill-label">Demand Forecasting AI</span>
               <span class="cv-skill-pct">75%</span>
-              <div class="cv-skill-track"><div class="cv-skill-fill" data-w="75"></div></div>
+              <div class="cv-skill-bar"><div class="cv-skill-fill" data-w="75"></div></div>
             </div>
             <div class="cv-skill-row">
               <span class="cv-skill-label">ERP / Tracciabilità</span>
               <span class="cv-skill-pct">80%</span>
-              <div class="cv-skill-track"><div class="cv-skill-fill" data-w="80"></div></div>
+              <div class="cv-skill-bar"><div class="cv-skill-fill" data-w="80"></div></div>
             </div>
             <div class="cv-skill-row">
               <span class="cv-skill-label">MRP / MPS</span>
               <span class="cv-skill-pct">70%</span>
-              <div class="cv-skill-track"><div class="cv-skill-fill" data-w="70"></div></div>
+              <div class="cv-skill-bar"><div class="cv-skill-fill" data-w="70"></div></div>
             </div>
             <div class="cv-skill-row">
               <span class="cv-skill-label">Dashboard KPI</span>
               <span class="cv-skill-pct">90%</span>
-              <div class="cv-skill-track"><div class="cv-skill-fill" data-w="90"></div></div>
+              <div class="cv-skill-bar"><div class="cv-skill-fill" data-w="90"></div></div>
             </div>
             <div class="cv-skill-row">
               <span class="cv-skill-label">SEO / WordPress</span>
               <span class="cv-skill-pct">80%</span>
-              <div class="cv-skill-track"><div class="cv-skill-fill" data-w="80"></div></div>
+              <div class="cv-skill-bar"><div class="cv-skill-fill" data-w="80"></div></div>
             </div>
             <div class="cv-skill-row">
               <span class="cv-skill-label">HTML/CSS/JS</span>
               <span class="cv-skill-pct">75%</span>
-              <div class="cv-skill-track"><div class="cv-skill-fill" data-w="75"></div></div>
+              <div class="cv-skill-bar"><div class="cv-skill-fill" data-w="75"></div></div>
             </div>
           </div>
         </div>
@@ -280,7 +280,8 @@
     entries.forEach(function(e) {
       if (e.isIntersecting) {
         var w = e.target.getAttribute('data-w');
-        e.target.style.width = w + '%';
+        e.target.style.setProperty('--skill-w', w + '%');
+        e.target.classList.add('visible');
         skillObserver.unobserve(e.target);
       }
     });
