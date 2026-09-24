@@ -1630,7 +1630,6 @@ html { -webkit-text-size-adjust: 100%; }
 /* Android Chrome momentum scroll */
 .platform-content {
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
 }
 /* Tablet landscape / small desktop */
 @media (max-width: 1024px) {
