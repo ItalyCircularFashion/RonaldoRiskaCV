@@ -106,23 +106,34 @@
       </div>
     </header>
 
-    <!-- EXECUTIVE SUMMARY -->
-    <section class="cv-section reveal">
-      <div class="cv-sec-ttl">Executive Summary</div>
-      <p style="font-size:.88rem;color:var(--sand);line-height:1.8;margin-bottom:.6rem">
-        Supply Chain Manager con radici tessili e testa orientata ai dati. Porto KPI misurabili in aziende che ancora vivono di Excel e carta.
-      </p>
-      <p style="font-size:.88rem;color:var(--sand);line-height:1.8">
-        Dal filato al magazzino, introduco strumenti digitali, AI applicata e metodologie Lean:
-        meno scarti, meno fermi macchina, meno errori umani, più decisioni basate sui dati.
-      </p>
-    </section>
+    <!-- TAB NAV -->
+    <nav class="cv-tabs reveal" id="cv-tabs">
+      <button class="cv-tab active" data-tab="summary">Summary</button>
+      <button class="cv-tab" data-tab="skills">Skills</button>
+      <button class="cv-tab" data-tab="experience">Esperienza</button>
+      <button class="cv-tab" data-tab="education">Formazione</button>
+      <button class="cv-tab" data-tab="certifications">Certificazioni</button>
+    </nav>
 
-    <!-- SOFT SKILLS + HARD SKILLS + LINGUE — layout 3-col -->
-    <div class="cv-grid-3 reveal">
-      <div class="cv-section">
+    <!-- TAB: SUMMARY -->
+    <div class="cv-tab-panel active" data-tab="summary">
+      <section class="cv-section reveal">
+        <div class="cv-sec-ttl">Executive Summary</div>
+        <p style="font-size:.88rem;color:var(--sand);line-height:1.8;margin-bottom:.6rem">
+          Supply Chain Manager con radici tessili e testa orientata ai dati. Porto KPI misurabili in aziende che ancora vivono di Excel e carta.
+        </p>
+        <p style="font-size:.88rem;color:var(--sand);line-height:1.8">
+          Dal filato al magazzino, introduco strumenti digitali, AI applicata e metodologie Lean:
+          meno scarti, meno fermi macchina, meno errori umani, più decisioni basate sui dati.
+        </p>
+      </section>
+    </div>
+
+    <!-- TAB: SKILLS -->
+    <div class="cv-tab-panel" data-tab="skills">
+      <section class="cv-section reveal">
         <div class="cv-sec-ttl">Soft Skills</div>
-        <div style="display:flex;flex-direction:column;gap:.35rem">
+        <div style="display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.5rem">
           <div style="font-size:.78rem;color:var(--cream)">Orientamento al risultato</div>
           <div style="font-size:.78rem;color:var(--cream)">Problem solving produttivo</div>
           <div style="font-size:.78rem;color:var(--cream)">Sensibilità qualitativa</div>
@@ -132,19 +143,57 @@
           <div style="font-size:.78rem;color:var(--cream)">Gestione priorità · multitasking</div>
           <div style="font-size:.78rem;color:var(--cream)">Miglioramento continuo</div>
         </div>
-      </div>
-      <div class="cv-section">
+
         <div class="cv-sec-ttl">Hard Skills</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.35rem">
-          <span class="cv-tag">Credit Risk</span><span class="cv-tag">CRM</span><span class="cv-tag">Excel</span><span class="cv-tag">PMI</span>
-          <span class="cv-tag">QC</span><span class="cv-tag">Finissaggio</span><span class="cv-tag">Terzisti</span><span class="cv-tag">DDT</span>
-          <span class="cv-tag">MRP/MPS</span><span class="cv-tag">5S/OEE</span><span class="cv-tag">Kanban</span><span class="cv-tag">ESG</span>
-          <span class="cv-tag">HTML/CSS/JS</span><span class="cv-tag">SEO/WordPress</span><span class="cv-tag">Linux</span><span class="cv-tag">Python</span>
+        <div style="display:flex;flex-direction:column;gap:.8rem;margin-top:.5rem">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.65rem;margin-bottom:.2rem">
+              <span style="color:var(--sand)">Computer Vision QC</span><span style="color:var(--gold)">85%</span>
+            </div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="--skill-w:85%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.65rem;margin-bottom:.2rem">
+              <span style="color:var(--sand)">Demand Forecasting AI</span><span style="color:var(--gold)">75%</span>
+            </div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="--skill-w:75%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.65rem;margin-bottom:.2rem">
+              <span style="color:var(--sand)">ERP / Tracciabilità</span><span style="color:var(--gold)">80%</span>
+            </div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="--skill-w:80%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.65rem;margin-bottom:.2rem">
+              <span style="color:var(--sand)">MRP / MPS</span><span style="color:var(--gold)">70%</span>
+            </div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="--skill-w:70%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.65rem;margin-bottom:.2rem">
+              <span style="color:var(--sand)">Dashboard KPI</span><span style="color:var(--gold)">90%</span>
+            </div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="--skill-w:90%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.65rem;margin-bottom:.2rem">
+              <span style="color:var(--sand)">SEO / WordPress</span><span style="color:var(--gold)">80%</span>
+            </div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="--skill-w:80%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.65rem;margin-bottom:.2rem">
+              <span style="color:var(--sand)">HTML/CSS/JS</span><span style="color:var(--gold)">75%</span>
+            </div>
+            <div class="cv-skill-bar"><div class="cv-skill-fill" style="--skill-w:75%"></div></div>
+          </div>
         </div>
-      </div>
-      <div class="cv-section">
+      </section>
+
+      <section class="cv-section reveal">
         <div class="cv-sec-ttl">Lingue</div>
-        <div style="display:flex;flex-direction:column;gap:.4rem">
+        <div style="display:flex;flex-direction:column;gap:.4rem;margin-top:.5rem">
           <div style="display:flex;justify-content:space-between;font-family:var(--f-m);font-size:.72rem">
             <span style="color:var(--sand)">Italiano</span><span style="color:var(--gold)">Madrelingua</span>
           </div>
@@ -161,109 +210,123 @@
             <span style="color:var(--sand)">Spagnolo</span><span style="color:var(--stone)">Base</span>
           </div>
         </div>
-      </div>
+      </section>
     </div>
 
-    <!-- ESPERIENZA PROFESSIONALE -->
-    <section class="cv-section reveal">
-      <div class="cv-sec-ttl">Esperienza Professionale</div>
+    <!-- TAB: EXPERIENCE -->
+    <div class="cv-tab-panel" data-tab="experience">
+      <section class="cv-section reveal">
+        <div class="cv-sec-ttl">Esperienza Professionale</div>
 
-      <div class="cv-entry">
-        <div class="cv-e-title">Back Office Insurance Credit Specialist</div>
-        <div class="cv-e-org">Aliante Assicurazioni s.r.l. — Direct Mandate · Atradius Group</div>
-        <div class="cv-e-date">2022 – 2023 · 1 anno · Prato</div>
-        <div class="cv-e-body">
-          <ul>
-            <li>Gestione portafoglio clienti PMI in ambito credito commerciale</li>
-            <li>Analisi pre-credito tramite software dedicati e dati finanziari</li>
-            <li>Supporto decisionale per copertura e gestione del credito</li>
-            <li>CRM prospect area Toscana, raggiungimento obiettivi di gruppo</li>
-            <li>Reportistica Excel, corrispondenza clienti, rinnovi contrattuali</li>
-          </ul>
+        <div class="cv-entry cv-entry-expandable expanded">
+          <button class="cv-expand-toggle" aria-label="Espandi">Dettagli</button>
+          <div class="cv-e-title">Back Office Insurance Credit Specialist</div>
+          <div class="cv-e-org">Aliante Assicurazioni s.r.l. — Direct Mandate · Atradius Group</div>
+          <div class="cv-e-date">2022 – 2023 · 1 anno · Prato</div>
+          <div class="cv-e-body">
+            <ul>
+              <li>Gestione portafoglio clienti PMI in ambito credito commerciale</li>
+              <li>Analisi pre-credito tramite software dedicati e dati finanziari</li>
+              <li>Supporto decisionale per copertura e gestione del credito</li>
+              <li>CRM prospect area Toscana, raggiungimento obiettivi di gruppo</li>
+              <li>Reportistica Excel, corrispondenza clienti, rinnovi contrattuali</li>
+            </ul>
+          </div>
+          <div class="cv-tags"><span class="cv-tag">Credit Risk</span><span class="cv-tag">CRM</span><span class="cv-tag">Excel</span><span class="cv-tag">PMI</span></div>
         </div>
-      </div>
 
-      <div class="cv-entry">
-        <div class="cv-e-title">Operations & Quality Coordinator</div>
-        <div class="cv-e-org">Stireria Il Futuro</div>
-        <div class="cv-e-date">2020 – 2021 · 1 anno · Prato</div>
-        <div class="cv-e-body">
-          <ul>
-            <li>Gestione fornitori terzisti per lavorazioni finissaggio</li>
-            <li>Controllo qualità finale capo: estetica e conformità standard</li>
-            <li>Documentazione logistica: DDT, packing list, fatture pro-forma</li>
-            <li>Operatività fasi: asolatura, accessori, etichettatura, ciclo a catena</li>
-          </ul>
+        <div class="cv-entry cv-entry-expandable expanded">
+          <button class="cv-expand-toggle" aria-label="Espandi">Dettagli</button>
+          <div class="cv-e-title">Operations & Quality Coordinator</div>
+          <div class="cv-e-org">Stireria Il Futuro</div>
+          <div class="cv-e-date">2020 – 2021 · 1 anno · Prato</div>
+          <div class="cv-e-body">
+            <ul>
+              <li>Gestione fornitori terzisti per lavorazioni finissaggio</li>
+              <li>Controllo qualità finale capo: estetica e conformità standard</li>
+              <li>Documentazione logistica: DDT, packing list, fatture pro-forma</li>
+              <li>Operatività fasi: asolatura, accessori, etichettatura, ciclo a catena</li>
+            </ul>
+          </div>
+          <div class="cv-tags"><span class="cv-tag">QC</span><span class="cv-tag">Finissaggio</span><span class="cv-tag">Terzisti</span><span class="cv-tag">DDT</span></div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <!-- FORMAZIONE -->
-    <section class="cv-section reveal">
-      <div class="cv-sec-ttl">Formazione</div>
+    <!-- TAB: EDUCATION -->
+    <div class="cv-tab-panel" data-tab="education">
+      <section class="cv-section reveal">
+        <div class="cv-sec-ttl">Formazione</div>
 
-      <div class="cv-entry">
-        <div class="cv-e-title">IFTS — Sustainable Fashion & Textile Supply Chain Manager</div>
-        <div class="cv-e-org">PIN · Università di Firenze</div>
-        <div class="cv-e-date">2023 – In corso · Prato</div>
-        <div class="cv-e-body">
-          Pianificazione sostenibile supply chain tessile end-to-end. Lean, ERP, ESG, GOTS, GRS,
-          OEKO-TEX, ZDHC, REACH. AI tools per monitoraggio produzione e KPI.
+        <div class="cv-entry cv-entry-expandable expanded">
+          <button class="cv-expand-toggle" aria-label="Espandi">Dettagli</button>
+          <div class="cv-e-title">IFTS — Sustainable Fashion & Textile Supply Chain Manager</div>
+          <div class="cv-e-org">PIN · Università di Firenze</div>
+          <div class="cv-e-date">2023 – In corso · Prato</div>
+          <div class="cv-e-body">
+            Pianificazione sostenibile supply chain tessile end-to-end. Lean, ERP, ESG, GOTS, GRS,
+            OEKO-TEX, ZDHC, REACH. AI tools per monitoraggio produzione e KPI.
+          </div>
+          <div class="cv-tags" style="margin-top:.5rem">
+            <span class="cv-tag">Supply Chain</span><span class="cv-tag">Lean</span><span class="cv-tag">ESG</span><span class="cv-tag">Certificazioni</span>
+          </div>
         </div>
+
+        <div class="cv-entry cv-entry-expandable expanded">
+          <button class="cv-expand-toggle" aria-label="Espandi">Dettagli</button>
+          <div class="cv-e-title">Diploma — Amministrazione, Finanza e Marketing</div>
+          <div class="cv-e-org">Istituto Paolo Dagomari</div>
+          <div class="cv-e-date">Giugno 2018 · Prato</div>
+          <div class="cv-e-body">
+            Contabilità, analisi economico-finanziaria, normativa commerciale, marketing e CRM.
+          </div>
+          <div class="cv-tags" style="margin-top:.5rem">
+            <span class="cv-tag">Finanza</span><span class="cv-tag">Marketing</span><span class="cv-tag">Contabilità</span>
+          </div>
+        </div>
+
+        <div class="cv-entry cv-entry-expandable expanded">
+          <button class="cv-expand-toggle" aria-label="Espandi">Dettagli</button>
+          <div class="cv-e-title">Production Planning & Logistics</div>
+          <div class="cv-e-org">G.P. Tricot srl</div>
+          <div class="cv-e-date">2025 – 2026 · Prato</div>
+          <div class="cv-e-body">
+            Gestione planning produttivo, scheduling ordini, approvvigionamento fornitori,
+            monitoraggio tempistiche consegna lungo filiera abbigliamento (50.000 capi/anno).
+          </div>
+          <div class="cv-tags" style="margin-top:.5rem">
+            <span class="cv-tag">Planning</span><span class="cv-tag">Scheduling</span><span class="cv-tag">Supply Chain</span>
+          </div>
+        </div>
+
+        <div class="cv-entry cv-entry-expandable expanded">
+          <button class="cv-expand-toggle" aria-label="Espandi">Dettagli</button>
+          <div class="cv-e-title">Tirocinio — Dispositore</div>
+          <div class="cv-e-org">PoolTrend s.r.l.</div>
+          <div class="cv-e-date">Lug – Ott 2026 · Prato</div>
+          <div class="cv-e-body">
+            Approvazione primo bagno presso tintorie, disposizioni tintorie.
+            Ordinare filato, Ritorcitura, Aspatura, Tintoria, Orditura, Imbozzimatura, Tessitura, Rammendo.
+            Supervisione fasi e controllo qualità.
+          </div>
+          <div class="cv-tags" style="margin-top:.5rem">
+            <span class="cv-tag">Dispositore</span><span class="cv-tag">Tessitura</span><span class="cv-tag">QC</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB: CERTIFICATIONS -->
+    <div class="cv-tab-panel" data-tab="certifications">
+      <section class="cv-section reveal">
+        <div class="cv-sec-ttl">Certificazioni & Competenze Digitali</div>
         <div class="cv-tags" style="margin-top:.5rem">
-          <span class="cv-tag">Supply Chain</span><span class="cv-tag">Lean</span><span class="cv-tag">ESG</span><span class="cv-tag">Certificazioni</span>
+          <span class="cv-tag">GOTS</span><span class="cv-tag">GRS</span><span class="cv-tag">OEKO-TEX</span><span class="cv-tag">BLUESIGN</span>
+          <span class="cv-tag">ZDHC</span><span class="cv-tag">REACH</span><span class="cv-tag">ISO 14001</span><span class="cv-tag">ESG</span>
+          <span class="cv-tag">PageSpeed 100</span><span class="cv-tag">Competenze Digitali</span>
         </div>
-      </div>
-
-      <div class="cv-entry">
-        <div class="cv-e-title">Diploma — Amministrazione, Finanza e Marketing</div>
-        <div class="cv-e-org">Istituto Paolo Dagomari</div>
-        <div class="cv-e-date">Giugno 2018 · Prato</div>
-        <div class="cv-e-body">
-          Contabilità, analisi economico-finanziaria, normativa commerciale, marketing e CRM.
-        </div>
-        <div class="cv-tags" style="margin-top:.5rem">
-          <span class="cv-tag">Finanza</span><span class="cv-tag">Marketing</span><span class="cv-tag">Contabilità</span>
-        </div>
-      </div>
-
-      <div class="cv-entry">
-        <div class="cv-e-title">Production Planning & Logistics</div>
-        <div class="cv-e-org">G.P. Tricot srl</div>
-        <div class="cv-e-date">2025 – 2026 · Prato</div>
-        <div class="cv-e-body">
-          Gestione planning produttivo, scheduling ordini, approvvigionamento fornitori,
-          monitoraggio tempistiche consegna lungo filiera abbigliamento (50.000 capi/anno).
-        </div>
-        <div class="cv-tags" style="margin-top:.5rem">
-          <span class="cv-tag">Planning</span><span class="cv-tag">Scheduling</span><span class="cv-tag">Supply Chain</span>
-        </div>
-      </div>
-
-      <div class="cv-entry">
-        <div class="cv-e-title">Tirocinio — Dispositore</div>
-        <div class="cv-e-org">PoolTrend s.r.l.</div>
-        <div class="cv-e-date">Lug – Ott 2026 · Prato</div>
-        <div class="cv-e-body">
-          Approvazione primo bagno presso tintorie, disposizioni tintorie.
-          Ordinare filato, Ritorcitura, Aspatura, Tintoria, Orditura, Imbozzimatura, Tessitura, Rammendo.
-          Supervisione fasi e controllo qualità.
-        </div>
-        <div class="cv-tags" style="margin-top:.5rem">
-          <span class="cv-tag">Dispositore</span><span class="cv-tag">Tessitura</span><span class="cv-tag">QC</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- CERTIFICAZIONI -->
-    <section class="cv-section reveal">
-      <div class="cv-sec-ttl">Certificazioni & Competenze Digitali</div>
-      <div class="cv-tags">
-        <span class="cv-tag">GOTS</span><span class="cv-tag">GRS</span><span class="cv-tag">OEKO-TEX</span><span class="cv-tag">BLUESIGN</span>
-        <span class="cv-tag">ZDHC</span><span class="cv-tag">REACH</span><span class="cv-tag">ISO 14001</span><span class="cv-tag">ESG</span>
-        <span class="cv-tag">PageSpeed 100</span><span class="cv-tag">Competenze Digitali</span>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <footer class="platform-footer">
       <span>© <span data-year></span> Ronaldo Riska · Supply Chain Manager — Textile</span>
@@ -278,5 +341,41 @@
 <button class="mob-menu-toggle" aria-label="Menu">☰</button>
 <script src="data.js" defer></script>
 <script src="main.js" defer></script>
+<script>
+// CV interactive: tab navigation
+document.querySelectorAll('.cv-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.cv-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.cv-tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.querySelector(`.cv-tab-panel[data-tab="${tab}"]`);
+    if (panel) panel.classList.add('active');
+  });
+});
+
+// CV interactive: expandable entries
+document.querySelectorAll('.cv-entry-expandable').forEach(entry => {
+  const toggle = entry.querySelector('.cv-expand-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      entry.classList.toggle('expanded');
+      entry.classList.toggle('collapsed');
+    });
+  }
+});
+
+// CV interactive: skill bars on scroll
+const skillBars = document.querySelectorAll('.cv-skill-fill');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+skillBars.forEach(b => observer.observe(b));
+</script>
 </body>
 </html>
