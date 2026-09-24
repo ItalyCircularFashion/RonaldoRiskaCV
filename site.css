@@ -511,10 +511,10 @@ body.page-news .mob-menu-toggle { background: var(--gold); color: #fff; }
 
 /* Research: laboratorio tecnico — blu freddo, cyan, bordi tecnici */
 body.page-research {
-  --bg: #050510; --bg-1: #0A0A1F; --bg-2: #10102A; --bg-3: #181835; --bg-4: #202040;
-  --cream: #E8F0FF; --sand: #8899BB; --stone: #445566;
-  --bdr: rgba(212,168,67,.08); --bdr-2: rgba(0,240,255,.16); --bdr-3: rgba(0,240,255,.28);
-  --gold: #00F0FF; --gold-hi: #00F0FF; --gold-lo: rgba(0,240,255,.10); --gold-xs: rgba(0,240,255,.05);
+  --bg: #0C0C0C; --bg-1: #121212; --bg-2: #1A1A1A; --bg-3: #242424; --bg-4: #303030;
+  --cream: #E5E5E5; --sand: #9CA3AF; --stone: #6B7280;
+  --bdr: rgba(255,255,255,.06); --bdr-2: rgba(255,255,255,.12); --bdr-3: rgba(255,255,255,.20);
+  --gold: #D4A843; --gold-hi: #E8C96A; --gold-lo: rgba(212,168,67,.10); --gold-xs: rgba(212,168,67,.05);
 }
 body.page-research .platform-ticker { border-bottom-color: rgba(123,47,255,.10); }
 body.page-research .ticker-label { color: var(--gold); }
@@ -629,10 +629,10 @@ body.page-forum .stat-label { color: var(--stone); }
 body.page-forum .company-card::before { background: linear-gradient(90deg, var(--gold), var(--gold-hi)); }
 /* Kanban: produttività industriale — arancio/terracotta, font monospace per dati */
 body.page-kanban {
-  --bg: #050510; --bg-1: #0A0A1F; --bg-2: #10102A; --bg-3: #181835; --bg-4: #202040;
-  --cream: #E8F0FF; --sand: #8899BB; --stone: #445566;
-  --bdr: rgba(212,168,67,.08); --bdr-2: rgba(0,240,255,.16); --bdr-3: rgba(0,240,255,.28);
-  --gold: #00F0FF; --gold-hi: #00F0FF; --gold-lo: rgba(0,240,255,.10); --gold-xs: rgba(0,240,255,.05);
+  --bg: #0C0C0C; --bg-1: #121212; --bg-2: #1A1A1A; --bg-3: #242424; --bg-4: #303030;
+  --cream: #E5E5E5; --sand: #9CA3AF; --stone: #6B7280;
+  --bdr: rgba(255,255,255,.06); --bdr-2: rgba(255,255,255,.12); --bdr-3: rgba(255,255,255,.20);
+  --gold: #D4A843; --gold-hi: #E8C96A; --gold-lo: rgba(212,168,67,.10); --gold-xs: rgba(212,168,67,.05);
 }
 body.page-kanban .platform-ticker { border-bottom-color: rgba(243,156,18,.10); }
 body.page-kanban .ticker-label { color: var(--gold); }
@@ -2840,7 +2840,7 @@ body.page-index .kpi-box {
 }
 
 body.page-index .kpi-box:hover {
-  border-color: rgba(0,240,255,.3);
+  border-color: rgba(212,168,67,.3);
   box-shadow: 0 0 15px rgba(0,240,255,.1);
 }
 
@@ -2851,64 +2851,64 @@ body.page-index .tile-icon {
 }
 
 body.page-index .tile:hover .tile-icon {
-  border-color: #00F0FF;
-  box-shadow: 0 0 20px rgba(0,240,255,.25);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(212,168,67,.15);
 }
 
 /* Index sidebar active state */
 body.page-index .sb-link.active {
-  color: #00F0FF;
+  color: var(--gold);
 }
 
 body.page-index .sb-link.active::before {
-  background: #00F0FF;
-  box-shadow: 0 0 8px rgba(0,240,255,.4);
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(212,168,67,.3);
 }
 
 /* Index buttons */
 body.page-index .btn-gold {
-  background: linear-gradient(135deg, #00F0FF, #00CCDD);
-  color: #050510;
-  box-shadow: 0 0 20px rgba(0,240,255,.2);
+  background: linear-gradient(135deg, #D4A843, #2DD4BF);
+  color: var(--ink);
+  box-shadow: 0 0 20px rgba(212,168,67,.15);
 }
 
 body.page-index .btn-gold:hover {
-  box-shadow: 0 0 30px rgba(0,240,255,.35);
+  box-shadow: 0 0 30px rgba(212,168,67,.2);
 }
 
 body.page-index .btn-outline {
-  border-color: rgba(0,240,255,.3);
-  color: #00F0FF;
+  border-color: rgba(212,168,67,.3);
+  color: var(--gold);
 }
 
 body.page-index .btn-outline:hover {
-  background: rgba(212,168,67,.08);
-  border-color: #00F0FF;
-  box-shadow: 0 0 15px rgba(0,240,255,.15);
+  background: var(--gold-lo);
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212,168,67,.1);
 }
 
 /* Index ticker */
 body.page-index .ticker-label {
-  background: rgba(0,240,255,.15);
-  color: #00F0FF;
+  background: rgba(212,168,67,.1);
+  color: var(--gold);
 }
 
 /* Index thread list */
 body.page-index .thread-list {
-  border-color: rgba(0,240,255,.1);
+  border-color: rgba(212,168,67,.08);
 }
 
 /* Index footer */
 body.page-index .platform-footer {
-  border-top-color: rgba(0,240,255,.1);
+  border-top-color: rgba(212,168,67,.08);
 }
 
 body.page-index .platform-footer a {
-  color: #00F0FF;
+  color: var(--gold);
 }
 
 body.page-index .platform-footer a:hover {
-  text-shadow: 0 0 8px rgba(0,240,255,.4);
+  text-shadow: 0 0 8px rgba(212,168,67,.3);
 }
 
 /* Index page-hdr */
@@ -2918,17 +2918,17 @@ body.page-index .page-hdr {
 
 /* Index eyebrow */
 body.page-index .eyebrow {
-  color: #00F0FF;
+  color: var(--gold);
 }
 
 body.page-index .eyebrow::before {
-  background: #00F0FF;
+  background: var(--gold);
 }
 
 /* Index mission card */
 body.page-index .section-card[style*="border-left:3px solid var(--teal)"] {
-  border-left-color: #00F0FF;
-  box-shadow: 0 0 20px rgba(0,240,255,.05);
+  border-left-color: var(--gold);
+  box-shadow: 0 0 20px rgba(212,168,67,.05);
 }
 
 /* Index news/research cards */
