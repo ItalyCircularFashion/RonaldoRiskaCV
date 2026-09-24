@@ -3635,7 +3635,7 @@ body.page-index .tile-grid {
 .cv-skill-row { display:flex; align-items:center; gap:.5rem; }
 .cv-skill-label { font-family:var(--f-m); font-size:.6rem; color:var(--sand); width:110px; flex-shrink:0; }
 .cv-skill-pct { font-family:var(--f-m); font-size:.55rem; color:var(--gold); width:30px; text-align:right; flex-shrink:0; }
-.cv-skill-track { flex:1; height:3px; background:var(--bg-3); border-radius:2px; overflow:hidden; }
+.cv-skill-bar { flex:1; height:3px; background:var(--bg-3); border-radius:2px; overflow:hidden; }
 .cv-skill-fill { height:100%; background:var(--gold); border-radius:2px; width:0; transition:width 1s cubic-bezier(.4,0,.2,1); }
 .js .cv-skill-fill.visible { width:var(--skill-w); }
 
