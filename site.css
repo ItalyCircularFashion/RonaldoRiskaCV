@@ -290,10 +290,10 @@ body.page-news .featured-article .fa-meta { font-family: Georgia, 'Times New Rom
   .news-hero-kpi .kpi-head { flex-direction: column; gap: .2rem; }
 }
 body.page-news {
-  --bg: #F0F4FF; --bg-1: #E6ECFF; --bg-2: #DDE4FF; --bg-3: #D4DCFF; --bg-4: #CBD4FF;
-  --cream: #1A1A2E; --sand: #445566; --stone: #778899;
-  --bdr: rgba(0,102,255,.12); --bdr-2: rgba(0,102,255,.20); --bdr-3: rgba(0,102,255,.35);
-  --gold: #7B2FFF; --gold-hi: #7B2FFF; --gold-lo: rgba(123,47,255,.08); --gold-xs: rgba(123,47,255,.04);
+  --bg: #F5F5F5; --bg-1: #FFFFFF; --bg-2: #F0F0F0; --bg-3: #E0E0E0; --bg-4: #D0D0D0;
+  --cream: #1A1A1A; --sand: #666666; --stone: #888888;
+  --bdr: rgba(0,0,0,.08); --bdr-2: rgba(0,0,0,.12); --bdr-3: rgba(0,0,0,.20);
+  --gold: #D4A843; --gold-hi: #E8C96A; --gold-lo: rgba(212,168,67,.10); --gold-xs: rgba(212,168,67,.05);
 }
 body.page-news .platform { background: var(--bg); }
 body.page-news .platform-sidebar { background: #F0EBE0; border-right-color: rgba(60,40,10,.10); }
@@ -311,12 +311,12 @@ body.page-news .eyebrow { color: var(--gold); }
 body.page-news .news-card { background: var(--bg-1); border-color: var(--bdr); }
 body.page-news .news-card:hover { border-color: var(--bdr-2); box-shadow: 0 4px 12px rgba(0,0,0,.08); }
 body.page-news .nc-cat.cat-ai { color: var(--blue); }
-body.page-news .nc-cat.cat-sus { color: #00FF88; }
+body.page-news .nc-cat.cat-sus { color: var(--gold); }
 body.page-news .nc-cat.cat-mfg { color: var(--teal); }
-body.page-news .nc-cat.cat-lux { color: #7B2FFF; }
+body.page-news .nc-cat.cat-lux { color: var(--gold); }
 body.page-news .nc-cat.cat-cert { color: var(--dn); }
 body.page-news .nc-cat.cat-scm { color: var(--teal); }
-body.page-news .nc-cat.cat-circ { color: #00FF88; }
+body.page-news .nc-cat.cat-circ { color: var(--gold); }
 body.page-news .nc-read { color: var(--gold); }
 body.page-news .featured-article { background: var(--bg-1); border-color: var(--bdr-2); }
 body.page-news .featured-article::before { background: var(--cream); }
@@ -588,7 +588,7 @@ body.page-forum .cat-filatura { background: rgba(37,99,235,.08); color: #2563EB;
 body.page-forum .cat-tessitura { background: rgba(59,130,246,.08); color: #2563EB; border-color: rgba(59,130,246,.20); }
 body.page-forum .cat-tintoria { background: rgba(100,116,139,.08); color: #475569; border-color: rgba(100,116,139,.20); }
 body.page-forum .cat-macchine { background: rgba(37,99,235,.08); color: #2563EB; border-color: rgba(37,99,235,.20); }
-body.page-forum .cat-finissaggio { background: rgba(16,185,129,.08); color: #00FF88; border-color: rgba(16,185,129,.20); }
+body.page-forum .cat-finissaggio { background: var(--gold-lo); color: var(--gold); border-color: rgba(212,168,67,.20); }
 body.page-forum .cat-consorzio { background: var(--gold-lo); color: var(--gold); border-color: var(--bdr-2); }
 body.page-forum .filter-btn { background: var(--bg-1); color: var(--sand); border-color: var(--bdr); box-shadow: 0 1px 2px rgba(0,0,0,.03); }
 body.page-forum .filter-btn:hover { border-color: var(--bdr-2); color: var(--cream); background: var(--bg-2); }
