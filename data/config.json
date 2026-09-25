@@ -1,0 +1,80 @@
+{
+  "site": {
+    "name": "Textile Intelligence Platform",
+    "tagline": "Prato Textile District · Digital Hub",
+    "location": "Prato, IT",
+    "education": "IFTS Sustainable Fashion Supply Chain",
+    "available": "● Disponibile per collaborazioni",
+    "author": "Ronaldo Riska",
+    "role": "Pianificazione Filiera · Moda-Tessile · Sviluppo Digitale",
+    "email": "ronaldo.riska@gmail.com",
+    "phone": "+39 3519134887",
+    "pdf": "RonaldoRiskaCurriculum.pdf",
+    "github": "https://github.com/ItalyCircularFashion"
+  },
+  "theme": {
+    "accent": "#D4A843",
+    "accentHi": "#E8C96A",
+    "teal": "#2DD4BF",
+    "blue": "#60A5FA",
+    "up": "#22C55E",
+    "dn": "#EF4444",
+    "neutral": "#9CA3AF"
+  },
+  "ticker": [
+    {"name":"Cotton NY","val":"79.4¢/lb","chg":"+1.8%","dir":"up"},
+    {"name":"Polyester","val":"$1.12/kg","chg":"-0.6%","dir":"dn"},
+    {"name":"Wool Merin.","val":"€18.2/kg","chg":"+0.4%","dir":"up"},
+    {"name":"Nylon 6","val":"$2.38/kg","chg":"-1.1%","dir":"dn"},
+    {"name":"Viscose","val":"$1.65/kg","chg":"+0.2%","dir":"up"},
+    {"name":"ESG Textile","val":"68.4","chg":"+3.2pts","dir":"up"},
+    {"name":"IT Export","val":"€14.2B","chg":"+2.1%","dir":"up"},
+    {"name":"GOTS Certs","val":"8,744","chg":"+12.4%","dir":"up"},
+    {"name":"AI Fashion","val":"$4.4B","chg":"+28.3%","dir":"up"},
+    {"name":"Fast Fashion","val":"−3.2%","chg":"YoY","dir":"dn"},
+    {"name":"Prato Index","val":"104.2","chg":"+0.9%","dir":"up"},
+    {"name":"LCA Cotton","val":"1.8kg CO₂","chg":"/shirt","dir":"neu"}
+  ],
+  "kpis": [
+    {"label":"Cotton NY","val":"79.4¢","sub":"+1.8% MTD","dir":"up"},
+    {"label":"IT Tessile Export","val":"€14.2B","sub":"+2.1% YoY","dir":"up"},
+    {"label":"Polyester","val":"$1.12","sub":"-0.6% WTD","dir":"dn"},
+    {"label":"ESG Index","val":"68.4","sub":"+3.2pts","dir":"up"},
+    {"label":"AI Fashion Mkt","val":"$4.4B","sub":"+28.3% YoY","dir":"up"},
+    {"label":"GOTS Certs","val":"8,744","sub":"+12.4% YoY","dir":"up"},
+    {"label":"Merino Wool","val":"€18.2","sub":"+0.4% WTD","dir":"up"},
+    {"label":"Fast Fashion","val":"-3.2%","sub":"YoY vol.","dir":"dn"}
+  ],
+  "series": {
+    "cotton":[76.1,76.8,77.2,76.9,77.8,78.1,78.4,77.9,78.6,79.0,79.2,79.4],
+    "poly":[1.18,1.17,1.16,1.17,1.15,1.16,1.14,1.15,1.13,1.14,1.13,1.12],
+    "wool":[17.2,17.4,17.6,17.5,17.8,17.9,18.0,17.8,18.0,18.1,18.2,18.2],
+    "esgtx":[62,63,63,64,65,64,65,66,67,66,68,68],
+    "aimarket":[2.8,3.0,3.1,3.2,3.4,3.5,3.6,3.8,3.9,4.1,4.3,4.4],
+    "prato":[100,101,101,102,102,103,103,103,104,104,104,104]
+  },
+  "charts": [
+    {"id":"c-cotton","title":"Cotone NY (¢/lb)","sub":"Ultime 12 settimane","val":"79.4¢","chg":"+1.8%","dir":"up","series":"cotton","color":"#D4A843"},
+    {"id":"c-poly","title":"Poliestere ($/kg)","sub":"Ultime 12 settimane","val":"$1.12","chg":"-0.6%","dir":"dn","series":"poly","color":"#E74C3C"},
+    {"id":"c-wool","title":"Lana Merino (€/kg)","sub":"Ultime 12 settimane","val":"€18.2","chg":"+0.4%","dir":"up","series":"wool","color":"#27AE60"},
+    {"id":"c-esg","title":"ESG Textile Index","sub":"Score 0-100","val":"68.4","chg":"+3.2","dir":"up","series":"esgtx","color":"#2E7D52"},
+    {"id":"c-ai","title":"AI Fashion Market","sub":"Miliardi USD","val":"$4.4B","chg":"+28.3%","dir":"up","series":"aimarket","color":"#3498DB"},
+    {"id":"c-prato","title":"Prato District Index","sub":"Base 100 = 2023","val":"104.2","chg":"+0.9%","dir":"up","series":"prato","color":"#9B59B6"}
+  ],
+  "sidebarPulse": [
+    {"name":"Cotton NY","val":"79.4¢","chg":"+1.8%","dir":"up"},
+    {"name":"ESG Index","val":"68.4","chg":"+3.2","dir":"up"},
+    {"name":"AI Fashion","val":"$4.4B","chg":"+28.3%","dir":"up"},
+    {"name":"Prato Idx","val":"104.2","chg":"+0.9%","dir":"up"},
+    {"name":"Fast Fashion","val":"-3.2%","chg":"YoY","dir":"dn"}
+  ],
+  "nav": {
+    "platform": [{"icon":"⌂","label":"Home","href":"index.html"},{"icon":"◈","label":"Curriculum","href":"cv.html","active":true}],
+    "intelligence": [{"icon":"▣","label":"Market Dashboard","href":"dashboard.html","badge":"Live"},{"icon":"◎","label":"AI Research Lab","href":"research.html","badge":"8"},{"icon":"◉","label":"Textile Newsroom","href":"news.html","badge":"8"}],
+    "community": [{"icon":"◌","label":"Industry Forum","href":"forum.html","badge":"25"}]
+  },
+  "footer": {
+    "links": ["Home","CV","Dashboard","Research","News","Forum","Contatto"],
+    "copyright": "Ronaldo Riska · Textile Intelligence Platform · Prato, IT"
+  }
+}
