@@ -28,7 +28,7 @@
     {"name":"Nylon 6","val":"$2.38/kg","chg":"-1.1%","dir":"dn"},
     {"name":"Viscose","val":"$1.65/kg","chg":"+0.2%","dir":"up"},
     {"name":"ESG Textile","val":"68.4","chg":"+3.2pts","dir":"up"},
-    {"name":"IT Export","val":"€14.2B","chg":"+2.1%","dir":"up"},
+    {"name":"IT Tessile Export","val":"€14.2B","chg":"+2.1%","dir":"up"},
     {"name":"GOTS Certs","val":"8,744","chg":"+12.4%","dir":"up"},
     {"name":"AI Fashion","val":"$4.4B","chg":"+28.3%","dir":"up"},
     {"name":"Fast Fashion","val":"−3.2%","chg":"YoY","dir":"dn"},
@@ -59,13 +59,13 @@
     {"id":"c-wool","title":"Lana Merino (€/kg)","sub":"Ultime 12 settimane","val":"€18.2","chg":"+0.4%","dir":"up","series":"wool","color":"#27AE60"},
     {"id":"c-esg","title":"ESG Textile Index","sub":"Score 0-100","val":"68.4","chg":"+3.2","dir":"up","series":"esgtx","color":"#2E7D52"},
     {"id":"c-ai","title":"AI Fashion Market","sub":"Miliardi USD","val":"$4.4B","chg":"+28.3%","dir":"up","series":"aimarket","color":"#3498DB"},
-    {"id":"c-prato","title":"Prato District Index","sub":"Base 100 = 2023","val":"104.2","chg":"+0.9%","dir":"up","series":"prato","color":"#9B59B6"}
+    {"id":"c-prato","title":"Prato Index","sub":"Base 100 = 2023","val":"104.2","chg":"+0.9%","dir":"up","series":"prato","color":"#9B59B6"}
   ],
   "sidebarPulse": [
     {"name":"Cotton NY","val":"79.4¢","chg":"+1.8%","dir":"up"},
     {"name":"ESG Index","val":"68.4","chg":"+3.2","dir":"up"},
     {"name":"AI Fashion","val":"$4.4B","chg":"+28.3%","dir":"up"},
-    {"name":"Prato Idx","val":"104.2","chg":"+0.9%","dir":"up"},
+    {"name":"Prato Index","val":"104.2","chg":"+0.9%","dir":"up"},
     {"name":"Fast Fashion","val":"-3.2%","chg":"YoY","dir":"dn"}
   ],
   "nav": {
