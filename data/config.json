@@ -76,5 +76,35 @@
   "footer": {
     "links": ["Home","CV","Dashboard","Research","News","Forum","Contatto"],
     "copyright": "Ronaldo Riska · Textile Intelligence Platform · Prato, IT"
+  },
+  "cv": {
+    "name": "Ronaldo Riska",
+    "title": "Pianificazione Filiera · Moda-Tessile · Sviluppo Digitale",
+    "location": "📍 Prato, 59100 · Toscana, IT",
+    "contact": [
+      {"icon":"✉","label":"ronaldo.riska@gmail.com","href":"mailto:ronaldo.riska@gmail.com"},
+      {"icon":"📞","label":"+39 3519134887","href":"tel:+393519134887"},
+      {"icon":"◆","label":"GitHub","href":"https://github.com/ItalyCircularFashion","external":true}
+    ],
+    "tags": ["Supply Chain","Filiera Tessile","Sostenibilità","AI Applied","MRP / MPS"],
+    "summary": "Persona curiosa, dinamica e orientata all'apprendimento continuo. Ho maturato esperienze in settori diversi sviluppando una visione trasversale dei processi lavorativi e competenze digitali trasversali (web development, Linux, SQL, IoT, ERP). Cerco un'opportunità nella gestione e coordinamento delle fasi di lavorazione nel settore tessile. Conosco la filiera dalla fibra al filato, dal tessuto al capo confezionato e voglio mettere queste competenze a disposizione nella gestione dei terzisti e nel monitoraggio delle lavorazioni, integrando strumenti digitali, KPI e metodologie di miglioramento continuo.",
+    "skills": {
+      "soft": ["Orientamento al risultato e rispetto delle tempistiche","Problem solving in contesti produttivi","Sensibilità qualitativa di processo e prodotto","Comunicazione efficace e collaborazione cross-funzionale","Adattabilità a contesti complessi","Approccio analitico e supporto decisionale","Gestione priorità e multitasking","Mentalità orientata al miglioramento continuo"],
+      "hard": ["Pianificazione produzione MRP/MPS (Excel / software digitali)","Tools digitali, dashboard KPI, reportistica analitica","Advanced IT: Linux, Excel, HTML, CSS, Java, web technologies","Web Development: WordPress, CMS, SEO, digital architecture","Digital Marketing: SEO/SEM, advertising, content strategy","AI & Process Automation: workflow automation, produttività","Ottimizzazione processi produttivi e coordinamento filiera"],
+      "langs": [{"name":"Italiano","level":"Madrelingua"},{"name":"Albanese","level":"Seconda lingua"},{"name":"Inglese","level":"Avanzato"},{"name":"Francese","level":"Base"},{"name":"Spagnolo","level":"Base"}]
+    },
+    "experience": [
+      {"title":"Dispositore — Tirocinio scolastico","org":"PoolTrend s.r.l.","date":"15 Luglio 2026 – 15 Ottobre 2026","tags":["Disposizione","QC","Tintoria"],"items":["Approvazione primo bagno presso tintorie e disposizioni tintoria","Disposizioni: acquisto filato, ritorcitura, asolatura, tintoria, orditura, imbozzimatura, tessitura, rammendo","Supervisione di tutte le fasi, controllo qualità e tempistiche"]},
+      {"title":"Production Planning & Logistics","org":"G.P. Tricot srl","date":"2025 – 2026","tags":["MRP/MPS","Planning","50K capi"],"items":["Gestione planning produttivo, scheduling ordini, approvvigionamento fornitori","Monitoraggio tempistiche di consegna lungo la filiera abbigliamento (50.000 capi stagionalmente)"]},
+      {"title":"Back Office Insurance Credit Specialist","org":"Aliante Assicurazioni s.r.l. — Direct Mandate from Atradius Group","date":"2022 – 2023","tags":["Credit Risk","CRM","PMI"],"items":["Gestione portafoglio clienti PMI in ambito credito commerciale","Analisi pre-credito tramite software dedicati e dati finanziari strutturati","Supporto decisionale per copertura e gestione del credito","CRM prospect area Toscana, reportistica Excel, corrispondenza clienti, rinnovi contrattuali"]},
+      {"title":"Operations & Quality Coordinator","org":"Stireria Il Futuro","date":"2020 – 2021","tags":["QC","Finissaggio","Terzisti"],"items":["Gestione fornitori terzisti per lavorazioni finissaggio","Controllo qualità finale capo: estetica e conformità standard","Documentazione logistica: DDT, packing list, fatture pro-forma","Operatività fasi: asolatura, accessori, etichettatura, ciclo a catena"]}
+    ],
+    "education": [
+      {"title":"IFTS — Sustainable Fashion and Textile Supply Chain Manager","org":"PIN, Prato – Università di Firenze","date":"2025 – in corso","tags":["Supply Chain","Lean","ESG"],"items":["Pianificazione sostenibile supply chain tessile end-to-end","Coordinamento processi: filatura, orditura, tessitura, nobilitazione, confezione, finissaggio","Ingegnerizzazione prodotto-processo, analisi flussi, ottimizzazione performance","Qualità, certificazioni e framework ESG: GRS, RCS, GOTS, OEKO-TEX, bluesign, ZDHC, REACH, ISO","Lean Manufacturing, ERP, strumenti digitali, dashboard, data analysis"]},
+      {"title":"Corso Competenze Digitali","org":"Quad SRL","date":"2023","tags":["Digital","WordPress","SEO"],"items":["Marketing, content creator, WordPress, SEO, SEM, Python, Linux, HTML, JSON, web development"]},
+      {"title":"Diploma Amministrazione, Finanza e Marketing","org":"Istituto Paolo Dagomari, Prato","date":"Giugno 2020","tags":["Finanza","Marketing","Contabilità"],"items":["Contabilità, analisi economico-finanziaria, normativa commerciale, marketing e CRM"]}
+    ],
+    "selfLearning": "Forte approccio autodidatta e orientamento al continuous learning. Sviluppo autonomo di competenze digitali, web e AI. Apprendimento pratico basato su sperimentazione e applicazione operativa.",
+    "certifications": ["GOTS","GRS","OEKO-TEX","BLUESIGN","ZDHC","REACH","ISO 14001","ESG"]
   }
 }

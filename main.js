@@ -105,6 +105,7 @@ function renderPage() {
   if (document.body.classList.contains('page-research')) renderResearch();
   if (document.body.classList.contains('page-forum')) { renderForum(); renderCompanies(); }
   if (document.body.classList.contains('page-index')) renderBiblioteca();
+  if (document.body.classList.contains('page-cv')) renderCV();
 }
 
 function renderKPIs() {
@@ -190,6 +191,57 @@ function renderBiblioteca() {
     body.style.maxHeight = isOpen ? body.scrollHeight + 'px' : '0';
     btn.querySelector('.lbl').textContent = isOpen ? 'Chiudi' : 'Leggi tutto';
   });
+}
+
+/* ═══ CV PAGE ═══ */
+function renderCV() {
+  if (!CFG?.cv) return;
+  const cv = CFG.cv;
+
+  // Tags
+  const tagsEl = document.querySelector('[data-cv-tags]');
+  if (tagsEl) tagsEl.innerHTML = cv.tags.map(t => `<span class="cv-hero-tag">${t}</span>`).join('');
+
+  // Summary
+  const sumEl = document.querySelector('[data-cv-summary]');
+  if (sumEl) sumEl.innerHTML = `<p class="cv-summary-text">${cv.summary}</p>`;
+
+  // Skills
+  renderSkillCol('soft', cv.skills?.soft);
+  renderSkillCol('hard', cv.skills?.hard);
+  renderLangs(cv.skills?.langs);
+
+  // Experience
+  const expEl = document.querySelector('[data-cv-experience]');
+  if (expEl && cv.experience) expEl.innerHTML = cv.experience.map(e => buildEntry(e)).join('');
+
+  // Education
+  const eduEl = document.querySelector('[data-cv-education]');
+  if (eduEl && cv.education) eduEl.innerHTML = cv.education.map(e => buildEntry(e)).join('');
+
+  // Self-learning
+  const slEl = document.querySelector('[data-cv-selflearning]');
+  if (slEl && cv.selfLearning) slEl.innerHTML = `<p class="cv-summary-text">${cv.selfLearning}</p>`;
+
+  // Certifications
+  const certEl = document.querySelector('[data-cv-certs]');
+  if (certEl && cv.certifications) certEl.innerHTML = cv.certifications.map(c => `<span class="cv-tag">${c}</span>`).join('');
+}
+
+function renderSkillCol(type, items) {
+  const el = document.querySelector('[data-cv-'+type+']');
+  if (!el || !items) return;
+  el.innerHTML = items.map(i => `<div class="cv-skill-item">${i}</div>`).join('');
+}
+
+function renderLangs(langs) {
+  const el = document.querySelector('[data-cv-lang]');
+  if (!el || !langs) return;
+  el.innerHTML = langs.map(l => `<div class="cv-lang-row"><span class="cv-lang-name">${l.name}</span><span class="cv-lang-level">${l.level}</span></div>`).join('');
+}
+
+function buildEntry(e) {
+  return `<div class="cv-entry"><div class="cv-e-title">${e.title}</div><div class="cv-e-org">${e.org}</div><div class="cv-e-date">${e.date}</div><ul class="cv-e-body">${(e.items||[]).map(i => `<li>${i}</li>`).join('')}</ul><div class="cv-tags">${(e.tags||[]).map(t => `<span class="cv-tag">${t}</span>`).join('')}</div></div>`;
 }
 
 /* ═══ COMPANIES (Forum / Directory) ═══ */
