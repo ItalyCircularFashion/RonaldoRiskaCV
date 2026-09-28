@@ -130,8 +130,8 @@
                 <thead>
                   <tr>
                     <th>Materia prima</th>
-                    <th>Prezzo</th>
-                    <th>Var. 30gg</th>
+                    <th class="td-num">Prezzo</th>
+                    <th class="td-num">Var. 30gg</th>
                     <th>Trend</th>
                     <th>Unità</th>
                     <th>Fonte</th>
@@ -308,9 +308,9 @@
                   <thead>
                     <tr>
                       <th>Materia prima</th>
-                      <th>Media 2024</th>
-                      <th>Media 2025</th>
-                      <th>Var. annuale</th>
+                      <th class="td-num">Media 2024</th>
+                      <th class="td-num">Media 2025</th>
+                      <th class="td-num">Var. annuale</th>
                       <th>Livello attuale</th>
                       <th>Stagionalità</th>
                     </tr>
@@ -365,9 +365,9 @@
                 <thead>
                   <tr>
                     <th>Mercato</th>
-                    <th>Export 2025 (M€)</th>
-                    <th>Var. YoY</th>
-                    <th>Quota %</th>
+                    <th class="td-num">Export 2025 (M€)</th>
+                    <th class="td-num">Var. YoY</th>
+                    <th class="td-num">Quota %</th>
                     <th>Trend</th>
                   </tr>
                 </thead>
@@ -394,8 +394,9 @@
               <h3>ESG &amp; AI adoption</h3>
             </div>
             <div>
+              <div class="eyebrow" style="margin-bottom:var(--space-3)">Certificazioni ESG</div>
               <table class="data-table">
-                <thead><tr><th>Certificazione</th><th>Aziende</th><th>Var.</th></tr></thead>
+                <thead><tr><th>Certificazione</th><th class="td-num">Aziende</th><th class="td-num">Var.</th></tr></thead>
                 <tbody>
                   <tr><td>GOTS</td><td class="td-num">8,744</td><td class="td-up td-num">+12.4%</td></tr>
                   <tr><td>GRS</td><td class="td-num">6,219</td><td class="td-up td-num">+18.7%</td></tr>
@@ -405,8 +406,9 @@
                   <tr><td>Cradle-to-Cradle</td><td class="td-num">892</td><td class="td-up td-num">+28.9%</td></tr>
                 </tbody>
               </table>
+              <div class="eyebrow" style="margin:var(--space-5) 0 var(--space-3)">AI adoption</div>
               <table class="data-table">
-                <thead><tr><th>AI Application</th><th>Adozione</th><th>ROI</th></tr></thead>
+                <thead><tr><th>AI Application</th><th class="td-num">Adozione</th><th class="td-num">ROI</th></tr></thead>
                 <tbody>
                   <tr><td>Quality Control CV</td><td class="td-num td-up">34%</td><td class="td-num">+28%</td></tr>
                   <tr><td>Demand Forecasting</td><td class="td-num td-up">41%</td><td class="td-num">+22%</td></tr>
@@ -422,7 +424,7 @@
         </div>
 
         <!-- RIGA 3: PRATO KPI + AZIENDE CHIAVE -->
-        <div class="dm-section" style="border-top:1px solid var(--bdr)">
+        <div class="dm-section">
           <div class="dm-panel-hdr">
             <div class="eyebrow">Focus locale · Confindustria Toscana 2025</div>
             <h3>Distretto di Prato — indicatori</h3>
@@ -451,7 +453,7 @@
                   <tr>
                     <th>Azienda</th>
                     <th>Settore</th>
-                    <th>Fatturato</th>
+                    <th class="td-num">Fatturato</th>
                     <th>Specializzazione</th>
                     <th>Certificazioni</th>
                   </tr>
@@ -475,14 +477,15 @@
         </div>
 
         <!-- INDICATORI DIGITALI -->
-        <div class="dm-section" style="border-top:1px solid var(--bdr)">
+        <div class="dm-section">
           <div class="dm-panel-hdr">
             <div class="eyebrow">Digitalizzazione · AI adoption · ESG</div>
             <h3>Trasformazione digitale del distretto</h3>
           </div>
           <div>
+            <div class="eyebrow" style="margin-bottom:var(--space-3)">Adozione tecnologie</div>
             <table class="data-table">
-              <thead><tr><th>Tecnologia</th><th>Adozione PMI</th><th>ROI medio</th><th>Barriera</th></tr></thead>
+              <thead><tr><th>Tecnologia</th><th class="td-num">Adozione PMI</th><th class="td-num">ROI medio</th><th>Barriera</th></tr></thead>
               <tbody>
                 <tr><td><strong>ERP / MES</strong></td><td class="td-num td-up">42%</td><td class="td-num">+18%</td><td>Costo licenze</td></tr>
                 <tr><td><strong>IoT / Sensori</strong></td><td class="td-num td-up">28%</td><td class="td-num">+24%</td><td>Integrazione</td></tr>
@@ -492,8 +495,9 @@
                 <tr><td><strong>Dashboard KPI</strong></td><td class="td-num td-up">22%</td><td class="td-num">+21%</td><td>Dati quality</td></tr>
               </tbody>
             </table>
+            <div class="eyebrow" style="margin:var(--space-5) 0 var(--space-3)">Indici di benchmark</div>
             <table class="data-table">
-              <thead><tr><th>Indice</th><th>Valore</th><th>Trend</th><th>Benchmark</th></tr></thead>
+              <thead><tr><th>Indice</th><th class="td-num">Valore</th><th>Trend</th><th>Benchmark</th></tr></thead>
               <tbody>
                 <tr><td><strong>Digital Maturity Index</strong></td><td class="td-num">3.2/5</td><td class="td-up td-num">▲</td><td class="td-num">EU: 3.4</td></tr>
                 <tr><td><strong>AI Readiness Score</strong></td><td class="td-num">2.8/5</td><td class="td-up td-num">▲</td><td class="td-num">EU: 2.9</td></tr>

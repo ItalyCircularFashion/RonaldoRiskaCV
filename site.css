@@ -15,6 +15,10 @@ html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--bg-3,var(
   /* Palette */
   --bg:#0A0A0A;--bg-elevated:#0F0F0F;--surface:#141414;--surface-raised:#1A1A1A;--surface-float:#222222;
   --primary:#D4A843;--primary-hi:#E8C96A;--primary-lo:rgba(212,168,67,.10);--primary-xs:rgba(212,168,67,.05);
+  /* Alias legacy: --gold e usato in 6 regole CSS e negli style inline di 7 pagine,
+     ma nel design system v6 e stato rinominato in --primary. Senza questo alias
+     var(--gold) non risolve e quei colori (incluso :focus-visible) spariscono. */
+  --gold:#D4A843;--gold-hi:#E8C96A;--gold-lo:rgba(212,168,67,.10);
   --secondary:#2DD4BF;--secondary-lo:rgba(45,212,191,.12);
   --accent:#ff2d6f;--accent-lo:rgba(255,45,111,.10);
   --blue:#60A5FA;--blue-lo:rgba(96,165,250,.12);
@@ -146,6 +150,34 @@ ul{list-style:none}
 .kpi-val{font-size:clamp(1.3rem,2.2vw,1.75rem);font-weight:700;font-family:var(--f-m);color:var(--cream);line-height:1}
 .kpi-sub{font-family:var(--f-m);font-size:var(--text-xs);color:var(--stone);margin-top:var(--space-1);display:flex;align-items:center;gap:var(--space-1)}
 .kpi-up{color:var(--up)}.kpi-dn{color:var(--dn)}.kpi-neu{color:var(--neutral)}
+
+/* ─── Data tables (dashboard.html) ─── */
+.data-table{width:100%;border-collapse:collapse;font-family:var(--f-m);font-size:var(--text-sm);font-variant-numeric:tabular-nums}
+.data-table thead th{font-size:var(--text-xs);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);text-align:left;padding:var(--space-2) var(--space-3);background:var(--surface-raised);border-bottom:1px solid var(--bdr-2);white-space:nowrap;position:sticky;top:0;z-index:1}
+.data-table tbody td{padding:var(--space-2) var(--space-3);color:var(--sand);border-bottom:1px solid var(--bdr);line-height:1.5;vertical-align:top}
+.data-table tbody tr:nth-child(even) td{background:var(--surface-raised)}
+.data-table tbody tr:hover td{background:var(--primary-xs)}
+.data-table tbody td strong{color:var(--cream);font-weight:600}
+.data-table tbody tr:last-child td{border-bottom:none}
+/* I selettori sotto hanno bisogno di .data-table per pareggiare la specificita
+   di ".data-table tbody td" (0,1,2): senza, td-up/td-dn verrebbero sovrascritti. */
+.data-table .td-num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.data-table .td-up{color:var(--up)}
+.data-table .td-dn{color:var(--dn)}
+.data-table a{color:var(--cream);text-decoration:underline;text-decoration-color:var(--bdr-3);text-underline-offset:2px;transition:color var(--duration-fast) var(--smooth)}
+.data-table a:hover{color:var(--primary);text-decoration-color:var(--primary)}
+
+/* Distretto: due tabelle nella stessa colonna (Critico / Digitalizzazione) */
+.materials-table td:first-child,.materials-table th:first-child{padding-left:0}
+.materials-table td:last-child,.materials-table th:last-child{padding-right:0}
+
+/* Dashboard section wrapper */
+.dm-section{padding-top:var(--space-6);margin-bottom:var(--space-2);border-top:1px solid var(--bdr)}
+.dm-section:first-of-type{padding-top:var(--space-5)}
+.dm-section .dm-panel-hdr{margin-bottom:var(--space-4)}
+
+/* Chart cards */
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--space-4);margin-bottom:var(--space-6)}
 
 /* Newsroom hero — blocco KPI distretto Prato (news.html) */
 .news-hero{background:var(--surface);border:1px solid var(--bdr);border-radius:var(--rl);padding:var(--space-5);margin-bottom:var(--space-5);display:flex;flex-direction:column;gap:var(--space-4)}
@@ -342,6 +374,10 @@ canvas.sparkline{width:100%;height:60px;display:block}
   .kpi-head{flex-direction:column;align-items:flex-start;gap:var(--space-1)}
   .news-hero{padding:var(--space-4)}
   .featured-article{padding:var(--space-4)}
+  .data-table{font-size:var(--text-xs)}
+  .data-table thead th{padding:var(--space-2);white-space:normal}
+  .data-table tbody td{padding:var(--space-2)}
+  .dm-section{padding-top:var(--space-5)}
   .tile-grid{grid-template-columns:1fr}
   .chart-grid{grid-template-columns:1fr}
   .news-grid{grid-template-columns:1fr}
