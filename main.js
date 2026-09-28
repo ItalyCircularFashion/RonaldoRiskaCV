@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (e) { console.warn('Data load failed:', e); }
   syncTheme(); setYear(); initTicker(); initSidebar(); initReveal(); initCharts();
   renderPage(); populateSidebarPulse(); highlightNavLink(); initMobMenu();
+  /* Fallback progressivo: se per qualche motivo un .reveal non viene
+     osservato (render fallito, observer non disponibile) resta invisibile.
+     Dopo 1.2s forziamo la visibilità di quanto non è ancora emerso. */
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 1200);
 });
 
 function syncTheme() {
@@ -153,6 +159,7 @@ function renderNews() {
   document.querySelectorAll('[data-news-grid]').forEach(grid => {
     const limit = parseInt(grid.dataset.limit || '99');
     grid.innerHTML = CNT.news.filter(n => !n.featured).slice(0, limit).map(buildNewsCard).join('');
+    setTimeout(() => observeNewReveals(grid), 80);
   });
 }
 function buildNewsCard(n) {
