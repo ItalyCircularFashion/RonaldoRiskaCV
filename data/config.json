@@ -70,7 +70,7 @@
   ],
   "nav": {
     "platform": [{"icon":"⌂","label":"Home","href":"index.html"},{"icon":"◈","label":"Curriculum","href":"cv.html","active":true}],
-    "intelligence": [{"icon":"▣","label":"Market Dashboard","href":"dashboard.html","badge":"Live"},{"icon":"◎","label":"AI Research Lab","href":"research.html","badge":"8"},{"icon":"◉","label":"Textile Newsroom","href":"news.html","badge":"8"}],
+    "intelligence": [{"icon":"▣","label":"Market Dashboard","href":"dashboard.html","badge":"Live"},{"icon":"◈","label":"CAD Moda","href":"cad-moda.html","badge":"Beta"},{"icon":"◎","label":"AI Research Lab","href":"research.html","badge":"8"},{"icon":"◉","label":"Textile Newsroom","href":"news.html","badge":"8"}],
     "community": [{"icon":"◌","label":"Industry Forum","href":"forum.html","badge":"25"}]
   },
   "footer": {
