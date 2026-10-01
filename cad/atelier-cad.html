@@ -176,8 +176,22 @@ function maglia(v,fe){
   edges:[fr?{n:'scollo',p:[[nw*.55,cy],[nw,-2+(cy+2)*.55],[nw,-2]]}:{n:'scollo',p:[[nw*.6,0],[nw,-2]]},{n:'spalla',p:[[h,sy]]},{n:'giromanica',p:[[h-1,AD*.4],[q-4,AD-2.5],[q,AD]]},{n:'fianco',p:[[q,L]]},{n:'orlo',p:[[0,L]]},{n:'piega',p:[[0,fr?cy:0]]}],
   darts:[],con:[[[0,AD],[q,AD]]],marks:[[[q,AD],[q+.9,AD]]],grain:[3,AD+4,L-6],lab:[6,AD+10]});
  const f=mk(1),b=mk(0),AH=len(f,'giromanica')+len(b,'giromanica'),bw=B/6+1+(fe?2:0),ow=v.omanica/2,sl=v.lm-bh;
- const sc=e=>({start:[0,0],edges:[{n:'t',p:[[bw*.45,0],[bw*.8,e*.4],[bw,e]]}]});let lo=1,hi=30;
- for(let i=0;i<24;i++){const m=(lo+hi)/2;if(len(sc(m),'t')<(AH+(fe?1.5:1))/2)lo=m;else hi=m}
+ const sc=e=>({start:[0,0],edges:[{n:'t',p:[[bw*.45,0],[bw*.8,e*.4],[bw,e]]}]});
+ // La manica e' tagliata x2 speculare sulla piega x=0: l'arco (0,0)->(bw,lo) e'
+ // META' della testa manica, la copia speculare ne forma l'altra meta'. Quindi
+ // 2*len(arco) = lunghezza della testa manica = (AH+ease)/2, e NON len(arco).
+ // Risolgere per target (e non target/2) assegnava a ogni meta' tutta la
+ // lunghezza della meta' giromanica: lo sfondava oltre sl e la testa manica
+ // attraversava la cucitura dell'orlo (auto-intersezione a y=sl).
+ //
+ // Dominio di lo: (0, sl]. sl = lunghezza sotto-manica = lm - fascia. Non puo'
+ // essere un tetto fisso come il vecchio hi=30: oltre sl l'arco scende dove sta
+ // l'orlo e il bordo del pannello si incrocia. sl e' l'unico limite geometrico
+ // reale, ed e' derivato dalla costruzione.
+ const tgt=(AH+(fe?1.5:1))/4;
+ let lo=0.01,hi=sl;
+ for(let i=0;i<40;i++){const m=(lo+hi)/2;if(len(sc(m),'t')<tgt)lo=m;else hi=m}
+ lo=Math.min(lo,sl);
  const s={nm:'Manica',note:'Taglio ×2 (uno speculare)',sym:1,start:[0,0],edges:[{n:'testa',p:[[bw*.45,0],[bw*.8,lo*.4],[bw,lo]]},{n:'sotto manica',p:[[ow,sl]]},{n:'orlo',p:[[0,sl]]},{n:'piega',p:[[0,0]]}],darts:[],con:[[[0,lo],[bw,lo]]],marks:[],grain:[0,lo+3,sl-4],lab:[3,lo+9]};
  const nl=2*(len(f,'scollo')+len(b,'scollo')),P=[f,b,s,rc('Bordo collo',nl*.85,4,'Taglio ×1, elastico')];
  if(fe)P.push(rc('Fascia orlo',q*1.7,2*bh,'Taglio ×2'),rc('Polsino',ow*1.7,2*bh,'Taglio ×2'));

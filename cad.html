@@ -70,7 +70,7 @@
           <div class="page-hdr-meta">
             <span>◈ 5 categorie di capo</span>
             <span>📐 2D + 3D</span>
-            <span>🔬 Fase 1.1 aperta</span>
+            <span>🔬 Fase 1.1 chiusa</span>
           </div>
         </div>
         <div style="display:flex;gap:.5rem;align-items:flex-start">
@@ -90,11 +90,11 @@
         <div style="font-family:var(--f-m);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
                     color:var(--gold);margin-bottom:.45rem">Stato della versione</div>
         <p style="font-size:.8rem;color:var(--sand);line-height:1.7;margin:0;max-width:86ch">
-          Questa è la <strong style="color:var(--cream)">Fase 1.1, aperta</strong>: la correzione
-          dimensionale è verificata (34/34) e resta un difetto noto.
-          La <strong style="color:var(--cream)">testa manica della T-shirt si auto-interseca sulle taglie 40 e 44</strong> —
-          la geometria è disegnata ma il tracciato non è un poligono valido. Gli altri 4 capi sono
-          verificati anche in topologia.
+          <strong style="color:var(--cream)">Fase 1.1 chiusa.</strong> La correzione dimensionale
+          (34/34) e la geometria (20/20) sono entrambe verificate: tutti e 5 i capi generano tracciati
+          validi su tutte le taglie. La causa del difetto sulla testa manica era un <strong style="color:var(--cream)">errore
+          di fattore 2</strong> — la manica è tagliata ×2 speculare, ma alla singola metà veniva
+          assegnata tutta la lunghezza della metà della giromanica.
         </p>
       </div>
 
@@ -157,13 +157,13 @@
             </thead>
             <tbody>
               <tr>
-                <td style="color:var(--cream)">T-shirt</td>
-                <td class="td-num" style="color:var(--sand)">40 · 44</td>
-                <td style="color:var(--sand)">Testa manica: auto-intersezione a (14,6; 22,0)</td>
-                <td><span style="display:inline-block;padding:.15rem .5rem;border-radius:99px;background:var(--gold-lo);color:var(--gold);font-family:var(--f-m);font-size:.6rem">Aperto</span></td>
+                <td style="color:var(--cream)">T-shirt · Felpa</td>
+                <td class="td-num" style="color:var(--sand)">40 · 44 · 48 · 56</td>
+                <td style="color:var(--sand)">nessuno — testa manica sotto l'orlo, tracciati validi</td>
+                <td><span style="display:inline-block;padding:.15rem .5rem;border-radius:99px;background:var(--up-lo);color:var(--up);font-family:var(--f-m);font-size:.6rem">Risolto</span></td>
               </tr>
               <tr>
-                <td style="color:var(--cream)">Gonna · Corpetto · Felpa · Pantaloni</td>
+                <td style="color:var(--cream)">Tutti e 5 i capi</td>
                 <td class="td-num" style="color:var(--sand)">40 · 44 · 48 · 56</td>
                 <td style="color:var(--sand)">nessuno — verificati in dimensione e topologia</td>
                 <td><span style="display:inline-block;padding:.15rem .5rem;border-radius:99px;background:var(--up-lo);color:var(--up);font-family:var(--f-m);font-size:.6rem">Verificato</span></td>

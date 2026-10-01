@@ -76,7 +76,7 @@
         <div style="font-family:var(--f-m);font-size:.62rem;color:var(--stone);text-align:right;white-space:nowrap">
           <div>5 categorie di capo</div>
           <div style="margin-top:.3rem">34 test automatici</div>
-          <div style="margin-top:.3rem;color:var(--gold)">Metodo verificato</div>
+          <div style="margin-top:.3rem;color:var(--up)">120 asserzioni verdi</div>
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@
           <div style="font-family:var(--f-m);font-size:.62rem;color:var(--stone);
                       text-align:right;white-space:nowrap">
             <div>Stato: Fase 1.1</div>
-            <div style="margin-top:.3rem;color:var(--gold)">Aperta</div>
+            <div style="margin-top:.3rem;color:var(--up)">Chiusa</div>
             <a href="cad.html" style="display:inline-block;margin-top:.75rem;padding:.45rem .85rem;
                       border:1px solid var(--gold);border-radius:var(--r);color:var(--gold);
                       text-decoration:none;text-transform:uppercase;letter-spacing:.12em">Apri l'app →</a>
@@ -139,8 +139,8 @@
         </div>
         <div class="kpi">
           <div class="kpi-label">Validazione topologica</div>
-          <div class="kpi-val">18<span class="kpi-unit">/20</span></div>
-          <div class="kpi-chg kpi-dn">2 difetti aperti</div>
+          <div class="kpi-val">20<span class="kpi-unit">/20</span></div>
+          <div class="kpi-chg kpi-up">nessun difetto</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Corpi di misura</div>
@@ -208,8 +208,8 @@
               <tr>
                 <td style="color:var(--cream)">1.1</td>
                 <td style="color:var(--sand)">Geometria della manica t-shirt</td>
-                <td><span style="display:inline-block;padding:.15rem .5rem;border-radius:99px;background:var(--gold-lo);color:var(--gold);font-family:var(--f-m);font-size:.6rem">In sviluppo</span></td>
-                <td class="td-num" style="color:var(--sand)">2 difetti aperti</td>
+                <td><span style="display:inline-block;padding:.15rem .5rem;border-radius:99px;background:var(--up-lo);color:var(--up);font-family:var(--f-m);font-size:.6rem">Chiusa</span></td>
+                <td class="td-num" style="color:var(--sand)">20/20 + 52 test</td>
               </tr>
               <tr>
                 <td style="color:var(--cream)">2.0</td>
@@ -237,12 +237,16 @@
         </p>
 
         <div style="display:grid;gap:.7rem">
-          <div style="padding:.8rem .9rem;background:var(--bg-2);border-left:2px solid var(--gold);border-radius:0 var(--r) var(--r) 0">
-            <div style="font-size:.78rem;color:var(--cream);font-weight:600">Scala della testa manica — t-shirt, taglie 40 e 44</div>
+          <div style="padding:.8rem .9rem;background:var(--bg-2);border-left:2px solid var(--up);border-radius:0 var(--r) var(--r) 0">
+            <div style="font-size:.78rem;color:var(--cream);font-weight:600">Scala della testa manica — risolto <span style="color:var(--up);font-family:var(--f-m);font-size:.62rem;font-weight:400">(Fase 1.1)</span></div>
             <p style="font-size:.74rem;color:var(--sand);line-height:1.7;margin:.4rem 0 0">
-              La testa manica scende a 30 cm mentre la cucitura sotto è a 22: il tracciato si
-              attraversa a (14,6; 22,0). Il calcolo risolve un'equazione senza soluzione nel dominio
-              consentito — non è un tetto da alzare, è una relazione da riprogettare.
+              La causa era un <strong style="color:var(--cream)">errore di fattore 2</strong>, non un tetto di ricerca
+              troppo stretto: la manica è tagliata ×2 speculare sulla piega, ma il binario assegnava a ogni
+              metà tutta la lunghezza della metà della giromanica. La testa manica scendeva a 30 cm mentre
+              la cucitura sotto era a 22, e il tracciato si attraversava a (14,6; 22,0). Risolvendo per
+              metà — con dominio derivato da <code style="font-family:var(--f-m)">sl</code> invece del fisso
+              <code style="font-family:var(--f-m)">hi=30</code> — la profondità scende a 6–12 cm e la somma dei
+              due archi torna esattamente alla metà della giromanica.
             </p>
           </div>
 
