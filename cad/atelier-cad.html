@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Atelier CAD, cartamodelli parametrici</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--bg:#E9EEF2;--side:#fff;--ink:#12304A;--mut:#5B7186;--line:#CBD6DF;--acc:#0F6E8C;--sa:#C4235F;--fill:rgba(18,48,74,.06);--g1:#D9E2E9;--g2:#BCCAD5;--con:#6F8AA0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#101B26;--side:#16242F;--ink:#DDE9F2;--mut:#8DA4B6;--line:#28394A;--acc:#4FB6D6;--sa:#FF7AA8;--fill:rgba(221,233,242,.07);--g1:#1A2A38;--g2:#28394A;--con:#7E9AAF}}
+:root[data-theme=dark]{--bg:#101B26;--side:#16242F;--ink:#DDE9F2;--mut:#8DA4B6;--line:#28394A;--acc:#4FB6D6;--sa:#FF7AA8;--fill:rgba(221,233,242,.07);--g1:#1A2A38;--g2:#28394A;--con:#7E9AAF}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.4 'Instrument Sans',system-ui,sans-serif}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+#app{display:grid;grid-template-columns:330px 1fr;height:100%}
+aside{background:var(--side);border-right:1px solid var(--line);overflow:auto;padding:18px 18px 28px}
+h1{font-size:22px;font-weight:600;margin:0;letter-spacing:-.01em}
+h2{font-size:13px;font-weight:600;margin:22px 0 6px;color:var(--mut)}
+.sub{margin:2px 0 12px;color:var(--mut);font-size:13px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{flex:1;border:0;background:none;color:var(--ink);padding:9px;font:inherit;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--side)}
+label{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;margin:9px 0}
+label>input[type=range]{grid-column:1/-1;accent-color:var(--acc);width:100%}
+input[type=number]{width:64px;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+output{color:var(--mut);font-variant-numeric:tabular-nums}
+.b{font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--side);color:var(--ink);cursor:pointer}
+.b:hover{border-color:var(--acc)}
+#ex{width:100%;margin-top:18px;background:var(--acc);border-color:var(--acc);color:var(--bg);font-weight:600}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13px}
+td,th{padding:4px 2px;text-align:right;font-weight:400}
+th{color:var(--mut)}td:first-child,th:first-child{text-align:left}
+.w td{color:var(--sa);font-weight:600}
+main{position:relative;min-height:0}
+#cv{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#cv:active{cursor:grabbing}
+#gg *{vector-effect:non-scaling-stroke}
+.zb{position:absolute;right:12px;bottom:12px;display:flex;gap:6px}
+#gs{flex-wrap:wrap}#gs button{flex:1 0 33%}
+.tb{position:absolute;left:12px;top:12px;z-index:2;background:var(--side)}.tb button{padding:8px 14px}
+select,input[type=file]{max-width:100%;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+#v3{position:absolute;inset:0}#v3 canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none}
+.hint{position:absolute;left:14px;bottom:10px;margin:0;color:var(--mut);font-size:12px;pointer-events:none}
+@media(max-width:760px){html,body,#app{height:auto}#app{grid-template-columns:1fr;grid-template-rows:58vh auto}main{order:-1}aside{border-right:0;border-top:1px solid var(--line)}}
+</style>
+<style id="sty"></style>
+</head>
+<body>
+<div id="app">
+<aside>
+<h1>Atelier CAD</h1>
+<p class="sub">Cartamodelli parametrici in scala reale. Misure in cm.</p>
+<div class="seg" id="gs"><button data-g="gonna" aria-pressed="true">Gonna</button><button data-g="corpetto" aria-pressed="false">Corpetto</button><button data-g="tshirt" aria-pressed="false">T-shirt</button><button data-g="felpa" aria-pressed="false">Felpa</button><button data-g="pantaloni" aria-pressed="false">Pantaloni</button></div>
+<h2>Misure del corpo</h2><div id="fm"></div>
+<h2>Stile e vestibilità</h2><div id="fs"></div>
+<h2>Cartamodello</h2>
+<label>Specchia sulla piega (pezzo intero)<input type="checkbox" id="mir" checked></label>
+<label>Punti e linee di costruzione<input type="checkbox" id="con"></label>
+<label>Margine di cucitura<span><input type="number" id="sa" min="0" max="5" step=".5" value="1"> cm</span></label>
+<h2>Immagine sul pezzo</h2>
+<label>Pezzo<select id="ip"></select></label>
+<input type="file" id="if" accept="image/*" aria-label="Carica un'immagine">
+<div id="ic" hidden>
+<label>Larghezza (cm)<output id="oiw"></output><input type="range" id="iw" min="4" max="160" step="1"></label>
+<label>Rotazione (°)<output id="oir"></output><input type="range" id="ir" min="-180" max="180" step="1"></label>
+<label>Sposta in orizzontale (cm)<output id="oix"></output><input type="range" id="ix" min="-40" max="40" step=".5"></label>
+<label>Sposta in verticale (cm)<output id="oiy"></output><input type="range" id="iy" min="-40" max="40" step=".5"></label>
+<button class="b" id="ib">Rimuovi immagine</button></div>
+<div id="mn" hidden>
+<h2>Manichino (taglia IT)</h2>
+<label>Taglia<select id="ms"><option>40</option><option>42</option><option selected>44</option><option>46</option><option>48</option></select></label>
+<div id="mt"></div>
+<button class="b" id="ma">Adatta il cartamodello a queste misure</button>
+<label>Mostra manichino<input type="checkbox" id="msh" checked></label>
+<label>Colore del tessuto<input type="color" id="fc" value="#8fb4cc"></label>
+<h2>Drappeggio</h2>
+<label>Aderenza al corpo<output id="odcl">60%</output><input type="range" id="dcl" data-d="cl" min="0" max="100" value="60"></label>
+<label>Caduta dritta<output id="odhg">50%</output><input type="range" id="dhg" data-d="hg" min="0" max="100" value="50"></label>
+<label>Pieghe<output id="odfd">40%</output><input type="range" id="dfd" data-d="fd" min="0" max="100" value="40"></label>
+</div>
+<h2>Controllo cuciture</h2><div id="ck"></div>
+<button class="b" id="ex" hidden>Esporta SVG in scala 1:1</button>
+<p id="st" class="sub" role="status"></p>
+</aside>
+<main>
+<svg id="cv" role="img" aria-label="Area di disegno del cartamodello">
+<defs>
+<pattern id="g1" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0H0V1" fill="none" style="stroke:var(--g1)" stroke-width=".03"/></pattern>
+<pattern id="g2" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" style="stroke:var(--g2)" stroke-width=".06"/></pattern>
+</defs>
+<rect x="-2000" y="-2000" width="4000" height="4000" fill="url(#g1)"/>
+<rect x="-2000" y="-2000" width="4000" height="4000" fill="url(#g2)"/>
+<g id="gg"></g>
+</svg>
+<div class="seg tb" id="tb"><button data-v="2d" aria-pressed="true">Cartamodello</button><button data-v="3d" aria-pressed="false">Modello 3D</button></div>
+<div id="v3" hidden></div>
+<p class="hint">Trascina per spostare, rotella per ingrandire. Griglia: 1 cm e 10 cm.</p>
+<div class="zb"><button class="b" id="zi" aria-label="Ingrandisci">+</button><button class="b" id="zo" aria-label="Riduci">−</button><button class="b" id="ft">Adatta alla vista</button></div>
+</main>
+</div>
+<script>
+const $=s=>document.querySelector(s),f2=v=>+v.toFixed(2),nf=v=>v.toFixed(1).replace('.',',');
+// parametri: [chiave, etichetta, valore, min, max, tipo m=misura s=stile]
+const PR={
+gonna:[['vita','Vita',70,50,130,'m'],['fianchi','Fianchi',96,70,150,'m'],['lung','Lunghezza gonna',58,25,110,'m'],['hd','Altezza fianchi',20,14,26,'m'],['svas','Svasatura all’orlo',0,0,16,'s'],['agio','Agio ai fianchi',4,0,12,'s'],['pince','Quota assorbita dalle pince (%)',60,20,100,'s']],
+corpetto:[['petto','Torace',92,70,140,'m'],['vita','Vita',72,50,130,'m'],['ld','Lunghezza dietro',41,36,48,'m'],['sp','Larghezza spalle',38,32,48,'m'],['agio','Agio al torace',6,2,16,'s'],['scollo','Profondità scollo davanti',9,5,18,'s'],['pince','Quota assorbita dalle pince (%)',60,20,100,'s']],
+tshirt:[['petto','Torace',92,70,140,'m'],['lung','Lunghezza dal punto spalla',66,45,90,'m'],['sp','Larghezza spalle',40,32,52,'m'],['lm','Lunghezza manica',22,14,40,'m'],['agio','Agio al torace',10,4,24,'s'],['scollo','Profondità scollo davanti',8,4,16,'s'],['omanica','Apertura orlo manica',32,20,44,'s']],
+felpa:[['petto','Torace',92,70,140,'m'],['lung','Lunghezza dal punto spalla',68,45,90,'m'],['sp','Larghezza spalle',42,32,52,'m'],['lm','Lunghezza manica',62,40,75,'m'],['agio','Agio al torace',18,8,30,'s'],['scollo','Profondità scollo davanti',9,4,16,'s'],['omanica','Apertura polsino',24,14,34,'s'],['fascia','Altezza fascia e polsino',6,3,12,'s']],
+pantaloni:[['vita','Vita',72,50,130,'m'],['fianchi','Fianchi',96,70,150,'m'],['lung','Lunghezza esterna',102,60,120,'m'],['cavallo','Altezza cavallo',27,22,34,'m'],['agio','Agio ai fianchi',6,2,16,'s'],['orlo','Apertura orlo (giro gamba)',38,24,70,'s'],['pince','Quota assorbita dalle pince (%)',60,20,100,'s']]};
+const S={g:'gonna',sa:1,mir:true,con:false,v:{}};
+for(const k in PR){S.v[k]={};PR[k].forEach(r=>S.v[k][r[0]]=r[2])}
+try{const j=JSON.parse(localStorage.atelier);for(const k in j)Object.assign(S.v[k]||{},j[k])}catch(e){}
+const save=()=>{try{localStorage.atelier=JSON.stringify(S.v)}catch(e){}if(S.t3)m3()};
+let VB,BB,DL;const cv=$('#cv');
+
+// ---- geometria: ogni pezzo = punto iniziale + lati (linea, quadratica o cubica) ----
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+function walk(p,f){let a=p.start;for(const e of p.edges){f(e,a);a=e.p[e.p.length-1]}}
+function samp(a,e,n=16){const P=[a,...e.p],k=P.length;if(k==2)return P;const o=[a];
+ for(let i=1;i<=n;i++){const t=i/n,u=1-t,w=k==3?[u*u,2*u*t,t*t]:[u*u*u,3*u*u*t,3*u*t*t,t*t*t];
+  o.push([0,1].map(c=>w.reduce((s,x,j)=>s+x*P[j][c],0)))}return o}
+const len=(p,n)=>{let s=0;walk(p,(e,a)=>{if(e.n==n){const q=samp(a,e);for(let i=1;i<q.length;i++)s+=dist(q[i-1],q[i])}});return s};
+const poly=p=>{const o=[p.start];walk(p,(e,a)=>o.push(...samp(a,e).slice(1)));o.pop();return o};
+// estremi orizzontali della carta a una data altezza (interpolazione sui lati)
+const rowSpan=(P,y)=>{let a=1e9,b=-1e9;for(let i=0;i<P.length;i++){const u=P[i],w=P[(i+1)%P.length];
+ if((u[1]<=y)!=(w[1]<=y)){const x=u[0]+(y-u[1])*(w[0]-u[0])/(w[1]-u[1]);a=Math.min(a,x);b=Math.max(b,x)}}
+ return a>b?null:[a,b]};
+// giro di CARTA a una data altezza. Ogni pezzo e' una meta': la copia
+// speculare (mirror) e' l'altra meta', quindi il giro e' 2 x semi-larghezza.
+// dw = larghezza di EACH dart: una meta' speculare ne contiene due.
+const giro=(p,y,dw=0)=>{const s=rowSpan(poly(p),y);return s?2*(s[1]-s[0])-2*dw:0};
+// margine di cucitura: offset del poligono con angoli a spigolo; sulla piega (x=0) nessun margine
+function off(P,d,cl){const n=P.length;let A=0;P.forEach((q,i)=>{const b=P[(i+1)%n];A+=q[0]*b[1]-b[0]*q[1]});const s=A>0?1:-1;
+ const N=(a,b)=>{const x=b[0]-a[0],y=b[1]-a[1],l=Math.hypot(x,y)||1;return[s*y/l,-s*x/l]};
+ return P.map((q,i)=>{const n1=N(P[(i+n-1)%n],q),n2=N(q,P[(i+1)%n]),k=d/Math.max(.3,1+n1[0]*n2[0]+n1[1]*n2[1]);
+  const x=q[0]+(n1[0]+n2[0])*k;return[cl?Math.max(0,x):x,q[1]+(n1[1]+n2[1])*k]})}
+
+// ---- capi base: formule semplificate di cartamodellistica ----
+// NOTA DI SCALA: ogni pezzo e' una META' del capo (etichetta "x1 in piega",
+// disegnato speculare con la piega su x=0). Percio' le larghezze di riferimento
+// sono METRI del giro, non quarti: W=(vita+easy)/2. Storicamente erano quarti,
+// e la carta risultava meta' della taglia.
+function gonna(v){
+ const H4=(v.fianchi+v.agio)/2,W4=(v.vita+2)/2,d=Math.max(0,H4-W4),dw=d*v.pince/100,T=W4+dw,hd=v.hd,L=v.lung,F=v.svas;
+ const mk=(nm,dl)=>({nm,note:'Taglio ×1 in piega',start:[0,0],dw,
+  edges:[{n:'vita',p:[[T,0]]},{n:'fianco',p:[[T+(H4-T)*.15,hd*.4],[H4,hd*.5],[H4,hd]]},{n:'fianco',p:[[H4+F,L]]},{n:'orlo',p:[[0,L]]},{n:'piega',p:[[0,0]]}],
+  darts:dw>.2?[[[T/2-dw/2,0],[T/2,dl],[T/2+dw/2,0]]]:[],con:[[[0,hd],[H4,hd]]],marks:[[[H4,hd],[H4+.9,hd]]],grain:[3.5,dl+4,L-6],lab:[6.5,L*.55]});
+ const a=mk('Gonna davanti',10),b=mk('Gonna dietro',14);
+ // le righe riassuntive MISURANO la carta, non riecheggiano l'input
+ return{panels:[a,b],rows:[['Fianco',len(a,'fianco'),len(b,'fianco'),1],['Larghezza pince',dw,dw],
+  ['Vita finita (carta)',giro(a,.05,dw)],['Fianchi finiti (carta)',giro(a,hd-.05)]]}}
+function corpetto(v){
+ const B=v.petto,E=v.agio,nw=B/20+3.5,AD=B/8+8.5,h=v.sp/2,q=(B+E)/2,Wq=(v.vita+4)/2,k=v.pince/100;
+ const mk=fr=>{const xs=q+(fr?.5:-.5),wy=v.ld+(fr?.8:0),dt=Math.max(0,xs-Wq),dw=dt*k,xw=xs-(dt-dw),nx=fr?nw-.2:nw,sy=fr?2.2:2,cy=v.scollo-2,st=fr?[0,cy]:[0,0],bx=B/10,xd=xw*.55;
+  const dart=dw>.2?[fr?[[bx-dw/2,wy],[bx,AD+3],[bx+dw/2,wy]]:[[xd-dw/2,wy],[xd,wy-13],[xd+dw/2,wy]]]:[];
+  return{nm:fr?'Corpetto davanti':'Corpetto dietro',note:'Taglio ×1 in piega',start:st,dw,wy,AD,
+   edges:[fr?{n:'scollo',p:[[nw*.55,cy],[nx,-2+(cy+2)*.55],[nx,-2]]}:{n:'scollo',p:[[nw*.6,0],[nx,-2]]},
+    {n:'spalla',p:[[h,sy]]},
+    fr?{n:'giromanica',p:[[h-1.8,AD*.4],[xs-4.5,AD-2],[xs,AD]]}:{n:'giromanica',p:[[h-.6,AD*.35],[xs-4,AD-3.5],[xs,AD]]},
+    {n:'fianco',p:[[xw,wy]]},{n:'vita',p:[[0,wy]]},{n:'piega',p:[st]}],
+   darts:dart,con:[[[0,AD],[xs,AD]]],marks:[[[xs,AD],[xs+.9,AD]]],grain:[3,AD*.6+2,wy-4],lab:[5.5,13]}};
+ const f=mk(1),b=mk(0);
+ // le righe riassuntive MISURANO la carta: il torace al massimo del pannello,
+ // la vita sulla riga di vita (wy) meno i dart che li assorbono
+ return{panels:[f,b],rows:[['Spalla',len(f,'spalla'),len(b,'spalla'),1],['Fianco',len(f,'fianco'),len(b,'fianco'),1],
+  ['Larghezza pince',f.dw,b.dw],['Torace finito (carta)',giro(f,AD-.05)],['Vita finita (carta)',giro(f,f.wy-.05,f.dw)]]}}
+
+// ---- t-shirt, felpa, pantaloni ----
+const rc=(nm,w,h,note)=>({nm,note,nf:1,start:[0,0],edges:[[w,0],[w,h],[0,h],[0,0]].map((p,i)=>({n:'abcd'[i],p:[p]})),darts:[],con:[],marks:[],grain:[w/2,1.5,h-1.5],lab:[1,h/2+.4]});
+function maglia(v,fe){
+ const B=v.petto,q=(B+v.agio)/2,nw=B/20+3.5,h=v.sp/2,AD=B/8+(fe?11:9.5),sy=fe?3.5:2.2,cy=v.scollo-2,bh=fe?v.fascia:0,L=v.lung-bh;
+ const mk=fr=>({nm:fr?'Davanti':'Dietro',note:'Taglio ×1 in piega',start:[0,fr?cy:0],
+  edges:[fr?{n:'scollo',p:[[nw*.55,cy],[nw,-2+(cy+2)*.55],[nw,-2]]}:{n:'scollo',p:[[nw*.6,0],[nw,-2]]},{n:'spalla',p:[[h,sy]]},{n:'giromanica',p:[[h-1,AD*.4],[q-4,AD-2.5],[q,AD]]},{n:'fianco',p:[[q,L]]},{n:'orlo',p:[[0,L]]},{n:'piega',p:[[0,fr?cy:0]]}],
+  darts:[],con:[[[0,AD],[q,AD]]],marks:[[[q,AD],[q+.9,AD]]],grain:[3,AD+4,L-6],lab:[6,AD+10]});
+ const f=mk(1),b=mk(0),AH=len(f,'giromanica')+len(b,'giromanica'),bw=B/6+1+(fe?2:0),ow=v.omanica/2,sl=v.lm-bh;
+ const sc=e=>({start:[0,0],edges:[{n:'t',p:[[bw*.45,0],[bw*.8,e*.4],[bw,e]]}]});let lo=1,hi=30;
+ for(let i=0;i<24;i++){const m=(lo+hi)/2;if(len(sc(m),'t')<(AH+(fe?1.5:1))/2)lo=m;else hi=m}
+ const s={nm:'Manica',note:'Taglio ×2 (uno speculare)',sym:1,start:[0,0],edges:[{n:'testa',p:[[bw*.45,0],[bw*.8,lo*.4],[bw,lo]]},{n:'sotto manica',p:[[ow,sl]]},{n:'orlo',p:[[0,sl]]},{n:'piega',p:[[0,0]]}],darts:[],con:[[[0,lo],[bw,lo]]],marks:[],grain:[0,lo+3,sl-4],lab:[3,lo+9]};
+ const nl=2*(len(f,'scollo')+len(b,'scollo')),P=[f,b,s,rc('Bordo collo',nl*.85,4,'Taglio ×1, elastico')];
+ if(fe)P.push(rc('Fascia orlo',q*1.7,2*bh,'Taglio ×2'),rc('Polsino',ow*1.7,2*bh,'Taglio ×2'));
+ return{panels:P,T:[[f,b,'t']],ref:'n',S:{p:s},rows:[['Spalla',len(f,'spalla'),len(b,'spalla'),1],['Fianco',len(f,'fianco'),len(b,'fianco'),1],['Giromanica totale',AH],['Testa manica (con agio)',2*len(s,'testa')],['Torace finito (carta)',giro(f,AD-.05)]]}}
+function pant(v){
+ const E=v.agio,Hq=(v.fianchi+E)/4,W2=(v.vita+2)/4,R=v.cavallo,L=v.lung,hd=Math.min(20,R-5),k=v.pince/100;
+ const mk=fr=>{const h=Hq+(fr?-1:1),e=(v.fianchi+E)/(fr?16:10),d=Math.max(0,h-(W2+(fr?-1:1))),dw=d*k,s=d-dw+(fr?0:1.5),c=(h+e)/2,fw=v.orlo/2+(fr?-1:1),cy=fr?0:-2,
+  // il bordo vita e' ancorato al QUARTO VITA (W2), non al quarto fianchi:
+  // la carta deve girare come il vita. cwt = angolo vita, cwt-cw = W2+dw.
+  cwt=s+W2+dw,xd=(s+cwt)/2;
+  return{nm:fr?'Pantalone davanti':'Pantalone dietro',note:'Taglio ×2 (uno speculare)',nf:1,dw,s,cwt,start:[s,0],
+   edges:[{n:'vita',p:[[cwt,cy]]},{n:'cavallo',p:[[h,R*.62],[h+e*.4,R],[h+e,R]]},{n:'interno gamba',p:[[c+fw/2,L]]},{n:'orlo',p:[[c-fw/2,L]]},{n:'fianco',p:[[0,hd]]},{n:'fianco',p:[[0,hd*.5],[s*.3,0],[s,0]]}],
+   darts:dw>.3?[[[xd-dw/2,cy/2],[xd,fr?9:13],[xd+dw/2,cy/2]]]:[],con:[[[0,hd],[h,hd]],[[0,R],[h+e,R]]],marks:[[[0,hd],[.9,hd]]],grain:[c,R+6,L-8],lab:[c-9,R+16]}};
+ const f=mk(1),b=mk(0);
+ // la cintura segue il giro vita MISURATO sulla carta, non l'input:
+ // per ogni meta' (cwt - s) e' la larghezza di carta, meno il dart che vi sta.
+ const waist=2*((f.cwt-f.s-f.dw)+(b.cwt-b.s-b.dw)),cw=v.vita+4;
+ return{panels:[f,b,rc('Cintura',cw,8,'Taglio ×1, piegato')],T:[[f,b,'l']],ref:'w',R,rows:[['Fianco',len(f,'fianco'),len(b,'fianco'),1],['Interno gamba',len(f,'interno gamba'),len(b,'interno gamba'),1],['Larghezza pince',f.dw,b.dw],['Vita finita (carta)',waist],['Larghezza cintura',cw]]}}
+const T2=(fn,ref)=>v=>{const B=fn(v);B.T=[[B.panels[0],B.panels[1],'t']];B.ref=ref;return B};
+const GF={gonna:T2(gonna,'w'),corpetto:T2(corpetto,'n'),tshirt:v=>maglia(v,0),felpa:v=>maglia(v,1),pantaloni:pant};
+
+// ---- disegno ----
+const css=(f,c)=>`.cut{fill:${c.fill};stroke:${c.ink};stroke-width:${1.7*f}}.sa{fill:none;stroke:${c.sa};stroke-width:${1.2*f};stroke-dasharray:${6*f} ${4*f}}.dart,.fold{fill:none;stroke:${c.ink};stroke-width:${f}}.fold{stroke-dasharray:${10*f} ${3*f} ${2*f} ${3*f}}.con{fill:none;stroke:${c.con};stroke-width:${.8*f};stroke-dasharray:${2*f} ${4*f}}.pt{fill:${c.sa}}.tx{fill:${c.ink};font:600 1.05px 'Instrument Sans',sans-serif}.tx2{fill:${c.con};font:.8px 'Instrument Sans',sans-serif}`;
+$('#sty').textContent=css(1,{ink:'var(--ink)',sa:'var(--sa)',fill:'var(--fill)',con:'var(--con)'});
+const dd=p=>{let d='M'+p.start.map(f2).join(' ');walk(p,e=>{if(e.n!='piega')d+='LQC'[e.p.length-1]+e.p.map(q=>q.map(f2).join(' ')).join(' ')});return d};
+function draw(p,P,full){
+ const f=q=>q.map(f2).join(' '),L=a=>a.map(f).join('L');
+ let s=`<path class="cut" d="${dd(p)}"/>`;
+ if(S.sa>0)s+=`<path class="sa" d="M${L(off(P,S.sa,!p.nf))}"/>`;
+ if(S.con)for(const c of p.con)s+=`<path class="con" d="M${L(c)}"/>`;
+ for(const t of p.darts.concat(p.marks))s+=`<path class="dart" d="M${L(t)}"/>`;
+ if(!p.M&&!p.nf)s+=`<path class="fold" d="M${f(p.start)}L${f(P[P.length-1])}"/>`;
+ if(S.con){walk(p,e=>{const q=e.p[e.p.length-1];s+=`<circle class="pt" r=".25" cx="${f2(q[0])}" cy="${f2(q[1])}"><title>${f2(q[0])}; ${f2(q[1])} cm</title></circle>`});
+  for(const t of p.darts)s+=`<circle class="pt" r=".25" cx="${f2(t[1][0])}" cy="${f2(t[1][1])}"/>`}
+ if(full){const[x,a,b]=p.grain;
+  s+=`<path class="dart" d="M${x} ${a}V${b}M${x-.4} ${a+.9}L${x} ${a}L${x+.4} ${a+.9}M${x-.4} ${b-.9}L${x} ${b}L${x+.4} ${b-.9}"/><text class="tx" x="${p.lab[0]}" y="${p.lab[1]}">${p.nm}</text><text class="tx2" x="${p.lab[0]}" y="${p.lab[1]+1.5}">${p.note}</text>`}
+ return s}
+function scene(){
+ const B=GF[S.g](S.v[S.g]);let cur=0,H=0,out='';
+ for(const p of B.panels){const P=poly(p),m=S.sa,w=Math.max(...P.map(q=>q[0]))+m,y0=Math.min(...P.map(q=>q[1]))-m,y1=Math.max(...P.map(q=>q[1]))+m;
+  p.M=(S.mir||p.sym)&&!p.nf;out+=`<g transform="translate(${f2(cur+(p.M?w:p.nf?m:0))} ${f2(-y0)})">${imgEl(p)}${draw(p,P,1)}${p.M?`<g transform="scale(-1 1)">${draw(p,P,0)}</g>`:''}</g>`;
+  cur+=w*(p.M?2:1)+(p.nf?m:0)+6;H=Math.max(H,y1-y0)}
+ return{out,BB:[-3,-3,cur,H+6],B}}
+function render(){
+ const{out,BB:b,B}=scene();BB=b;CB=B;$('#gg').innerHTML=out;
+ $('#ck').innerHTML='<table><tr><th></th><th>Davanti</th><th>Dietro</th><th>Δ</th></tr>'+B.rows.map(r=>r[2]==null
+  ?`<tr><td>${r[0]}</td><td colspan="3">${nf(r[1])} cm</td></tr>`
+  :`<tr class="${r[3]&&Math.abs(r[1]-r[2])>1?'w':''}"><td>${r[0]}</td><td>${nf(r[1])}</td><td>${nf(r[2])}</td><td>${r[3]?nf(r[1]-r[2]):''}</td></tr>`).join('')
+  +'</table><p class="sub">Un Δ oltre 1 cm indica cuciture da rettificare.</p>';
+ save()}
+function form(){
+ const v=S.v[S.g],row=r=>{const[k,l,,mn,mx,t]=r,s=k=='pince'?5:.5,u=k=='pince'?'%':' cm';
+  return t=='m'?`<label>${l}<span><input type="number" data-k="${k}" min="${mn}" max="${mx}" step="${s}" value="${v[k]}"> cm</span></label>`
+   :`<label>${l}<output>${v[k]}${u}</output><input type="range" data-k="${k}" min="${mn}" max="${mx}" step="${s}" value="${v[k]}"></label>`};
+ $('#fm').innerHTML=PR[S.g].filter(r=>r[5]=='m').map(row).join('');$('#fs').innerHTML=PR[S.g].filter(r=>r[5]=='s').map(row).join('')}
+
+// ---- vista: fit, zoom, pan ----
+const setVB=()=>cv.setAttribute('viewBox',VB.map(f2).join(' '));
+function fit(){if(S.t3)return;const r=cv.getBoundingClientRect(),a=r.width/r.height;let[x,y,w,h]=BB;
+ if(w/h<a){const n=h*a;x-=(n-w)/2;w=n}else{const n=w/a;y-=(n-h)/2;h=n}VB=[x,y,w,h];setVB()}
+function zoom(k,px=.5,py=.5){const[x,y,w,h]=VB;VB=[x+(w-w*k)*px,y+(h-h*k)*py,w*k,h*k];setVB()}
+cv.addEventListener('wheel',e=>{e.preventDefault();const r=cv.getBoundingClientRect();zoom(e.deltaY>0?1.12:.89,(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height)},{passive:false});
+let dr=0;cv.addEventListener('pointerdown',e=>{dr=1;cv.setPointerCapture(e.pointerId)});cv.addEventListener('pointerup',()=>dr=0);
+cv.addEventListener('pointermove',e=>{if(!dr)return;const r=cv.getBoundingClientRect();VB[0]-=e.movementX*VB[2]/r.width;VB[1]-=e.movementY*VB[3]/r.height;setVB()});
+$('#zi').onclick=()=>zoom(.8);$('#zo').onclick=()=>zoom(1.25);$('#ft').onclick=fit;
+
+// ---- input ----
+$('aside').addEventListener('input',e=>{const i=e.target,k=i.dataset.k;
+ if(i.id=='mir')S.mir=i.checked;
+ else if(i.id=='con')S.con=i.checked;
+ else if(i.id=='sa')S.sa=Math.min(5,Math.max(0,parseFloat(i.value)||0));
+ else if(k){const r=PR[S.g].find(r=>r[0]==k);let x=parseFloat(i.value);if(isNaN(x))return;x=Math.min(r[4],Math.max(r[3],x));S.v[S.g][k]=x;
+  if(i.type=='range')i.previousElementSibling.textContent=x+(k=='pince'?'%':' cm')}
+ else return;render()});
+$('#gs').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;S.g=b.dataset.g;
+ $('#gs').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x==b));form();render();fillIp();fit()};
+
+// ---- esportazione SVG in scala 1:1 (1 unità = 1 cm) ----
+const say=t=>$('#st').textContent=t;
+function exp(){const{out,BB:b}=scene();
+ return`<svg xmlns="http://www.w3.org/2000/svg" width="${f2(b[2])}cm" height="${f2(b[3])}cm" viewBox="${b.map(f2).join(' ')}"><style>${css(.0265,{ink:'#12304A',sa:'#C4235F',fill:'none',con:'#6F8AA0'})}</style>${out}</svg>`}
+if(window.claude&&claude.use)claude.use('downloads').then(d=>{if(d){DL=d;$('#ex').hidden=false}}).catch(()=>{});
+$('#ex').onclick=()=>DL.save({filename:`cartamodello-${S.g}.svg`,data:exp()})
+ .then(()=>say('File salvato. Aprilo in scala 100% per misure reali.'))
+ .catch(e=>say(e&&e.code=='declined'?'Salvataggio annullato.':'Esportazione non disponibile in questa vista.'));
+
+// ---- 3D: ogni pezzo avvolge un volume semplificato, riga per riga ----
+let CB,TD;const TP=2*Math.PI;
+function iv(P,y,p){let a=1e9,b=-1e9;for(let i=0;i<P.length;i++){const u=P[i],w=P[(i+1)%P.length];if((u[1]<=y)!=(w[1]<=y)){const x=u[0]+(y-u[1])*(w[0]-u[0])/(w[1]-u[1]);a=Math.min(a,x);b=Math.max(b,x)}}
+ if(a>b)return null;const d=p.darts[0];if(d){const t=(y-d[1][1])/(d[0][1]-d[1][1]);if(t>0&&t<1)b-=(d[2][0]-d[0][0])*t}return[a,b]}
+const ARM=20,lp=(T,Y)=>{let i=0;while(i<T.length-2&&Y<T[i+1][0])i++;const a=T[i],b=T[i+1],t=Math.max(0,Math.min(1,(a[0]-Y)/(a[0]-b[0])));return a.slice(1).map((v,k)=>v+(b[k+1]-v)*t)};
+const SZ={40:[80,62,88,36.5,164],42:[84,66,92,37.5,166],44:[88,70,96,38.5,168],46:[92,74,100,39.5,170],48:[96,78,104,40.5,172]};
+S.mn={sz:44,cl:.6,hg:.5,fd:.4,sh:1};S.fc='#8fb4cc';
+const IM={};let uid=0,IC=0;
+const bb=p=>{const P=poly(p),xs=P.map(q=>q[0]),ys=P.map(q=>q[1]),mx=Math.max(...xs);return[p.nf?Math.min(...xs):-mx,Math.min(...ys),mx,Math.max(...ys)]};
+function imgEl(p){const I=IM[S.g+':'+p.nm];if(!I)return'';const b=bb(p),d=dd(p),c=++IC,w=I.w,h=w*I.h;
+ return`<clipPath id="k${c}"><path d="${d}"/>${p.M?`<path d="${d}" transform="scale(-1 1)"/>`:''}</clipPath><g clip-path="url(#k${c})"><image href="${I.src}" x="${f2(-w/2)}" y="${f2(-h/2)}" width="${f2(w)}" height="${f2(h)}" preserveAspectRatio="none" transform="translate(${f2((b[0]+b[2])/2+I.ox)} ${f2((b[1]+b[3])/2+I.oy)}) rotate(${I.r})"/></g>`}
+// manichino: misure standard per taglia -> profilo per altezza [Y, semiasse laterale, semiasse sagittale]
+function body(){const[B,W,Hp,sp,al]=SZ[S.mn.sz],H=al/170,r=C=>C/TP,e=C=>[1.2*r(C),.83*r(C)],rt=r(Hp*.58),rn=r(33+(B-80)*.2);
+ const f=T=>T.map(t=>[t[0]*H,t[1],t[2]]);
+ return{H,B,sp,TR:f([[152,rn,rn],[147,rn*1.1,rn*1.1],[143.5,sp*.3,8],[141,sp*.485,9.5],[134,...e(B*1.03)],[124,...e(B)],[114,...e(B*.93)],[105,...e(W)],[96,...e((W+Hp)/2)],[88,...e(Hp)],[77,...e(Hp*.98)]]),LG:f([[77,rt*.98,rt],[47,rt*.9,rt*.66],[8,rt*.93,rt*.4]])}}
+function mannequin(M,g){
+ const mt=new THREE.MeshStandardMaterial({color:0xd8cdc0,roughness:.7,side:THREE.DoubleSide}),{H,TR,LG,B}=M,V=THREE.Vector3,n=28,pos=[],ix=[],T=TR.concat([[70*H,TR[10][1]*.75,TR[10][2]*.7]]);
+ const put=(geo,x,y,z)=>{const m=new THREE.Mesh(geo,mt);m.position.set(x,y,z);g.add(m);return m};
+ T.forEach((t,j)=>{for(let i=0;i<n;i++){const q=i/n*TP;pos.push(t[1]*Math.sin(q),t[0],t[2]*Math.cos(q))}
+  if(j)for(let i=0;i<n;i++){const a=(j-1)*n+i,b=(j-1)*n+(i+1)%n,c=j*n+i,d=j*n+(i+1)%n;ix.push(a,c,b,b,c,d)}});
+ const tg=new THREE.BufferGeometry();tg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));tg.setIndex(ix);tg.computeVertexNormals();g.add(new THREE.Mesh(tg,mt));
+ const limb=(p,q,r0,r1)=>{const d=new V().subVectors(p,q),m=put(new THREE.CylinderGeometry(r0,r1,d.length(),20),0,0,0);m.position.copy(p).add(q).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new V(0,1,0),d.normalize())};
+ const ball=(p,r)=>put(new THREE.SphereGeometry(r,18,12),p.x,p.y,p.z);
+ for(const s of[1,-1]){const P=LG.map(t=>new V(s*t[1],t[0],0));limb(P[0],P[1],LG[0][2],LG[1][2]);limb(P[1],P[2],LG[1][2],LG[2][2]);ball(P[1],LG[1][2]);ball(P[2],LG[2][2]);
+  const ft=put(new THREE.SphereGeometry(1,12,8),s*LG[2][1],2.6*H,4);ft.scale.set(3.6,2.6,8.5);
+  const A0=new V(s*M.sp*.46,139*H,0),ar=B/88,E=A0.clone().add(new V(s*Math.sin(ARM*Math.PI/180),-Math.cos(ARM*Math.PI/180),0).multiplyScalar(62*H));limb(A0,E,4.6*ar,3*ar);ball(A0,5*ar);ball(E,3*ar)}
+ put(new THREE.SphereGeometry(1,24,16),0,160*H,.6).scale.set(7.6,10.2,9)}
+const TXC=new Map();
+function tex(p){const[X0,Y0,X1,Y1]=bb(p),I=IM[S.g+':'+p.nm],K=8,sig=[S.g,p.nm,f2(X0),f2(Y0),f2(X1),f2(Y1),S.fc,I?[I.id,I.w,I.r,I.ox,I.oy]:''].join();
+ if(TXC.has(sig))return TXC.get(sig);if(TXC.size>40){TXC.forEach(v=>v.dispose());TXC.clear()}
+ const c=document.createElement('canvas');c.width=Math.max(8,Math.round((X1-X0)*K));c.height=Math.max(8,Math.round((Y1-Y0)*K));
+ const x=c.getContext('2d');x.fillStyle=S.fc;x.fillRect(0,0,c.width,c.height);
+ if(I){x.translate(((X0+X1)/2+I.ox-X0)*K,((Y0+Y1)/2+I.oy-Y0)*K);x.rotate(I.r*Math.PI/180);x.drawImage(I.img,-I.w*K/2,-I.w*I.h*K/2,I.w*K,I.w*I.h*K)}
+ const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;TXC.set(sig,t);return t}
+// drappeggio procedurale: anello attorno al corpo per ogni altezza (aderenza, caduta, pieghe)
+function surf(pf,pb,o){
+ const Pf=poly(pf),Pb=pb&&poly(pb),ys=[],rows=[],N=12,ex=(I,p)=>p.nf?I[1]-I[0]:2*I[1],M=S.mn,out=[];
+ const y0=Math.min(...Pf.map(q=>q[1])),y1=Math.max(...Pf.map(q=>q[1]));let ea=0,eb=0;
+ for(let y=y0+.02;y<y1;y++)ys.push(y);ys.push(y1-.02);
+ for(const y of ys){const F=iv(Pf,y,pf);if(!F)continue;const B=pb?iv(Pb,y,pb)||F:null,rr=(ex(F,pf)+(pb?ex(B,pb):0))/TP;if(!(rr>.05))continue;
+  const Y=o.Y0-y,d=o.bd(Y,y);if(Y<o.hs){ea=Math.max(ea,d[0]);eb=Math.max(eb,d[1])}
+  const a1=d[0]+M.hg*(Math.max(ea,d[0])-d[0]),b1=d[1]+M.hg*(Math.max(eb,d[1])-d[1]),s=Math.max(0,rr/Math.sqrt((a1*a1+b1*b1)/2)-1),k=1+s*(1-M.cl);
+  rows.push({y,Y,F,B,rr,A:a1*k+.4,Z:b1*k+.4,am:M.fd*s*M.cl*Math.sqrt(a1*b1)*2.2,off:d[2]||0})}
+ for(const[p,fr]of pb?[[pf,1],[pb,0]]:[[pf,1]]){const pos=[],uv=[],ix=[],[X0,Y0,X1,Y1]=bb(p);
+  for(const s of p.nf?[1]:[1,-1])for(const l of o.leg?[1,-1]:[1]){let pv=-1;const fl=(o.leg&&l==1)!=!fr;
+   for(const r of rows){const I=fr?r.F:r.B,c=p.nf?(I[0]+I[1])/2:0,b0=pos.length/3;
+    for(let i=0;i<=N;i++){const x=s*(I[0]+(I[1]-I[0])*i/N),ph=fr?(x-c)/r.rr:Math.PI-(x-c)/r.rr,w=r.am*Math.cos(6*ph+r.Y*.11),sn=(r.A+w)*Math.sin(ph),u=(x-X0)/(X1-X0);
+     pos.push(o.leg?l*(r.off-sn):sn,r.Y,(r.Z+w)*Math.cos(ph));uv.push(fl?1-u:u,1-(r.y-Y0)/(Y1-Y0))}
+    if(pv>=0)for(let i=0;i<N;i++){const a=pv+i,c2=b0+i;ix.push(a,c2,a+1,a+1,c2,c2+1)}
+    pv=b0}}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();out.push([p,g])}
+ return out}
+function init3(){try{
+ const c=$('#v3'),r=new THREE.WebGLRenderer({antialias:true,alpha:true}),sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,1,3000),piv=new THREE.Group(),g=new THREE.Group();
+ piv.add(g);sc.add(piv);sc.add(new THREE.HemisphereLight(0xffffff,0x7a8b99,.95));const dl=new THREE.DirectionalLight(0xffffff,.75);dl.position.set(50,90,140);sc.add(dl);
+ r.outputEncoding=THREE.sRGBEncoding;r.setPixelRatio(Math.min(2,devicePixelRatio||1));c.appendChild(r.domElement);piv.rotation.set(.12,.5,0);
+ TD={r,sc,cam,piv,g,d:200,mat:new THREE.MeshStandardMaterial({color:0x4d93b4,roughness:.85,metalness:0,side:THREE.DoubleSide})};
+ let dr=0;const e=r.domElement;
+ e.addEventListener('pointerdown',ev=>{dr=1;e.setPointerCapture(ev.pointerId)});e.addEventListener('pointerup',()=>dr=0);
+ e.addEventListener('pointermove',ev=>{if(!dr)return;piv.rotation.y+=ev.movementX*.01;piv.rotation.x=Math.max(-1.2,Math.min(1.2,piv.rotation.x+ev.movementY*.01));draw3()});
+ e.addEventListener('wheel',ev=>{ev.preventDefault();TD.d*=ev.deltaY>0?1.1:.9;draw3()},{passive:false});
+ }catch(x){TD=null;say('Il 3D richiede WebGL, non disponibile in questa vista.')}}
+function size3(){if(!TD)return;const c=$('#v3'),w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;TD.r.setSize(w,h,false);TD.cam.aspect=w/h;TD.cam.updateProjectionMatrix()}
+function draw3(){TD.cam.position.set(0,0,TD.d);TD.r.render(TD.sc,TD.cam)}
+function m3(){
+ if(!TD||!CB)return;const{piv,g}=TD,rx=piv.rotation.x,ry=piv.rotation.y,M=body(),H=M.H,lo=M.TR[M.TR.length-1][0];
+ while(g.children.length){const ch=g.children[0];ch.traverse(o=>{o.geometry&&o.geometry.dispose();o.material&&o.material.dispose()});g.remove(ch)}
+ if(S.mn.sh)mannequin(M,g);
+ const nz=CB.ref=='n',Y0=(nz?143:105)*H,hs=nz?134*H:1e9,
+  tb=Y=>{const t=Y>=lo?lp(M.TR,Y):(l=>[l[0]+l[1],l[1]])(lp(M.LG,Y));return[t[0],t[1]]},
+  lg=Y=>{if(Y>=lo){const t=lp(M.TR,Y);return[t[0]/2,t[1],t[0]/2]}const t=lp(M.LG,Y);return[t[1],t[1],t[0]]},
+  add=(pg,u)=>pg.forEach(([p,geo])=>u.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(p),roughness:.9,side:THREE.DoubleSide}))));
+ for(const[a,b,k]of CB.T)add(surf(a,b,k=='l'?{Y0,hs:1e9,leg:1,bd:lg}:{Y0,hs,bd:tb}),g);
+ if(CB.S)for(const s of[1,-1]){const u=new THREE.Group();
+  add(surf(CB.S.p,null,{Y0:0,hs:1e9,bd:(Y,y)=>{const r=4.6*M.B/88*(1-.35*Math.min(1,y/(62*H)));return[r,r]}}),u);
+  u.position.set(s*M.sp*.46,139*H,0);u.rotation.z=s*ARM*Math.PI/180;g.add(u)}
+ piv.rotation.set(0,0,0);g.position.set(0,0,0);piv.updateMatrixWorld(true);
+ const key=S.g+S.mn.sz+S.mn.sh;
+ if(TD.key!=key){const bx=new THREE.Box3().setFromObject(g),z=bx.getSize(new THREE.Vector3());TD.c=bx.getCenter(new THREE.Vector3()).negate();TD.key=key;TD.d=Math.max(z.y*1.1,z.x*1.1/TD.cam.aspect)/(2*Math.tan(TD.cam.fov*Math.PI/360))+z.z}
+ g.position.copy(TD.c);piv.rotation.set(rx,ry,0);draw3()}
+const ld=cb=>{if(window.THREE)return cb();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.onload=cb;s.onerror=()=>say('Motore 3D non caricato: controlla la connessione.');document.head.appendChild(s)};
+$('#tb').onclick=e=>{const b=e.target.closest('[data-v]');if(!b)return;S.t3=b.dataset.v=='3d';
+ $('#tb').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x==b));
+ cv.toggleAttribute('hidden',S.t3);$('#v3').hidden=!S.t3;$('.zb').hidden=S.t3;$('#ex').hidden=S.t3||!DL;$('#mn').hidden=!S.t3;
+ $('.hint').textContent=S.t3?'Trascina per ruotare, rotella per avvicinare. L’anteprima avvolge i pezzi su un volume semplificato.':'Trascina per spostare, rotella per ingrandire. Griglia: 1 cm e 10 cm.';
+ if(S.t3)ld(()=>{if(!TD)init3();if(TD){size3();m3()}});else fit()};
+addEventListener('resize',()=>{if(S.t3&&TD){size3();m3()}});
+// ---- immagini sui pezzi e manichino ----
+function fillIp(){const k=$('#ip').value;$('#ip').innerHTML=CB.panels.map(p=>`<option>${p.nm}</option>`).join('');if(CB.panels.some(p=>p.nm==k))$('#ip').value=k;sync()}
+const ik=()=>S.g+':'+$('#ip').value,IK=[['iw','w'],['ir','r'],['ix','ox'],['iy','oy']];
+function sync(){const I=IM[ik()];$('#ic').hidden=!I;if(I)IK.forEach(([d,k])=>{$('#'+d).value=I[k];$('#o'+d).textContent=I[k]})}
+$('#ip').onchange=sync;
+$('#if').onchange=e=>{const f=e.target.files[0];if(!f)return;const R=new FileReader();R.onload=()=>{const im=new Image();im.onload=()=>{
+ const k=ik(),p=CB.panels.find(q=>q.nm==$('#ip').value),b=bb(p),sc=Math.min(1,1024/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+ IM[k]={src:c.toDataURL(f.type=='image/png'?'image/png':'image/jpeg',.85),img:c,id:++uid,h:c.height/c.width,w:Math.round(b[2]-b[0]),r:0,ox:0,oy:0};sync();render()};im.src=R.result};R.readAsDataURL(f);e.target.value=''};
+IK.forEach(([d,k])=>$('#'+d).oninput=e=>{const I=IM[ik()];if(!I)return;I[k]=+e.target.value;$('#o'+d).textContent=I[k];render()});
+$('#ib').onclick=()=>{delete IM[ik()];sync();render()};
+function mtab(){const[B,W,H,sp,al]=SZ[S.mn.sz];$('#mt').innerHTML='<table>'+[['Altezza',al],['Torace',B],['Vita',W],['Fianchi',H],['Spalle',sp],['Collo',33+(B-80)*.2],['Coscia',H*.58]].map(r=>`<tr><td>${r[0]}</td><td>${nf(r[1])} cm</td></tr>`).join('')+'</table>'}
+$('#ma').onclick=()=>{const[B,W,H]=SZ[S.mn.sz],v=S.v[S.g];if('petto'in v)v.petto=B;if('vita'in v)v.vita=W;if('fianchi'in v)v.fianchi=H;form();render();say('Misure adattate alla taglia '+S.mn.sz+'.')};
+$('#mn').addEventListener('input',e=>{const i=e.target,M=S.mn;
+ if(i.id=='ms'){M.sz=+i.value;mtab()}else if(i.id=='msh')M.sh=i.checked;else if(i.id=='fc')S.fc=i.value;
+ else if(i.dataset.d){M[i.dataset.d]=i.value/100;$('#o'+i.id).textContent=i.value+'%'}else return;m3()});
+form();render();fillIp();mtab();requestAnimationFrame(fit);
+</script>
+</body>
+</html>
