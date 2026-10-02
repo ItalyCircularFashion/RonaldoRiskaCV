@@ -265,9 +265,13 @@ $('aside').addEventListener('input',e=>{const i=e.target,k=i.dataset.k;
  else if(i.id=='sa')S.sa=Math.min(5,Math.max(0,parseFloat(i.value)||0));
  else if(k){const r=PR[S.g].find(r=>r[0]==k);let x=parseFloat(i.value);if(isNaN(x))return;x=Math.min(r[4],Math.max(r[3],x));S.v[S.g][k]=x;
   if(i.type=='range')i.previousElementSibling.textContent=x+(k=='pince'?'%':' cm')}
- else return;render()});
+ else return;
+ // render() ridisegna il 2D; m3() ricostruisce il corpo 3D dalle NUOVE
+ // misure, mtab() mostra i valori effettivamente usati. Senza queste due, il
+ // pannello cambia ma il manichino resta com'era: era esattamente il difetto.
+ render();mtab();if(S.t3)m3()});
 $('#gs').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;S.g=b.dataset.g;
- $('#gs').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x==b));form();render();fillIp();fit()};
+ $('#gs').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x==b));form();render();fillIp();mtab();if(S.t3)m3();fit()};
 
 // ---- esportazione SVG in scala 1:1 (1 unità = 1 cm) ----
 const say=t=>$('#st').textContent=t;
@@ -290,9 +294,39 @@ const bb=p=>{const P=poly(p),xs=P.map(q=>q[0]),ys=P.map(q=>q[1]),mx=Math.max(...
 function imgEl(p){const I=IM[S.g+':'+p.nm];if(!I)return'';const b=bb(p),d=dd(p),c=++IC,w=I.w,h=w*I.h;
  return`<clipPath id="k${c}"><path d="${d}"/>${p.M?`<path d="${d}" transform="scale(-1 1)"/>`:''}</clipPath><g clip-path="url(#k${c})"><image href="${I.src}" x="${f2(-w/2)}" y="${f2(-h/2)}" width="${f2(w)}" height="${f2(h)}" preserveAspectRatio="none" transform="translate(${f2((b[0]+b[2])/2+I.ox)} ${f2((b[1]+b[3])/2+I.oy)}) rotate(${I.r})"/></g>`}
 // manichino: misure standard per taglia -> profilo per altezza [Y, semiasse laterale, semiasse sagittale]
-function body(){const[B,W,Hp,sp,al]=SZ[S.mn.sz],H=al/170,r=C=>C/TP,e=C=>[1.2*r(C),.83*r(C)],rt=r(Hp*.58),rn=r(33+(B-80)*.2);
+// ---- adattatore: misure del capo attivo -> dimensioni del corpo ----
+//
+// body() leggeva SOLO SZ[S.mn.sz], una tabella di 5 taglie fisse (40..48) che
+// non ha niente a che fare con le misure che l'utente digita. Il risultato:
+// un cartamodello taglia 56 (torace 118) veniva avvolto su un manichino che
+// non esiste, o veniva troncato alla taglia 48.
+//
+// Qui S.v[S.g] diventa la fonte primaria. SZ resta come ripiego esplicito per
+// i valori che il capo corrente NON dichiara (es. gonna: non ha 'petto'.
+//
+// Semantica verificata: SZ[44]=[88,70,96,38.5,168] ha vita 70 e fianchi 96,
+// identici ai default di gonna e pantaloni => SZ e i capi parlano delle
+// STESSE grandezze. SZ.B e' il torace del corpo (nudo), non il torace finito:
+// il capo finito e' petto+agio, ed e' il confronto in surf() (rr vs A,Z).
+// Per questo si passa 'petto' direttamente, senza sottrarre o aggiungere agio:
+// agio e' la vestibilita' del capo, non una misura del corpo.
+//
+// Vincolo di coerenza (surf riga 322): s = max(0, rr/corpo - 1). Se il corpo
+// fosse piu' largo del capo finito, s andrebbe a 0 e l'agevole sparirebbe in
+// silenzio. Passando il torace nudo (non il finito) il vincolo resta rispettato.
+const BODY_SRC={B:'petto',W:'vita',Hp:'fianchi',sp:'sp'};
+function bodyDims(){
+ const row=SZ[S.mn.sz],v=S.v[S.g]||{},out={},src={};
+ for(const[key,mis]of Object.entries(BODY_SRC)){
+  if(v[mis]!=null){out[key]=v[mis];src[key]='capo'}
+  else{out[key]=row[{B:0,W:1,Hp:2,sp:3}[key]];src[key]='SZ'}   // il capo non dichiara questa misura
+ }
+ out.al=row[4];src.al='SZ';                                      // l'altezza non e' fra le misure dei capi
+ return{...out,src};
+}
+function body(){const{B,W,Hp,sp,al,src}=bodyDims(),H=al/170,r=C=>C/TP,e=C=>[1.2*r(C),.83*r(C)],rt=r(Hp*.58),rn=r(33+(B-80)*.2);
  const f=T=>T.map(t=>[t[0]*H,t[1],t[2]]);
- return{H,B,sp,TR:f([[152,rn,rn],[147,rn*1.1,rn*1.1],[143.5,sp*.3,8],[141,sp*.485,9.5],[134,...e(B*1.03)],[124,...e(B)],[114,...e(B*.93)],[105,...e(W)],[96,...e((W+Hp)/2)],[88,...e(Hp)],[77,...e(Hp*.98)]]),LG:f([[77,rt*.98,rt],[47,rt*.9,rt*.66],[8,rt*.93,rt*.4]])}}
+ return{H,B,sp,src,TR:f([[152,rn,rn],[147,rn*1.1,rn*1.1],[143.5,sp*.3,8],[141,sp*.485,9.5],[134,...e(B*1.03)],[124,...e(B)],[114,...e(B*.93)],[105,...e(W)],[96,...e((W+Hp)/2)],[88,...e(Hp)],[77,...e(Hp*.98)]]),LG:f([[77,rt*.98,rt],[47,rt*.9,rt*.66],[8,rt*.93,rt*.4]])}}
 function mannequin(M,g){
  const mt=new THREE.MeshStandardMaterial({color:0xd8cdc0,roughness:.7,side:THREE.DoubleSide}),{H,TR,LG,B}=M,V=THREE.Vector3,n=28,pos=[],ix=[],T=TR.concat([[70*H,TR[10][1]*.75,TR[10][2]*.7]]);
  const put=(geo,x,y,z)=>{const m=new THREE.Mesh(geo,mt);m.position.set(x,y,z);g.add(m);return m};
@@ -355,7 +389,10 @@ function m3(){
   add(surf(CB.S.p,null,{Y0:0,hs:1e9,bd:(Y,y)=>{const r=4.6*M.B/88*(1-.35*Math.min(1,y/(62*H)));return[r,r]}}),u);
   u.position.set(s*M.sp*.46,139*H,0);u.rotation.z=s*ARM*Math.PI/180;g.add(u)}
  piv.rotation.set(0,0,0);g.position.set(0,0,0);piv.updateMatrixWorld(true);
- const key=S.g+S.mn.sz+S.mn.sh;
+ // La cache della camera dipende dalla geometria GENERATA. Prima bastava la
+  // taglia del manichino; ora il corpo deriva dalle misure del capo, quindi
+  // la chiave deve cambiare anche quando cambiano i valori digitati.
+  const key=S.g+Object.values(S.v[S.g]).join(',')+S.mn.sh;
  if(TD.key!=key){const bx=new THREE.Box3().setFromObject(g),z=bx.getSize(new THREE.Vector3());TD.c=bx.getCenter(new THREE.Vector3()).negate();TD.key=key;TD.d=Math.max(z.y*1.1,z.x*1.1/TD.cam.aspect)/(2*Math.tan(TD.cam.fov*Math.PI/360))+z.z}
  g.position.copy(TD.c);piv.rotation.set(rx,ry,0);draw3()}
 const ld=cb=>{if(window.THREE)return cb();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.onload=cb;s.onerror=()=>say('Motore 3D non caricato: controlla la connessione.');document.head.appendChild(s)};
@@ -375,8 +412,18 @@ $('#if').onchange=e=>{const f=e.target.files[0];if(!f)return;const R=new FileRea
  IM[k]={src:c.toDataURL(f.type=='image/png'?'image/png':'image/jpeg',.85),img:c,id:++uid,h:c.height/c.width,w:Math.round(b[2]-b[0]),r:0,ox:0,oy:0};sync();render()};im.src=R.result};R.readAsDataURL(f);e.target.value=''};
 IK.forEach(([d,k])=>$('#'+d).oninput=e=>{const I=IM[ik()];if(!I)return;I[k]=+e.target.value;$('#o'+d).textContent=I[k];render()});
 $('#ib').onclick=()=>{delete IM[ik()];sync();render()};
-function mtab(){const[B,W,H,sp,al]=SZ[S.mn.sz];$('#mt').innerHTML='<table>'+[['Altezza',al],['Torace',B],['Vita',W],['Fianchi',H],['Spalle',sp],['Collo',33+(B-80)*.2],['Coscia',H*.58]].map(r=>`<tr><td>${r[0]}</td><td>${nf(r[1])} cm</td></tr>`).join('')+'</table>'}
-$('#ma').onclick=()=>{const[B,W,H]=SZ[S.mn.sz],v=S.v[S.g];if('petto'in v)v.petto=B;if('vita'in v)v.vita=W;if('fianchi'in v)v.fianchi=H;form();render();say('Misure adattate alla taglia '+S.mn.sz+'.')};
+// La tabella del manichino mostra i valori che il 3D USA DAVVERO, non la riga
+ // di SZ: senza questo l'utente legge 'Torace 88' mentre il corpo e' costruito
+ // sul suo torace digitato. La provenienza ('dal capo' / 'taglia NN') dichiara
+ // da dove viene ogni valore, e rende esplicito il ripiego su SZ.
+ function mtab(){const{B,W,Hp,sp,al,src}=bodyDims(),[z,sz]=SZ[S.mn.sz],m=s=>s==='SZ'?`taglia ${S.mn.sz} (ripiego)`:'dal capo';
+  $('#mt').innerHTML='<table>'+[['Altezza',al,src.al],['Torace',B,src.B],['Vita',W,src.W],['Fianchi',Hp,src.Hp],['Spalle',sp,src.sp],['Collo',33+(B-80)*.2,null],['Coscia',Hp*.58,null]].map(r=>`<tr><td>${r[0]}</td><td>${nf(r[1])} cm</td><td style="font-size:.55rem;opacity:.6">${r[2]?m(r[2]):'derivato'}</td></tr>`).join('')+'</table>'}
+ // Non e' piu' la sincronizzazione: il corpo deriva gia' dalle misure del capo.
+ // Il pulsante resta come azione esplicita "ripristina i valori di taglia",
+ // utile per ripartire da un riferimento noto.
+ $('#ma').onclick=()=>{const v=S.v[S.g],[B,W,H,sp]=[SZ[S.mn.sz][0],SZ[S.mn.sz][1],SZ[S.mn.sz][2],SZ[S.mn.sz][3]];
+  if('petto'in v)v.petto=B;if('vita'in v)v.vita=W;if('fianchi'in v)v.fianchi=H;if('sp'in v)v.sp=sp;
+  form();render();mtab();save();say('Misure ripristinate sui valori della taglia '+S.mn.sz+'.')};
 $('#mn').addEventListener('input',e=>{const i=e.target,M=S.mn;
  if(i.id=='ms'){M.sz=+i.value;mtab()}else if(i.id=='msh')M.sh=i.checked;else if(i.id=='fc')S.fc=i.value;
  else if(i.dataset.d){M[i.dataset.d]=i.value/100;$('#o'+i.id).textContent=i.value+'%'}else return;m3()});
