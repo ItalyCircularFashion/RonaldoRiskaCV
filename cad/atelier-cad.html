@@ -236,22 +236,59 @@ function draw(p,P,full){
 // del disegno. Non blocca il rendering: registra lo stato e lo espone, cosi' un
 // difetto geometrico resta diagnosticabile senza impedire di guardare il capo.
 //
+// CONTRATTO FAIL-SAFE. Quattro stati, e NON_VALIDATED non sta per "valido":
+//
+//   VALID             il validatore ha girato e non ha trovato difetti
+//   INVALID           il validatore ha girato e ha trovato difetti
+//   NOT_VALIDATED     il validatore non c'e': geometry-core.js non caricato
+//   VALIDATION_ERROR  il validatore c'e' ma non e' utilizzabile: manca una
+//                     funzione, o ne lancia una
+//
+// Il quarto stato esiste perche' senza try/catch un validatore rotto fa
+// sfuggire l'eccezione fino a render(): il rendering si ferma E S.val resta
+// quello della render precedente, che dice "valido". Il fallimento risultava
+// cosi' indistinguibile da un capo corretto.
+//
 // Il pannello e' gia' nella sua forma finale {start, edges[]}: la conversione
 // la fa lo stesso poly() che il layout usa, quindi non esiste una seconda
 // rappresentazione della stessa geometria.
+const VAL={VALID:'VALID',INVALID:'INVALID',NOT_VALIDATED:'NOT_VALIDATED',VALIDATION_ERROR:'VALIDATION_ERROR'};
 function validPanel(p){
- if(!window.AtelierGeom)return{ok:0,stato:'validatore non caricato'};
- const{analyse,poly}=window.AtelierGeom,pts=poly(p,{close:false,skipFold:true}),r=analyse(pts,false);
- if(!pts.length)return{stato:'vuoto',r};
- if(r.repeatedVertex)return{stato:'vertice ripetuto',r};
- if(r.selfInt.length)return{stato:'auto-interseca',r};
- if(r.zeroLen)return{stato:'lato nullo',r};
- return{stato:'valido',r};
+ const G=window.AtelierGeom;
+ if(!G)return{stato:VAL.NOT_VALIDATED,motivo:'geometry-core.js non caricato'};
+ if(typeof G.analyse!=='function'||typeof G.poly!=='function')
+  return{stato:VAL.VALIDATION_ERROR,motivo:'AtelierGeom privo di analyse() o poly()'};
+ let pts,r;
+ try{pts=G.poly(p,{close:false,skipFold:true});r=G.analyse(pts,false)}
+ catch(e){return{stato:VAL.VALIDATION_ERROR,motivo:e&&e.message?e.message:String(e)}}
+ // Il try copre la CHIAMATA, non la LETTURA del risultato. Un validatore che
+ // ritorna undefined (o una forma non confrontabile) faceva esplodere
+ // r.repeatedVertex FUORI dal try: eccezione non gestita, rendering fermo, e
+ // S.val lasciato al valore precedente — che diceva "valido". La forma del
+ // risultato va verificata come parte della validazione, non data per scontata.
+ if(!r||typeof r!=='object')return{stato:VAL.VALIDATION_ERROR,motivo:'analyse() ha ritornato '+(r===undefined?'undefined':typeof r)};
+ if(!Array.isArray(r.selfInt))return{stato:VAL.VALIDATION_ERROR,motivo:'analyse() senza selfInt: struttura inattesa'};
+ if(!pts||!Array.isArray(pts))return{stato:VAL.VALIDATION_ERROR,motivo:'poly() ha ritornato un tracciato non valido'};
+ if(!pts.length)return{stato:VAL.INVALID,motivo:'tracciato vuoto',r};
+ if(r.repeatedVertex)return{stato:VAL.INVALID,motivo:'vertice ripetuto',r};
+ if(r.selfInt.length)return{stato:VAL.INVALID,motivo:'auto-interseca: '+r.selfInt.length,r};
+ if(r.zeroLen)return{stato:VAL.INVALID,motivo:'lato nullo: '+r.zeroLen,r};
+ return{stato:VAL.VALID,r};
 }
 function validatePanels(P){
- const V=[];let tutti=true;
- for(const p of P.panels){const v=validPanel(p);V.push({nm:p.nm,stato:v.stato,difetti:v.r?v.r.selfInt.length:0});if(v.stato!=='valido')tutti=false}
- S.val={tutti,stati:V};
+ const V=[];let agg=null;
+ for(const p of P.panels){
+  const v=validPanel(p),s=v.stato;
+  // l'aggregato degrada: VALID solo se OGNI pannello e' VALID. Un errore di
+  // validazione ha la precedenza su un difetto geometrico, perche' descrive
+  // l'infrastruttura e non il capo.
+  agg=agg===null?s
+   :agg===VAL.VALID&&s===VAL.VALID?VAL.VALID
+   :agg!==VAL.VALIDATION_ERROR&&s===VAL.VALIDATION_ERROR?VAL.VALIDATION_ERROR
+   :agg!==VAL.INVALID&&s===VAL.INVALID?VAL.INVALID:agg;
+  V.push({nm:p.nm,stato:s,motivo:v.motivo||'',difetti:v.r&&v.r.selfInt?v.r.selfInt.length:0});
+ }
+ S.val={stato:agg,validato:agg===VAL.VALID,tutti:agg===VAL.VALID,stati:V};
  return S.val}
 function scene(){
  const B=GF[S.g](S.v[S.g]);validatePanels(B);let cur=0,H=0,out='';
