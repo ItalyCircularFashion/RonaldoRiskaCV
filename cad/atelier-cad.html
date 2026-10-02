@@ -48,6 +48,9 @@ select,input[type=file]{max-width:100%;padding:5px 6px;border:1px solid var(--li
 </style>
 <style id="sty"></style>
 </head>
+<!-- nucleo geometrico condiviso: lo carica anche la suite di test, che lo
+     ri-esporta da test/validator.mjs. Un solo sorgente della logica. -->
+<script src="geometry-core.js"></script>
 <body>
 <div id="app">
 <aside>
@@ -110,7 +113,7 @@ corpetto:[['petto','Torace',92,70,140,'m'],['vita','Vita',72,50,130,'m'],['ld','
 tshirt:[['petto','Torace',92,70,140,'m'],['lung','Lunghezza dal punto spalla',66,45,90,'m'],['sp','Larghezza spalle',40,32,52,'m'],['lm','Lunghezza manica',22,14,40,'m'],['agio','Agio al torace',10,4,24,'s'],['scollo','Profondità scollo davanti',8,4,16,'s'],['omanica','Apertura orlo manica',32,20,44,'s']],
 felpa:[['petto','Torace',92,70,140,'m'],['lung','Lunghezza dal punto spalla',68,45,90,'m'],['sp','Larghezza spalle',42,32,52,'m'],['lm','Lunghezza manica',62,40,75,'m'],['agio','Agio al torace',18,8,30,'s'],['scollo','Profondità scollo davanti',9,4,16,'s'],['omanica','Apertura polsino',24,14,34,'s'],['fascia','Altezza fascia e polsino',6,3,12,'s']],
 pantaloni:[['vita','Vita',72,50,130,'m'],['fianchi','Fianchi',96,70,150,'m'],['lung','Lunghezza esterna',102,60,120,'m'],['cavallo','Altezza cavallo',27,22,34,'m'],['agio','Agio ai fianchi',6,2,16,'s'],['orlo','Apertura orlo (giro gamba)',38,24,70,'s'],['pince','Quota assorbita dalle pince (%)',60,20,100,'s']]};
-const S={g:'gonna',sa:1,mir:true,con:false,v:{}};
+const S={g:'gonna',sa:1,mir:true,con:false,v:{},val:null};
 for(const k in PR){S.v[k]={};PR[k].forEach(r=>S.v[k][r[0]]=r[2])}
 try{const j=JSON.parse(localStorage.atelier);for(const k in j)Object.assign(S.v[k]||{},j[k])}catch(e){}
 const save=()=>{try{localStorage.atelier=JSON.stringify(S.v)}catch(e){}if(S.t3)m3()};
@@ -229,8 +232,29 @@ function draw(p,P,full){
  if(full){const[x,a,b]=p.grain;
   s+=`<path class="dart" d="M${x} ${a}V${b}M${x-.4} ${a+.9}L${x} ${a}L${x+.4} ${a+.9}M${x-.4} ${b-.9}L${x} ${b}L${x+.4} ${b-.9}"/><text class="tx" x="${p.lab[0]}" y="${p.lab[1]}">${p.nm}</text><text class="tx2" x="${p.lab[0]}" y="${p.lab[1]+1.5}">${p.note}</text>`}
  return s}
+// Validazione di ogni pannello generato, subito dopo la generazione e prima
+// del disegno. Non blocca il rendering: registra lo stato e lo espone, cosi' un
+// difetto geometrico resta diagnosticabile senza impedire di guardare il capo.
+//
+// Il pannello e' gia' nella sua forma finale {start, edges[]}: la conversione
+// la fa lo stesso poly() che il layout usa, quindi non esiste una seconda
+// rappresentazione della stessa geometria.
+function validPanel(p){
+ if(!window.AtelierGeom)return{ok:0,stato:'validatore non caricato'};
+ const{analyse,poly}=window.AtelierGeom,pts=poly(p,{close:false,skipFold:true}),r=analyse(pts,false);
+ if(!pts.length)return{stato:'vuoto',r};
+ if(r.repeatedVertex)return{stato:'vertice ripetuto',r};
+ if(r.selfInt.length)return{stato:'auto-interseca',r};
+ if(r.zeroLen)return{stato:'lato nullo',r};
+ return{stato:'valido',r};
+}
+function validatePanels(P){
+ const V=[];let tutti=true;
+ for(const p of P.panels){const v=validPanel(p);V.push({nm:p.nm,stato:v.stato,difetti:v.r?v.r.selfInt.length:0});if(v.stato!=='valido')tutti=false}
+ S.val={tutti,stati:V};
+ return S.val}
 function scene(){
- const B=GF[S.g](S.v[S.g]);let cur=0,H=0,out='';
+ const B=GF[S.g](S.v[S.g]);validatePanels(B);let cur=0,H=0,out='';
  for(const p of B.panels){const P=poly(p),m=S.sa,w=Math.max(...P.map(q=>q[0]))+m,y0=Math.min(...P.map(q=>q[1]))-m,y1=Math.max(...P.map(q=>q[1]))+m;
   p.M=(S.mir||p.sym)&&!p.nf;out+=`<g transform="translate(${f2(cur+(p.M?w:p.nf?m:0))} ${f2(-y0)})">${imgEl(p)}${draw(p,P,1)}${p.M?`<g transform="scale(-1 1)">${draw(p,P,0)}</g>`:''}</g>`;
   cur+=w*(p.M?2:1)+(p.nf?m:0)+6;H=Math.max(H,y1-y0)}
@@ -431,7 +455,15 @@ form();render();fillIp();mtab();requestAnimationFrame(fit);
  // Accesso in sola lettura allo stato interno, per i test. Non e' usato dall'app:
  // serve solo a ispezionare il percorso REALE (CB/TD) che vive nel closure dello
  // script e non e' raggiungibile da window. Nessuna logica dipende da questo.
- window.__t={CB:()=>CB,TD:()=>TD,S:()=>S,setTD:v=>{TD=v},lp};
+ window.__t={CB:()=>CB,TD:()=>TD,S:()=>S,setTD:v=>{TD=v},lp,
+  // stato di validazione della generazione corrente
+  val:()=>S.val,
+  // validazione di un pannello arbitrario: serve a verificare che il runtime
+  // usi davvero il validatore condiviso e non una copia
+  validPanel,validatePanels,
+  // il percorso completo (generatore -> pannello -> validazione) si esercita
+  // chiamando il generatore esposto e poi validPanel sul suo risultato
+  genera:k=>GF[k](S.v[k])};
  </script>
 </body>
 </html>
