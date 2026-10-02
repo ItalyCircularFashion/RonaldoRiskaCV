@@ -30,6 +30,20 @@ output{color:var(--mut);font-variant-numeric:tabular-nums}
 .b{font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--side);color:var(--ink);cursor:pointer}
 .b:hover{border-color:var(--acc)}
 #ex{width:100%;margin-top:18px;background:var(--acc);border-color:var(--acc);color:var(--bg);font-weight:600}
+#ex:disabled{background:none;border-color:var(--line);color:var(--mut);cursor:not-allowed}
+/* lo stato porta un glifo e un testo: il colore da solo non basta, e in
+   modalita' scura o con deficit di visione dei colori i due toni di rosso
+   non si distinguono */
+#vs{margin:10px 0 0;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px}
+#vs:empty{display:none}
+#vs b{font-weight:600}
+#vs[data-s=VALID]{border-color:var(--acc)}
+#vs[data-s=INVALID],#vs[data-s=VALIDATION_ERROR]{border-color:var(--sa);color:var(--sa)}
+#vs[data-s=NOT_VALIDATED]{border-style:dashed;color:var(--mut)}
+#vp{margin:6px 0 0;padding:0;list-style:none;font-size:13px}
+#vp li{padding:4px 8px;margin-bottom:4px;border-left:2px solid var(--sa);background:var(--fill);border-radius:0 6px 6px 0}
+#vp li b{font-weight:600}
+#vp li span{color:var(--mut)}
 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13px}
 td,th{padding:4px 2px;text-align:right;font-weight:400}
 th{color:var(--mut)}td:first-child,th:first-child{text-align:left}
@@ -85,6 +99,8 @@ select,input[type=file]{max-width:100%;padding:5px 6px;border:1px solid var(--li
 <label>Pieghe<output id="odfd">40%</output><input type="range" id="dfd" data-d="fd" min="0" max="100" value="40"></label>
 </div>
 <h2>Controllo cuciture</h2><div id="ck"></div>
+<p id="vs" role="status" aria-live="polite"></p>
+<ul id="vp" hidden></ul>
 <button class="b" id="ex" hidden>Esporta SVG in scala 1:1</button>
 <p id="st" class="sub" role="status"></p>
 </aside>
@@ -289,7 +305,37 @@ function validatePanels(P){
   V.push({nm:p.nm,stato:s,motivo:v.motivo||'',difetti:v.r&&v.r.selfInt?v.r.selfInt.length:0});
  }
  S.val={stato:agg,validato:agg===VAL.VALID,tutti:agg===VAL.VALID,stati:V};
- return S.val}
+ mostraVal();return S.val}
+// Etichette in chiaro per i quattro stati. Il glifo non e' decorazione: e' il
+// primo segnale per chi non distingue i colori, e il testo e' la garanzia che
+// lo stato sia leggibile senza aprire la console.
+const ETICHETTA={VALID:['\u2713','Geometria valida'],INVALID:['\u2717','Geometria non valida'],
+ NOT_VALIDATED:['?','Geometria non verificata'],VALIDATION_ERROR:['!','Errore validazione geometria']};
+function mostraVal(){
+ const V=S.val,box=$('#vs'),lst=$('#vp');
+ if(!box||!V)return;
+ const E=ETICHETTA[V.stato]||['?','Stato sconosciuto'];
+ box.dataset.s=V.stato;box.textContent=E[0]+' '+E[1];
+ // il dettaglio del motivo sta nel titolo: sempre disponibile, ma non occupa
+ // spazio quando la geometria e' regolare
+ const p=V.stati.filter(x=>x.stato!=='VALID');
+ box.title=p.length&&p[0].motivo?p[0].motivo:(V.stato==='VALID'?'':'validazione non eseguita');
+ // la lista dei pannelli compare solo se qualcosa non va: in VALID non deve
+ // aggiungere rumore, e un elenco di quattro righe tutte uguali non informa
+ lst.textContent='';
+ if(p.length){
+  for(const x of p){
+   const li=document.createElement('li');
+   const b=document.createElement('b');b.textContent=x.nm;
+   const s=document.createElement('span');
+   s.textContent=(ETICHETTA[x.stato]||['','?'])[1].replace('Geometria ','')+' — '+x.motivo;
+   li.append(b,' ',s);lst.appendChild(li);
+  }
+  lst.hidden=false;
+ }else lst.hidden=true;
+ if(typeof aggiornaEx==='function')aggiornaEx();
+ dispatchEvent(new Event('validationchange'));
+}
 function scene(){
  const B=GF[S.g](S.v[S.g]);validatePanels(B);let cur=0,H=0,out='';
  for(const p of B.panels){const P=poly(p),m=S.sa,w=Math.max(...P.map(q=>q[0]))+m,y0=Math.min(...P.map(q=>q[1]))-m,y1=Math.max(...P.map(q=>q[1]))+m;
@@ -339,9 +385,32 @@ const say=t=>$('#st').textContent=t;
 function exp(){const{out,BB:b}=scene();
  return`<svg xmlns="http://www.w3.org/2000/svg" width="${f2(b[2])}cm" height="${f2(b[3])}cm" viewBox="${b.map(f2).join(' ')}"><style>${css(.0265,{ink:'#12304A',sa:'#C4235F',fill:'none',con:'#6F8AA0'})}</style>${out}</svg>`}
 if(window.claude&&claude.use)claude.use('downloads').then(d=>{if(d){DL=d;$('#ex').hidden=false}}).catch(()=>{});
-$('#ex').onclick=()=>DL.save({filename:`cartamodello-${S.g}.svg`,data:exp()})
+// L'export e' consentito solo con geometria VALID. exp() resta intatto e
+// resta l'unica fonte dell'SVG: la guardia e' PRIMA della chiamata, e non
+// tocca exp(). Un file scaricato deve poter essere tagliato con fiducia, e un
+// cartamodello non verificato non lo e'.
+//
+// Il rifiuto e' dichiarato, mai silenzioso: il bottone resta visibile ma
+// disabilitato, e lo stato con il motivo e' gia' scritto accanto.
+const exPo=$('#ex');
+function exportConsentito(){return !!S.val&&S.val.stato===VAL.VALID}
+function aggiornaEx(){
+ if(!exPo)return;
+ // il bottone e' nascosto in vista 3D e quando manca il downloader: la
+ // guardia non deve riaccenderlo
+ exPo.hidden=exPo.dataset.forzato==='no';
+ exPo.disabled=!exportConsentito();
+}
+addEventListener('validationchange',aggiornaEx);
+exPo.onclick=()=>{
+ if(!exportConsentito()){
+  const E=ETICHETTA[S.val&&S.val.stato]||['','Stato sconosciuto'];
+  say('Esportazione bloccata: '+E[1].toLowerCase()+'.');
+  return;
+ }
+ DL.save({filename:`cartamodello-${S.g}.svg`,data:exp()})
  .then(()=>say('File salvato. Aprilo in scala 100% per misure reali.'))
- .catch(e=>say(e&&e.code=='declined'?'Salvataggio annullato.':'Esportazione non disponibile in questa vista.'));
+ .catch(e=>say(e&&e.code=='declined'?'Salvataggio annullato.':'Esportazione non disponibile in questa vista.'));};
 
 // ---- 3D: ogni pezzo avvolge un volume semplificato, riga per riga ----
 let CB,TD;const TP=2*Math.PI;
@@ -459,7 +528,11 @@ function m3(){
 const ld=cb=>{if(window.THREE)return cb();const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.onload=cb;s.onerror=()=>say('Motore 3D non caricato: controlla la connessione.');document.head.appendChild(s)};
 $('#tb').onclick=e=>{const b=e.target.closest('[data-v]');if(!b)return;S.t3=b.dataset.v=='3d';
  $('#tb').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x==b));
- cv.toggleAttribute('hidden',S.t3);$('#v3').hidden=!S.t3;$('.zb').hidden=S.t3;$('#ex').hidden=S.t3||!DL;$('#mn').hidden=!S.t3;
+ cv.toggleAttribute('hidden',S.t3);$('#v3').hidden=!S.t3;$('.zb').hidden=S.t3;
+ // #ex resta nascosto in vista 3D e senza downloader: la guardia di validazione
+ // decide solo il disabled, l'hidden continua a dipendere dalla vista
+ exPo.dataset.forzato=(S.t3||!DL)?'no':'si';exPo.hidden=S.t3||!DL;exPo.disabled=!exportConsentito();
+ $('#mn').hidden=!S.t3;
  $('.hint').textContent=S.t3?'Trascina per ruotare, rotella per avvicinare. L’anteprima avvolge i pezzi su un volume semplificato.':'Trascina per spostare, rotella per ingrandire. Griglia: 1 cm e 10 cm.';
  if(S.t3)ld(()=>{if(!TD)init3();if(TD){size3();m3()}});else fit()};
 addEventListener('resize',()=>{if(S.t3&&TD){size3();m3()}});
