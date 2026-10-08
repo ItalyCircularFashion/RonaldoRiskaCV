@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="it" data-theme="dark" data-page="tessile">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ciclo Tessile e Abbigliamento Sostenibili — Distretto Pratese</title>
+  <meta name="description" content="Il ciclo tessile e l'abbigliamento sostenibili nel Distretto di Prato: dalla fibra al capo finito, filiera circolare, certificazioni, innovazione digitale e dati di settore.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://italycircularfashion.github.io/RonaldoRiskaCV/ciclo-tessile-pratese.html">
+  <link rel="stylesheet" href="site.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ciclo Tessile e Abbigliamento Sostenibili — Distretto Pratese">
+  <meta property="og:description" content="Filiera tessile circolare dal filo al capo: certificazioni, sostenibilità, innovazione digitale e dati del Distretto di Prato.">
+  <meta property="og:image" content="https://italycircularfashion.github.io/RonaldoRiskaCV/assets/profile.svg">
+  <meta property="og:url" content="https://italycircularfashion.github.io/RonaldoRiskaCV/ciclo-tessile-pratese.html">
+  <meta property="og:locale" content="it_IT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ciclo Tessile e Abbigliamento Sostenibili — Distretto Pratese">
+  <meta name="twitter:description" content="Filiera tessile circolare dal filo al capo: certificazioni, sostenibilità, innovazione digitale e dati del Distretto di Prato.">
+  <link rel="alternate" hreflang="it" href="https://italycircularfashion.github.io/RonaldoRiskaCV/ciclo-tessile-pratese.html">
+  <link rel="alternate" hreflang="x-default" href="https://italycircularfashion.github.io/RonaldoRiskaCV/">
+  <link rel="icon" type="image/jpeg" href="profile.jpg">
+  <style>
+    .cycle-hero {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+      padding: clamp(3rem, 6vw, 5rem) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cycle-hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+    .cycle-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .cycle-hero .eyebrow {
+      font-family: var(--f-m);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .cycle-hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 1rem;
+      color: var(--ink);
+    }
+    .cycle-hero .lead {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 1.5rem;
+    }
+    .cycle-hero .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .cycle-hero .hero-tag {
+      font-family: var(--f-m);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.02);
+    }
+    .cycle-steps {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    .cycle-step {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .cycle-step:last-child { border-bottom: none; }
+    .cycle-step:nth-child(even) { direction: rtl; }
+    .cycle-step:nth-child(even) > * { direction: ltr; }
+    .cycle-step-num {
+      font-family: var(--f-m);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .cycle-step h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      color: var(--cream);
+    }
+    .cycle-step p {
+      color: var(--sand);
+      line-height: 1.7;
+      font-size: 0.9rem;
+      margin: 0 0 1rem;
+    }
+    .cycle-step-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .cycle-step-tags span {
+      font-family: var(--f-m);
+      font-size: 0.6rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .cycle-step-visual {
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 1.5rem;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--f-m);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+    @media (max-width: 700px) {
+      .cycle-step, .cycle-step:nth-child(even) {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+    }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+    }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .cert-card .cert-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .cert-card .cert-desc {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .data-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+    }
+    .data-card {
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      padding: 1.2rem;
+    }
+    .data-card .data-val {
+      font-family: var(--f-m);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .data-card .data-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      line-height: 1.4;
+    }
+    .data-card .data-src {
+      font-size: 0.62rem;
+      color: var(--stone);
+      margin-top: 0.5rem;
+      font-family: var(--f-m);
+    }
+    .section-band {
+      background: var(--bg-soft);
+      padding: 3rem 0;
+    }
+    .section-band .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .section-heading {
+      margin-bottom: 1.5rem;
+    }
+    .section-heading .eyebrow {
+      font-family: var(--f-m);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .section-heading h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin: 0;
+    }
+    .integration-banner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(255,45,111,0.08) 0%, rgba(0,246,255,0.06) 100%);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .integration-banner h3 {
+      color: var(--cream);
+      font-size: 1.1rem;
+      margin: 0 0 0.5rem;
+    }
+    .integration-banner p {
+      color: var(--sand);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .site-footer {
+      background: var(--bg);
+      border-top: 1px solid var(--line);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .site-footer p {
+      font-size: 0.78rem;
+      color: var(--stone);
+    }
+  </style>
+</head>
+<body class="page-cv">
+<a class="skip-link" href="#main">Salta al contenuto</a>
+
+<div class="platform">
+
+  <div class="ticker-bar" aria-label="Market ticker">
+    <div class="ticker-label">LIVE</div>
+    <div class="ticker-track"><div class="ticker-items" aria-hidden="true"></div></div>
+  </div>
+
+  <aside class="platform-sidebar sidebar" aria-label="Navigazione piattaforma">
+    <a class="sb-brand" href="index.html">
+      <div class="sb-mark" aria-hidden="true">RR</div>
+      <div class="sb-txt"><div class="sb-name">Ronaldo Riska</div><div class="sb-role">Pianificazione Filiera</div></div>
+    </a>
+
+    <nav class="sb-section" aria-label="Piattaforma">
+      <div class="sb-section-title">Piattaforma</div>
+      <a class="sb-link" href="index.html"><span class="sb-icon" aria-hidden="true">⌂</span> Home</a>
+      <a class="sb-link active" href="ciclo-tessile-pratese.html"><span class="sb-icon" aria-hidden="true">◈</span> Ciclo Tessile</a>
+    </nav>
+
+    <nav class="sb-section" aria-label="Intelligence">
+      <div class="sb-section-title">Intelligence</div>
+      <a class="sb-link" href="dashboard.html"><span class="sb-icon" aria-hidden="true">▣</span> Market Dashboard<span class="sb-badge">Live</span></a>
+      <a class="sb-link" href="cad-moda.html"><span class="sb-icon" aria-hidden="true">◈</span> CAD Moda<span class="sb-badge">Beta</span></a>
+      <a class="sb-link" href="research.html"><span class="sb-icon" aria-hidden="true">◎</span> AI Research Lab<span class="sb-badge">8</span></a>
+      <a class="sb-link" href="news.html"><span class="sb-icon" aria-hidden="true">◉</span> Textile Newsroom<span class="sb-badge">8</span></a>
+    </nav>
+
+    <nav class="sb-section" aria-label="Community">
+      <div class="sb-section-title">Community</div>
+      <a class="sb-link" href="forum.html"><span class="sb-icon" aria-hidden="true">◌</span> Industry Forum<span class="sb-badge">25</span></a>
+    </nav>
+
+    <div class="sb-market" data-sidebar-pulse></div>
+
+    <div class="sb-bottom">
+      <span style="font-family:var(--f-m);font-size:.58rem;color:var(--stone)">&copy; <span data-year></span> RR</span>
+      <button class="theme-btn" data-theme-toggle aria-label="Cambia tema">Light</button>
+    </div>
+  </aside>
+
+  <button class="mob-menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  <div class="sidebar-backdrop"></div>
+
+  <main class="platform-content content" id="main">
+
+    <!-- HERO -->
+    <section class="cycle-hero" aria-labelledby="cycle-hero-title">
+      <div class="cycle-hero-inner">
+        <p class="eyebrow">Distretto Tessile di Prato · Filiera Circolare</p>
+        <h1 id="cycle-hero-title">Ciclo Tessile e Abbigliamento Sostenibili</h1>
+        <p class="lead">
+          Dalla materia prima al capo finito: il percorso completo della filiera tessile pratese,
+          tra tradizione manifatturiera e transizione digitale. Una finestra sui processi, le
+          certificazioni, i dati e le innovazioni che definiscono il tessile sostenibile nel
+          Distretto di Prato.
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Filiera Circolare</span>
+          <span class="hero-tag">Certificazioni EU</span>
+          <span class="hero-tag">Industry 4.0</span>
+          <span class="hero-tag">Distretto Pratese</span>
+          <span class="hero-tag">LCA &amp; ESG</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- IL CICLO TESSILE -->
+    <section class="cycle-steps" aria-labelledby="cycle-title">
+      <div class="section-heading" style="padding:0 1.5rem;margin-bottom:2rem">
+        <p class="eyebrow">Filiera</p>
+        <h2 id="cycle-title">Le sei fasi del ciclo tessile</h2>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">01 · Fibra</div>
+          <h3>Dalla materia prima al filato</h3>
+          <p>
+            Il ciclo inizia con la scelta della fibra: naturale (lana, cotone, lino, canapa, seta),
+            sintetica (poliestere, nylon, acrilico) o man-made cellulosica (viscosa, lyocell/Tencel).
+            Nel Distretto di Prato la lana rigenerata è il fiore all'occhiello: il 60% delle fibre
+            lavorate proviene da materiale riciclato, facendo di Prato il hub mondiale del riciclo laniero.
+          </p>
+          <div class="cycle-step-tags">
+            <span>Lana vergine</span><span>Lana rigenerata</span><span>Cotone</span><span>Poliestere riciclato</span><span>Lyocell</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Materie prime → Apertura / Lavaggio → Cardatura o Pettinatura → Filatura (Nm) → Ritorcitura
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">02 · Filato</div>
+          <h3>Trasformazione della fibra in filo</h3>
+          <p>
+            La filatura converte le fibre parallele in un filo continuo. Nel ciclo laniero cardato
+            (tipico di Prato) le fibre corte e rigenerate vengono cardate e sottoposte a riferimento;
+            nel ciclo pettinato si selezionano fibre lunghe e regolari per filati di alta gamma.
+            Il titolo Nm indica la finezza: Nm 60 per tessuti estivi leggeri, Nm 20 per panni invernali.
+          </p>
+          <div class="cycle-step-tags">
+            <span>Cardato</span><span>Pettinato</span><span>Nm</span><span>Ritorcitura</span><span>Titolo</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Fibra cardata/pettinata → Nastro → Riferimento → Torsione → Filato finito (bobina/roccia)
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">03 · Tessuto</div>
+          <h3>Tessitura: trama e ordito si incontrano</h3>
+          <p>
+            Il telaio intreccia ordito (fili longitudinali) e trama (fili trasversali) secondo
+            un'armatura definita. Le principali armature — taffettà (piano), saia (diagonale), raso
+            (punti fitti) — determinano aspetto, mano e prestazioni del tessuto. Il jacquard
+            permette disegni complessi controllati digitalmente dal CAD tessile.
+          </p>
+          <div class="cycle-step-tags">
+            <span>Taffettà</span><span>Saia</span><span>Raso</span><span>Jacquard</span><span>Armature</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Ordito sul subbio → Telaio → Armatura (taffettà/saia/raso/jacquard) → Tessuto grezzo → Controllo qualità
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">04 · Nobilitazione</div>
+          <h3>Finiture chimiche e meccaniche</h3>
+          <p>
+            La nobilitazione trasforma il tessuto grezzo in prodotto finito. Trattamenti
+            preparatori (lavaggio, carbonizzazione, candeggio), trattamenti principali
+            (follatura, rattissatura, mercerizzazione, sanforizzazione) e trattamenti funzionali
+            (impermeabilizzazione DWR, antimacchia, antistatico). Le normative REACH e ZDHC
+            regolano severamente i chemicals usati nelle tintorie e nei finissaggi.
+          </p>
+          <div class="cycle-step-tags">
+            <span>Follatura</span><span>Rattissatura</span><span>Mercerizzazione</span><span>ZDHC</span><span>REACH</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Tessuto grezzo → Lavaggio → Trattamenti chimici → Follatura/Rattissatura → Vaporizzazione → Tessuto finito
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">05 · Confezione</div>
+          <h3>Dal tessuto al capo finito</h3>
+          <p>
+            La confezione taglia, assembla e finisce il capo. Include modellistica, taglio (manuale
+            o CAD/CAM), cucitura, assemblaggio accessori (bottoni, etichette, zip), controllo qualità
+            finale e imballo. Nel Distretto di Prato la confezione è spesso a ciclo integrato con
+            tessitura e finissaggio, garantendo tracciabilità end-to-end.
+          </p>
+          <div class="cycle-step-tags">
+            <span>Modellistica</span><span>Taglio CAD</span><span>Cucitura</span><span>QC finale</span><span>Logistica</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Taglio (cad/digitale) → Cucitura → Assemblaggio → Controllo qualità → Imballo → Spedizione
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">06 · Distribuzione</div>
+          <h3>Dal capo al consumatore</h3>
+          <p>
+            L'ultimo anello: logistica, magazzino, retail e e-commerce. Con l'EU Digital Product
+            Passport (ESPR, obbligatorio dal 2027) ogni capo dovrà portare un'identità digitale
+            con composizione, tracciabilità, riparabilità e impatto ambientale. Prato è già
+            avanti con 23 aziende GOTS e il 78% aderente al progetto Detox.
+          </p>
+          <div class="cycle-step-tags">
+            <span>DPP 2027</span><span>Tracciabilità</span><span>Retail</span><span>E-commerce</span><span>Circolare</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Distribuzione → Retail / E-commerce → Consumatore → Fine vita → Riciclo/Recupero → Loop chiuso
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICAZIONI -->
+    <section class="section-band" aria-labelledby="certs-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Certificazioni</p>
+          <h2 id="certs-title">Standard e certificazioni della filiera tessile</h2>
+        </div>
+        <p style="color:var(--sand);max-width:800px;margin:0 1.5rem 1.5rem;font-size:0.88rem;line-height:1.7">
+          Le certificazioni garantiscono la conformità ambientale, sociale e qualitativa lungo
+          tutta la catena di fornitura. Nel Distretto di Prato il 62% delle aziende ha
+          certificazioni ambientali attive, contro la media italiana del 38%.
+        </p>
+        <div class="certs-grid">
+          <div class="cert-card">
+            <div class="cert-name">GOTS</div>
+            <div class="cert-desc">Global Organic Textile Standard — fibre organiche, produzione sostenibile</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-name">OEKO-TEX</div>
+            <div class="cert-desc">Testing sostanze nocive — Standard 100, Made in Green, STeP</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-name">Bluesign</div>
+            <div class="cert-desc">Gestione sostenibile dei chemicals e dei processi produttivi</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-name">ZDHC</div>
+            <div class="cert-desc">Zero Discharge of Hazardous Chemicals — MRSL 4.0, 47 sostanze regolamentate</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-name">GRS</div>
+            <div class="cert-desc">Global Recycle Standard — fibre riciclate, tracciabilità catena</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-name">RCS</div>
+            <div class="cert-desc">Recycled Claim Standard — contenuto riciclato verificato</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-name">REACH</div>
+            <div class="cert-desc">Regolamento EU su sostanze chimiche — restrizioni e autorizzazioni</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-name">ISO 14001</div>
+            <div class="cert-desc">Sistema di gestione ambientale — miglioramento continuo impatto</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IL DISTRETTO DI PRATO -->
+    <section class="cycle-steps" aria-labelledby="prato-title">
+      <div style="padding:0 1.5rem">
+        <div class="section-heading" style="margin-bottom:2rem">
+          <p class="eyebrow">Distretto di Prato</p>
+          <h2 id="prato-title">Prato: ieri e oggi — un distretto in transizione</h2>
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">Storia</div>
+          <h3>Dalle origini laniere alla circular fashion</h3>
+          <p>
+            Prato ha una tradizione tessile millenaria: le prime manifatture lanerie risalgono al
+            Medioevo. Oggi il distretto conta oltre 7.000 aziende attive, più di 42.000 addetti e
+            un export che supera i 2 miliardi di euro annui. La peculiarità pratese è la filiera
+            corta e integrata: dalla materia prima al capo finito, tutto avviene in pochi chilometri.
+          </p>
+          <div class="cycle-step-tags">
+            <span>Medioevo</span><span>Filiera corta</span><span>7.000 aziende</span><span>42.000 addetti</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Medievo laniero → Industrializzazione → Fioritura artigiana → Filiera integrata moderna → Circular fashion
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">Dati 2025-2026</div>
+          <h3>Numeri chiave del distretto</h3>
+          <p>
+            Confindustria Toscana Nord e Camera di Commercio di Prato confermano: il fatturato
+            cumulato delle aziende tessili pratesi raggiunge i 3,8 miliardi nel 2025 (+3,4% YoY).
+            L'export Extra-UE vale il 42% del totale (vs 33% media Italia), con USA, Cina e
+            Emirati Arabi come mercati chiave. L'occupazione sale a 15.250 unità (+23,1% in 12 mesi).
+          </p>
+          <div class="cycle-step-tags">
+            <span>€3,8Mld fatturato</span><span>+3,4% YoY</span><span>Extra-UE 42%</span><span>+23% occupazione</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Fatturato €3,8Mld · Export Extra-UE 42% · Occupazione 15.250 · PMI +53% vs media Italia
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">Sostenibilità</div>
+          <h3>Prato distretto green-conscious</h3>
+          <p>
+            Gli investimenti in sostenibilità delle aziende pratesi raggiungono il 4,2% del fatturato,
+            contro la media italiana del 2,8%. Il 62% delle aziende ha certificazioni ambientali
+            attive. Il riciclo della lana pratese ha un impatto CO₂ del 62% inferiore alla lana
+            vergine australiana (LCA peer-reviewed). L'adesione al progetto Detox di Greenpeace
+            coinvolge il 78% delle aziende del distretto.
+          </p>
+          <div class="cycle-step-tags">
+            <span>4,2% fatturato</span><span>62% certificazioni</span><span>Detox 78%</span><span>CO₂ -62%</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          Lana rigenerata -62% CO₂ · Investimenti verde 4,2% · Detox 78% aziende · Certificazioni 62%
+        </div>
+      </div>
+
+      <div class="cycle-step">
+        <div>
+          <div class="cycle-step-num">Innovazione</div>
+          <h3>Industry 4.0 applicato al tessile</h3>
+          <p>
+            L'adozione di AI nel distretto pratese raggiunge il 22% (vs 18% media UE), con dashboard
+            KPI (42%), ERP con IoT (28%) e computer vision per QC (15%). Il progetto Digital Twin
+            su 5 linee tessili pratesi ha ridotto gli scarti del 28% e aumentato l'OEE del 15%.
+            La piattaforma consortile Didip (2026) integra 31 imprese per tracciabilità digitale.
+          </p>
+          <div class="cycle-step-tags">
+            <span>AI 22%</span><span>Digital Twin -28% scarti</span><span>Didip 31 imprese</span><span>CV QC 96,8%</span>
+          </div>
+        </div>
+        <div class="cycle-step-visual">
+          AI Adoption 22% · Digital Twin OEE +15% · Computer Vision QC 96,8% · Didip 31 aziende
+        </div>
+      </div>
+    </section>
+
+    <!-- INNOVAZIONE DIGITALE -->
+    <section class="section-band" aria-labelledby="digital-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Innovazione</p>
+          <h2 id="digital-title">Digitalizzazione della filiera tessile</h2>
+        </div>
+        <div class="data-row">
+          <div class="data-card">
+            <div class="data-val">96,8%</div>
+            <div class="data-label">Accuratezza computer vision per QC tessile (12 sistemi benchmarkati, 3 aziende pratesi)</div>
+            <div class="data-src">Fonte: Technical Report Computer Vision QC, Mag 2026</div>
+          </div>
+          <div class="data-card">
+            <div class="data-val">11,8%</div>
+            <div class="data-label">MAPE demand forecasting con Transformer su 4 brand italiani (vs 25-35% metodi tradizionali)</div>
+            <div class="data-src">Fonte: Research Paper Transformer Forecasting, Feb 2026</div>
+          </div>
+          <div class="data-card">
+            <div class="data-val">-95%</div>
+            <div class="data-label">Riduzione consumi idrici con tintura supercritical CO₂ (vs tintura tradizionale)</div>
+            <div class="data-src">Fonte: Waterless Dyeing Report, Gen 2026</div>
+          </div>
+          <div class="data-card">
+            <div class="data-val">14 mesi</div>
+            <div class="data-label">Payback medio per sistema computer vision QC (riduzione scarti 34%)</div>
+            <div class="data-src">Fonte: Technical Report CV QC, Mag 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER INTEGRATION -->
+    <section class="cycle-steps" aria-labelledby="integ-title" style="padding-top:1rem">
+      <div class="integration-banner">
+        <h3 id="integ-title">Osservatorio Tessile — Prato Textile District</h3>
+        <p>
+          Un progetto di analisi continua su storia, manifattura e transizione digitale del distretto.
+          Approfondimenti su sostenibilità, tracciabilità e innovazione industriale — con dati
+          verificati e fonti citate.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span data-year></span> Ronaldo Riska · Ciclo Tessile e Abbigliamento Sostenibili · Distretto Pratese</p>
+    <nav style="display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem" aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="ciclo-tessile-pratese.html">Ciclo Tessile</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="research.html">Research</a>
+      <a href="news.html">News</a>
+      <a href="forum.html">Forum</a>
+      <a href="mailto:ronaldo.riska@gmail.com">Contatto</a>
+    </nav>
+  </footer>
+
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>

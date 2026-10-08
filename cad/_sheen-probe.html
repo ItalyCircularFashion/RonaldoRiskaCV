@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head>
+<body style="margin:0;background:#222">
+<div id="out" style="position:fixed;top:0;left:0;color:#fff;font:12px monospace;z-index:9;white-space:pre"></div>
+<div id="c" style="width:600px;height:400px"></div>
+<script>
+window.__log = [];
+window.addEventListener('error', function (e) { window.__log.push(e.message); });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// prova isolata: ogni forma di sheen viene resa davvero, e si registra se lo
+// shader compila. Il problema di prima era che il test riusciva solo a creare
+// il materiale, senza forzare la compilazione: qui si chiama render().
+const CASI = [
+  ['nessun parametro', {}],
+  ['sheen numerico 0.45', { sheen: 0.45 }],
+  ['sheen oggetto {value:0.45}', { sheen: { value: 0.45 } }],
+  ['sheen 1.0', { sheen: 1.0 }],
+  ['clearcoat 0.15', { clearcoat: 0.15 }],
+  ['roughness 0.9', { roughness: 0.9 }],
+];
+const esiti = [];
+const sc = new THREE.Scene();
+sc.add(new THREE.HemisphereLight(0xffffff, 0x808080, 0.8));
+const d = new THREE.DirectionalLight(0xffffff, 0.9); d.position.set(3, 5, 4); sc.add(d);
+const cam = new THREE.PerspectiveCamera(40, 1.5, 0.1, 100); cam.position.set(0, 0, 3);
+
+for (const [nome, opt] of CASI) {
+  const r = new THREE.WebGLRenderer({ antialias: true });
+  r.setSize(600, 400);
+  document.getElementById('c').appendChild(r.domElement);
+  const s2 = sc.clone();
+  const geo = new THREE.SphereGeometry(0.8, 32, 24);
+  const mat = new THREE.MeshPhysicalMaterial(Object.assign({ color: 0x4d93b4 }, opt));
+  s2.add(new THREE.Mesh(geo, mat));
+  let esito;
+  try {
+    r.render(s2, cam);           // forza la compilazione dello shader
+    esito = 'render OK';
+  } catch (e) { esito = 'ERRORE: ' + e.message; }
+  esiti.push({ nome, esito, errore: window.__log.length ? window.__log[window.__log.length - 1] : null });
+  window.__log.length = 0;
+}
+document.getElementById('out').textContent = '';
+window.__esiti = esiti;
+</script>
+</body></html>

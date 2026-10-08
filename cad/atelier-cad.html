@@ -458,11 +458,20 @@ function body(){const{B,W,Hp,sp,al,src}=bodyDims(),H=al/170,r=C=>C/TP,e=C=>[1.2*
  const f=T=>T.map(t=>[t[0]*H,t[1],t[2]]);
  return{H,B,sp,src,TR:f([[152,rn,rn],[147,rn*1.1,rn*1.1],[143.5,sp*.3,8],[141,sp*.485,9.5],[134,...e(B*1.03)],[124,...e(B)],[114,...e(B*.93)],[105,...e(W)],[96,...e((W+Hp)/2)],[88,...e(Hp)],[77,...e(Hp*.98)]]),LG:f([[77,rt*.98,rt],[47,rt*.9,rt*.66],[8,rt*.93,rt*.4]])}}
 function mannequin(M,g){
- const mt=new THREE.MeshStandardMaterial({color:0xd8cdc0,roughness:.7,side:THREE.DoubleSide}),{H,TR,LG,B}=M,V=THREE.Vector3,n=28,pos=[],ix=[],T=TR.concat([[70*H,TR[10][1]*.75,TR[10][2]*.7]]);
- const put=(geo,x,y,z)=>{const m=new THREE.Mesh(geo,mt);m.position.set(x,y,z);g.add(m);return m};
+ // Solo materiale: la geometria resta quella della Fase 1.2, derivata dalle
+ // misure del capo. Prima era un crema caldo (0xd8cdc0) che compete con il
+ // colore del capo e sembra plastica lucida. Qui e' un grigio caldo chiaro,
+ // opaco e desaturato: legge come corpo tecnico e non come persona, e resta
+ // piu' chiaro del tessuto cosi' il capo si stacca. roughness alta toglie la
+ // specularita' da plastica; metalness 0 conferma che non e' un metallo.
+ const mt=new THREE.MeshStandardMaterial({color:0xd9d5cf,roughness:.93,metalness:0,side:THREE.DoubleSide}),
+  {H,TR,LG,B}=M,V=THREE.Vector3,n=28,pos=[],ix=[],T=TR.concat([[70*H,TR[10][1]*.75,TR[10][2]*.7]]);
+ const put=(geo,x,y,z)=>{const m=new THREE.Mesh(geo,mt);m.position.set(x,y,z);
+  m.castShadow=true;m.receiveShadow=true;g.add(m);return m};
  T.forEach((t,j)=>{for(let i=0;i<n;i++){const q=i/n*TP;pos.push(t[1]*Math.sin(q),t[0],t[2]*Math.cos(q))}
   if(j)for(let i=0;i<n;i++){const a=(j-1)*n+i,b=(j-1)*n+(i+1)%n,c=j*n+i,d=j*n+(i+1)%n;ix.push(a,c,b,b,c,d)}});
- const tg=new THREE.BufferGeometry();tg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));tg.setIndex(ix);tg.computeVertexNormals();g.add(new THREE.Mesh(tg,mt));
+ const tg=new THREE.BufferGeometry();tg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));tg.setIndex(ix);tg.computeVertexNormals();
+ const torso=new THREE.Mesh(tg,mt);torso.castShadow=true;torso.receiveShadow=true;g.add(torso);
  const limb=(p,q,r0,r1)=>{const d=new V().subVectors(p,q),m=put(new THREE.CylinderGeometry(r0,r1,d.length(),20),0,0,0);m.position.copy(p).add(q).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new V(0,1,0),d.normalize())};
  const ball=(p,r)=>put(new THREE.SphereGeometry(r,18,12),p.x,p.y,p.z);
  for(const s of[1,-1]){const P=LG.map(t=>new V(s*t[1],t[0],0));limb(P[0],P[1],LG[0][2],LG[1][2]);limb(P[1],P[2],LG[1][2],LG[2][2]);ball(P[1],LG[1][2]);ball(P[2],LG[2][2]);
@@ -495,10 +504,37 @@ function surf(pf,pb,o){
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();out.push([p,g])}
  return out}
 function init3(){try{
- const c=$('#v3'),r=new THREE.WebGLRenderer({antialias:true,alpha:true}),sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,1,3000),piv=new THREE.Group(),g=new THREE.Group();
- piv.add(g);sc.add(piv);sc.add(new THREE.HemisphereLight(0xffffff,0x7a8b99,.95));const dl=new THREE.DirectionalLight(0xffffff,.75);dl.position.set(50,90,140);sc.add(dl);
+ const c=$('#v3'),r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true}),sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,1,1,3000),piv=new THREE.Group(),g=new THREE.Group();
+ piv.add(g);sc.add(piv);
+ // Illuminazione da studio a tre punti. Prima c'era una hemisphere da 0.95 piu'
+ // una direzionale da 0.75: la hemisphere domina e la forma si appiattisce, perche'
+ // la hemisphere non e' direzionale e non modella il volume. Qui la luce che
+ // DEFINISCE la forma e' una sola direzionale (key), le altre due la sostengono.
+ // Nessuna luce colorata, nessun contrasto drammatico: l'oggetto deve restare
+ // leggibile per l'ispezione del cartamodello, non solo bello.
+ sc.add(new THREE.HemisphereLight(0xffffff,0x8d9aa6,.42));          // riempimento d'ambiente
+ const key=new THREE.DirectionalLight(0xffffff,.92);                // luce principale
+ key.position.set(60,105,130);
+ key.castShadow=true;                                              // il capo proietta sul manichino e su se' stesso
+ key.shadow.mapSize.set(2048,2048);
+ const sc2=key.shadow.camera;sc2.left=-110;sc2.right=110;sc2.top=130;sc2.bottom=-70;sc2.near=1;sc2.far=420;
+ sc2.updateProjectionMatrix();key.shadow.bias=-.0012;key.shadow.normalBias=.6;key.shadow.radius=2.5;
+ sc.add(key);
+ const fill=new THREE.DirectionalLight(0xffffff,.34);              // riempimento dal lato opposto, piu' debole
+ fill.position.set(-90,50,70);sc.add(fill);
+ const rim=new THREE.DirectionalLight(0xffffff,.5);                // stacco dal fondo: separa il capo dal manichino
+ rim.position.set(-30,60,-120);sc.add(rim);
+ // La mappa delle ombre ha un costo per frame. PCFSoft e' il compromesso:
+ // bordi morbidi a un solo passaggio, niente passate multiple come VSM.
+ r.shadowMap.enabled=true;r.shadowMap.type=THREE.PCFSoftShadowMap;
+ // ACESFilmic rolloff le alte luci invece di clipsarle: senza tone mapping i
+ // bianchi del manichino saturano sullo schermo e si perdono i dettagli.
+ // r128 non ha ancora ColorManagement, quindi la codifica resta sRGB esplicita.
+ r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.02;
  r.outputEncoding=THREE.sRGBEncoding;r.setPixelRatio(Math.min(2,devicePixelRatio||1));c.appendChild(r.domElement);piv.rotation.set(.12,.5,0);
- TD={r,sc,cam,piv,g,d:200,mat:new THREE.MeshStandardMaterial({color:0x4d93b4,roughness:.85,metalness:0,side:THREE.DoubleSide})};
+ // NB: TD.key e' gia' la firma di cache della camera (vedi m3): qui la luce va
+ // sotto un altro nome, o la sovrascrittura azzererebbe la cache a ogni frame.
+ TD={r,sc,cam,piv,g,d:200,luce:key,mat:new THREE.MeshStandardMaterial({color:0x4d93b4,roughness:.85,metalness:0,side:THREE.DoubleSide})};
  let dr=0;const e=r.domElement;
  e.addEventListener('pointerdown',ev=>{dr=1;e.setPointerCapture(ev.pointerId)});e.addEventListener('pointerup',()=>dr=0);
  e.addEventListener('pointermove',ev=>{if(!dr)return;piv.rotation.y+=ev.movementX*.01;piv.rotation.x=Math.max(-1.2,Math.min(1.2,piv.rotation.x+ev.movementY*.01));draw3()});
@@ -508,12 +544,29 @@ function size3(){if(!TD)return;const c=$('#v3'),w=c.clientWidth,h=c.clientHeight
 function draw3(){TD.cam.position.set(0,0,TD.d);TD.r.render(TD.sc,TD.cam)}
 function m3(){
  if(!TD||!CB)return;const{piv,g}=TD,rx=piv.rotation.x,ry=piv.rotation.y,M=body(),H=M.H,lo=M.TR[M.TR.length-1][0];
+ // Materiale tessile: MeshStandardMaterial con roughness alta e metalness 0.
+ //
+ // Perche' NON MeshPhysicalMaterial con sheen, che sarebbe la scelta ovvia per
+ // un tessuto: in r128 lo 'sheen' e' ROTTO. Il materiale espone la proprieta' ma
+ // lo shader fisico invia sheenColor come uniform3fv ricevendo il valore di
+ // sheen, e il render fallisce con "The object must have a callable @@iterator".
+ // Verificato isolarmente su numeri, oggetti {value} e valori diversi: fallisce
+ // in ogni forma. Lo sheen funziona dalla r129 in poi, non prima.
+ //
+ // Quindi l'effetto tessuto si ottiene con quello che r128 sa fare: roughness
+ // alta (risposta diffusa, specularita' minima) e illuminazione che modella il
+ // volume. Non sono parametri di fibra misurati, e' approssimazione visiva.
+ const tessile=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.94,metalness:0,
+  side:THREE.DoubleSide});
  while(g.children.length){const ch=g.children[0];ch.traverse(o=>{o.geometry&&o.geometry.dispose();o.material&&o.material.dispose()});g.remove(ch)}
  if(S.mn.sh)mannequin(M,g);
  const nz=CB.ref=='n',Y0=(nz?143:105)*H,hs=nz?134*H:1e9,
   tb=Y=>{const t=Y>=lo?lp(M.TR,Y):(l=>[l[0]+l[1],l[1]])(lp(M.LG,Y));return[t[0],t[1]]},
   lg=Y=>{if(Y>=lo){const t=lp(M.TR,Y);return[t[0]/2,t[1],t[0]/2]}const t=lp(M.LG,Y);return[t[1],t[1],t[0]]},
-  add=(pg,u)=>pg.forEach(([p,geo])=>u.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(p),roughness:.9,side:THREE.DoubleSide}))));
+  // add clona il template: ogni pannello ha la sua texture, ma i parametri sono
+  // gli stessi, quindi un solo oggetto Materiale sorgente
+ add=(pg,u)=>pg.forEach(([p,geo])=>{const m=tex(p),k=tessile.clone();k.map=m;
+  k.castShadow=true;k.receiveShadow=true;u.add(new THREE.Mesh(geo,k))});
  for(const[a,b,k]of CB.T)add(surf(a,b,k=='l'?{Y0,hs:1e9,leg:1,bd:lg}:{Y0,hs,bd:tb}),g);
  if(CB.S)for(const s of[1,-1]){const u=new THREE.Group();
   add(surf(CB.S.p,null,{Y0:0,hs:1e9,bd:(Y,y)=>{const r=4.6*M.B/88*(1-.35*Math.min(1,y/(62*H)));return[r,r]}}),u);
