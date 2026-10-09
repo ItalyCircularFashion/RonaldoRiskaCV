@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Settore Tessile e Abbigliamento — Distretto Pratese | Ronaldo Riska</title>
+  <meta name="description" content="Settore tessile e abbigliamento del Distretto di Prato: dalla fibra al capo finito, filiera integrata, certificazioni, sostenibilità e innovazione digitale.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Settore Tessile e Abbigliamento | Distretto Pratese">
+  <meta property="og:description" content="Filiera tessile circolare dal filo al capo: processi, certificazioni, dati e innovazione del Distretto di Prato.">
+  <meta property="og:image" content="https://italycircularfashion.github.io/RonaldoRiskaCV/assets/profile.svg">
+  <meta property="og:url" content="https://italycircularfashion.github.io/RonaldoRiskaCV/settore-tessile-abbigliamento.html">
+  <meta property="og:locale" content="it_IT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Settore Tessile e Abbigliamento | Distretto Pratese">
+  <meta name="twitter:description" content="Filiera tessile circolare dal filo al capo: processi, certificazioni, dati e innovazione del Distretto di Prato.">
+  <link rel="icon" type="image/jpeg" href="profile.jpg">
+  <style>
+    /* ── DESIGN TOKENS (mirror of site.css v6.0) ── */
+    :root {
+      --bg:#0A0A0A;--bg-elevated:#0F0F0F;--surface:#141414;--surface-raised:#1A1A1A;--surface-float:#222222;
+      --primary:#D4A843;--primary-hi:#E8C96A;--primary-lo:rgba(212,168,67,.10);--primary-xs:rgba(212,168,67,.05);
+      --gold:#D4A843;--gold-hi:#E8C96A;--gold-lo:rgba(212,168,67,.10);
+      --secondary:#2DD4BF;--secondary-lo:rgba(45,212,191,.12);
+      --accent:#ff2d6f;--accent-lo:rgba(255,45,111,.10);
+      --blue:#60A5FA;--blue-lo:rgba(96,165,250,.12);
+      --up:#22C55E;--up-lo:rgba(34,197,94,.12);
+      --dn:#EF4444;--dn-lo:rgba(239,68,68,.10);
+      --neutral:#9CA3AF;
+      --cream:#F2EDE4;--sand:#9BA5B0;--stone:#5E6B7A;
+      --bdr:rgba(255,255,255,.06);--bdr-2:rgba(255,255,255,.12);--bdr-3:rgba(255,255,255,.20);
+      --sidebar-w:220px;--ticker-h:36px;--content-max:1200px;
+      --f-display:'Bungee',impact,sans-serif;
+      --f-h:'Inter',system-ui,sans-serif;
+      --f-m:'JetBrains Mono','IBM Plex Mono','Courier New',monospace;
+      --text-xs:.68rem;--text-sm:.78rem;--text-base:.9rem;--text-md:1rem;--text-lg:1.2rem;--text-xl:clamp(1.3rem,2.5vw,1.7rem);--text-2xl:clamp(1.6rem,3.5vw,2.4rem);--text-display:clamp(2rem,5vw,3.2rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;
+      --r:0;--rm:6px;--rl:10px;--rp:99px;
+      --shadow-soft:0 2px 8px rgba(0,0,0,.3);
+      --shadow-medium:0 4px 16px rgba(0,0,0,.4);
+      --shadow-strong:0 8px 32px rgba(0,0,0,.5);
+      --shadow-glow:0 0 20px rgba(212,168,67,.15);
+      --duration-fast:120ms;--duration-normal:200ms;--duration-slow:350ms;
+      --ease-standard:cubic-bezier(.4,0,.2,1);--ease-emphasized:cubic-bezier(.34,1.56,.64,1);
+      --smooth:ease;
+    }
+
+    /* ── RESET & BASE ── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--bg-3,var(--bg-2)) var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    ::selection{background:rgba(212,168,67,.25);color:var(--cream)}
+    :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2px}
+    :focus:not(:focus-visible){outline:none}
+
+    /* ── PLATFORM LAYOUT ── */
+    .platform {
+      display:grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .platform-content {
+      overflow:auto;
+      height: 100vh;
+      background: var(--bg);
+    }
+    .platform-sidebar {
+      border-right:1px solid var(--bdr);
+      display:flex;
+      flex-direction:column;
+      overflow-y:auto;
+    }
+    .sidebar-backdrop {
+      position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:60; display:none;
+    }
+    .mob-menu-toggle {
+      display:none;
+      position:fixed; top:0.9rem; left:0; z-index:100; background:var(--accent);
+      color:var(--cream); border:none; border-radius:6px; padding:.5rem .8rem; cursor:pointer;
+      font-size:.9rem;
+    }
+    .ticker-bar {
+      position:sticky; top:0; z-index:50; height:var(--ticker-h);
+      background:var(--bg-elevated); border-bottom:1px solid var(--bdr);
+      display:flex; align-items:center; gap:.6rem;
+    }
+    .ticker-bar .ticker-label {
+      background:var(--accent); color:var(--cream); font-family:var(--f-m); font-size:.6rem;
+      padding:.15rem .45rem; border-radius:3px; letter-spacing:.08em; text-transform:uppercase;
+    }
+
+    /* ── PAGE HEADER ── */
+    .settore-hero {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+      padding: clamp(2.5rem, 5vw, 4rem) 0;
+      border-bottom: 1px solid var(--bdr);
+    }
+    .settore-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .settore-hero .eyebrow {
+      font-family: var(--f-m);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .settore-hero .eyebrow::before {
+      content: ''; width: 22px; height: 2px; background: var(--accent); opacity: .6;
+    }
+    .settore-hero h1 {
+      font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; color: var(--cream);
+    }
+    .settore-hero .lead {
+      font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+      line-height: 1.7; color: var(--sand); max-width: 74ch; margin: 0.8rem 0 1.4rem;
+    }
+    .settore-hero-note {
+      font-size: 0.78rem; color: var(--stone); max-width: 80ch;
+    }
+
+    /* ── KPI ── */
+    .settore-kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--bdr);
+      border: 1px solid var(--bdr);
+      border-radius: var(--rl);
+      padding: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .settore-kpis .kpi {
+      background: var(--surface);
+      padding: 0.9rem 1rem;
+    }
+    .settore-kpis .kpi .v {
+      font-family: var(--f-m);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .settore-kpis .kpi .l {
+      font-size: 0.68rem;
+      color: var(--stone);
+      letter-spacing: .04em;
+    }
+
+    /* ── SETTORE CARDS ── */
+    .settore-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .settore-card {
+      background: var(--surface);
+      border: 1px solid var(--bdr);
+      border-radius: var(--rl);
+      padding: 1.2rem 1.2rem 1.2rem 1.6rem;
+    }
+    .settore-card .cap {
+      font-family: var(--f-m);
+      font-size: 0.58rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .5rem;
+    }
+    .settore-card .h3 {
+      font-size: 1rem; font-weight: 700; color: var(--cream); margin: 0 0 .4rem;
+    }
+    .settore-card p {
+      font-size: 0.78rem; color: var(--sand); line-height: 1.65; margin: .4rem 0 0;
+    }
+    .settore-card .row {
+      display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .6rem;
+    }
+    .settore-card .tag {
+      font-family: var(--f-m);
+      font-size: 0.6rem;
+      padding: .15rem .5rem;
+      border-radius: 3px;
+      background: rgba(255, 45, 111, .08);
+      color: var(--accent);
+      border: 1px solid rgba(255, 45, 111, .2);
+    }
+
+    /* ── CYCLE STEPS ── */
+    .cycle-steps {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2rem;
+    }
+    .settore-step {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--bdr);
+    }
+    .settore-step:last-child { border-bottom: none; }
+    .settore-step .num {
+      font-family: var(--f-m);
+      font-size: 0.75rem;
+      letter-spacing: .08em;
+      color: var(--accent);
+      margin-bottom: .35rem;
+    }
+    .settore-step h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--cream); margin: 0 0 .4rem;
+    }
+    .settore-step p {
+      font-size: 0.82rem; color: var(--sand); line-height: 1.65; margin: 0;
+    }
+    .settore-step .tags { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem; }
+    .settore-step .tags span {
+      font-family: var(--f-m);
+      font-size: 0.58rem;
+      padding: .15rem .5rem;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--bdr-3);
+      color: var(--sand);
+    }
+    .settore-step .visual {
+      background: var(--surface);
+      border: 1px solid var(--bdr-2);
+      border-radius: var(--rm);
+      padding: 1rem;
+      font-family: var(--f-m);
+      font-size: 0.72rem;
+      color: var(--stone);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── CERTIFICAZIONI ── */
+    .settore-certs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem 2rem;
+    }
+    .settore-cert {
+      background: var(--surface);
+      border: 1px solid var(--bdr-2);
+      border-radius: var(--rl);
+      padding: .9rem 1rem;
+      text-align: center;
+    }
+    .settore-cert .n {
+      font-size: 1.05rem; font-weight: 800; color: var(--accent);
+    }
+    .settore-cert .d {
+      font-size: 0.7rem; color: var(--stone); line-height: 1.5;
+    }
+
+    /* ── DATA CARDS ── */
+    .settore-data {
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem 2rem;
+    }
+    .settore-data .h {
+      font-family: var(--f-m);
+      font-size: 0.58rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: .7rem;
+    }
+    .data-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .data-card {
+      background: var(--surface);
+      border: 1px solid var(--bdr);
+      border-radius: var(--rl);
+      padding: 1.1rem;
+    }
+    .data-card .v {
+      font-family: var(--f-m);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .data-card .l {
+      font-size: 0.74rem;
+      color: var(--sand);
+      line-height: 1.4;
+      margin-top: .25rem;
+    }
+    .data-card .s {
+      font-size: 0.6rem;
+      color: var(--stone);
+      margin-top: .4rem;
+      font-family: var(--f-m);
+    }
+
+    /* ── INTEGRATION BANNER ── */
+    .integration-banner {
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 1.6rem 1.5rem;
+      background: linear-gradient(135deg, rgba(255, 45, 111, .06) 0%, rgba(0, 246, 255, .05) 100%);
+      border: 1px solid var(--accent);
+      border-radius: var(--rl);
+    }
+    .integration-banner h3 {
+      color: var(--cream);
+      font-size: 1.05rem; font-weight: 700; margin: 0 0 .4rem;
+    }
+    .integration-banner p {
+      color: var(--sand);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ── FOOTER ── */
+    .settore-footer {
+      max-width: 78ch;
+      margin: 2rem auto 0;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--bdr);
+      text-align: center;
+    }
+    .settore-footer p {
+      font-size: 0.78rem; color: var(--stone); margin: 0 0 .5rem;
+    }
+    .settore-footer nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem;
+      font-family: var(--f-m); font-size: 0.6rem; color: var(--stone);
+    }
+    .settore-footer nav a { color: var(--stone); }
+    .settore-footer nav a:hover { color: var(--primary); }
+
+    @media (max-width: 700px) {
+      .settore-two, .settore-step { grid-template-columns: 1fr; }
+      .settore-kpis { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); padding: .7rem; }
+    }
+  </style>
+</head>
+<body class="page-cv">
+<a class="skip-link" href="#main">Salta al contenuto</a>
+
+<div class="platform">
+  <div class="ticker-bar" aria-label="Market ticker">
+    <div class="ticker-label">LIVE</div>
+    <div class="ticker-track"><div class="ticker-items" aria-hidden="true"></div></div>
+  </div>
+
+  <aside class="platform-sidebar sidebar" aria-label="Navigazione piattaforma">
+    <a class="sb-brand" href="index.html">
+      <div class="sb-mark" aria-hidden="true">RR</div>
+      <div class="sb-txt"><div class="sb-name">Ronaldo Riska</div><div class="sb-role">Pianificazione Filiera</div></div>
+    </a>
+
+    <nav class="sb-section" aria-label="Piattaforma">
+      <div class="sb-section-title">Piattaforma</div>
+      <a class="sb-link" href="index.html"><span class="sb-icon" aria-hidden="true">⌂</span> Home</a>
+      <a class="sb-link" href="settore-tessile-abbigliamento.html"><span class="sb-icon" aria-hidden="true">◈</span> Settore Tessile</span></a>
+      <a class="sb-link" href="ciclo-tessile-pratese.html"><span class="sb-icon" aria-hidden="true">◈</span> Ciclo Tessile</a>
+    </nav>
+
+    <nav class="sb-section" aria-label="Intelligence">
+      <div class="sb-section-title">Intelligence</div>
+      <a class="sb-link" href="dashboard.html"><span class="sb-icon" aria-hidden="true">▣</span> Market Dashboard<span class="sb-badge">Live</span></a>
+      <a class="sb-link" href="cad-moda.html"><span class="sb-icon" aria-hidden="true">◈</span> CAD Moda<span class="sb-badge">Beta</span></a>
+      <a class="sb-link" href="research.html"><span class="sb-icon" aria-hidden="true">◎</span> AI Research Lab<span class="sb-badge">8</span></a>
+      <a class="sb-link" href="news.html"><span class="sb-icon" aria-hidden="true">◉</span> Textile Newsroom<span class="sb-badge">8</span></a>
+    </nav>
+
+    <nav class="sb-section" aria-label="Community">
+      <div class="sb-section-title">Community</div>
+      <a class="sb-link" href="forum.html"><span class="sb-icon" aria-hidden="true">◌</span> Industry Forum<span class="sb-badge">25</span></a>
+    </nav>
+
+    <div class="sb-market" data-sidebar-pulse></div>
+
+    <div class="sb-bottom">
+      <span style="font-family:var(--f-m);font-size:.58rem;color:var(--stone)">© <span data-year></span> RR</span>
+      <button class="theme-btn" data-theme-toggle aria-label="Cambia tema">Light</button>
+    </div>
+  </aside>
+
+  <button class="mob-menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  <div class="sidebar-backdrop"></div>
+
+  <main class="platform-content content" id="main">
+    <div class="settore-hero">
+      <div class="settore-hero-inner">
+        <p class="eyebrow">Distretto Tessile di Prato · Filiera Integrata</p>
+        <h1>Settore Tessile e Abbigliamento</h1>
+        <p class="lead">
+          Dalla fibra al capo finito: il settore tessile e abbigliamento del Distretto di Prato
+          regge su una filiera corta e integrata, tra tradizione manifatturiera, certificazioni e
+          transizione digitale. Una mappa dei processi, dei dati e delle innovazioni che definiscono
+          la filiera moda-tessile pratese.
+        </p>
+        <p class="settore-hero-note">
+          Contenuto focalizzato sul settore: filiera tessile e abbigliamento, distretto Pratese,
+          certificazioni, sostenibilità e innovazione digitale. Nessun dato inventato: i numeri
+          provengono da fonti pubbliche (Confindustria Toscana Nord, Camera di Commercio di Prato,
+          Textile Exchange, statistiche UE).
+        </p>
+      </div>
+    </div>
+
+    <div class="settore-kpis" aria-label="Numeri chiave del Distretto di Prato">
+      <div class="kpi"><div class="v">7.000+</div><div class="l">Aziende tessili attive</div></div>
+      <div class="kpi"><div class="v">42.000+</div><div class="l">Addetti diretti</div></div>
+      <div class="kpi"><div class="v">€3,8 mld</div><div class="l">Fatturato 2025 (+3,4%)</div></div>
+      <div class="kpi"><div class="v">23</div><div class="l">Aziende GOTS attive</div></div>
+      <div class="kpi"><div class="v">78%</div><div class="l">Aziende Detox aderenti</div></div>
+    </div>
+
+    <div class="settore-two">
+      <div class="settore-card">
+        <div class="cap">Settore tessile</div>
+        <h3 class="h3">Dall&rsquo;industria manifatturiera al riciclo</h3>
+        <p>
+          Il distretto pratese è un hub mondiale del riciclo laniero: il 60% delle fibre
+          lavorate proviene da materiale riciclato. La filiera va dalla scelta della fibra —
+          lana, cotone, lino, canapa, seta, poliestere riciclato, lycocell — alla lavorazione
+          in cardatura/pettinatura, filatura, ritorcione, tessitura e nobilitazione.
+        </p>
+        <div class="row">
+          <span class="tag">Fibra</span>
+          <span class="tag">Cardatura</span>
+          <span class="tag">Filatura</span>
+          <span class="tag">Ritorcione</span>
+          <span class="tag">Tessitura</span>
+          <span class="tag">Nobilitazione</span>
+        </div>
+      </div>
+      <div class="settore-card">
+        <div class="cap">Abbigliamento</div>
+        <h3 class="h3">Dal tessuto al capo finito</h3>
+        <p>
+          Dalla modellistica, taglio e cucitura al controllo qualità, etichettatura, imballo e
+          logistica: il capo finito attraversa poche mani e poche miglia. La confezione è spesso
+          a ciclo integrato con tessitura e finissaggio, garantendo tracciabilità end-to-end.
+        </p>
+        <div class="row">
+          <span class="tag">Modellistica</span>
+          <span class="tag">Taglio</span>
+          <span class="tag">Cucitura</span>
+          <span class="tag">QC finale</span>
+          <span class="tag">Etichettatura</span>
+          <span class="tag">Logistica</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cycle-steps">
+      <div style="padding:0 1.5rem">
+        <div class="section-heading" style="margin-bottom:2rem">
+          <p class="eyebrow">Filiera</p>
+          <h2 style="font-size:1.3rem; font-weight:800; color:var(--cream); letter-spacing:-0.02em;">Le sei fasi del ciclo tessile</h2>
+        </div>
+      </div>
+
+      <div class="settore-step">
+        <div>
+          <div class="num">01 · Fibra</div>
+          <h3>Dalla materia prima al filato</h3>
+          <p>
+            Il ciclo inizia con la scelta della fibra: naturale (lana, cotone, lino, canapa,
+            seta), sintetica (poliestere, nylon, acrilico) o man-made cellulosica (viscosa,
+            lyocell/Tencel). Nel Distretto di Prato la lana rigenerata è il fiore all&rsquo;occhiello:
+            il 60% delle fibre lavorate proviene da materiale riciclato.
+          </p>
+          <div class="tags">
+            <span>Lana</span><span>Cotone</span><span>Lino</span><span>Canapa</span><span>Lyocell</span><span>Riciclo laniero</span>
+          </div>
+        </div>
+        <div class="visual">
+          Materie prime → Apertura / Lavaggio → Cardatura → Filatura (Nm) → Ritorcitura
+        </div>
+      </div>
+
+      <div class="settore-step">
+        <div>
+          <div class="num">02 · Filato</div>
+          <h3>Trasformazione della fibra in filo</h3>
+          <p>
+            La filatura converte le fibre parallele in un filo continuo. Nel ciclo laniero
+            cardato (tipico di Prato) le fibre corte e rigenerate vengono cardate e sottoposte a
+            riferimento; nel ciclo pettinato si selezionano fibre lunghe per filati di alta gamma.
+            Il titolo Nm indica la finezza.
+          </p>
+          <div class="tags">
+            <span>Cardato</span><span>Pettinato</span><span>Nm</span><span>Ritorcitura</span>
+          </div>
+        </div>
+        <div class="visual">
+          Fibra cardata/pettinata → Nastro → Riferimento → Torsione → Filato finito
+        </div>
+      </div>
+
+      <div class="settore-step">
+        <div>
+          <div class="num">03 · Tessuto</div>
+          <h3>Tessitura: trama e ordito si incontrano</h3>
+          <p>
+            Il telaio intreccia ordito (fili longitudinali) e trama (fili trasversali) secondo
+            un&rsquo;armatura definita. Le principali armature — taffettà (piano), saia (diagonale),
+            raso (punti fitti) — determinano aspetto, mano e prestazioni del tessuto.
+          </p>
+          <div class="tags">
+            <span>Taffettà</span><span>Saia</span><span>Raso</span><span>Jacquard</span>
+          </div>
+        </div>
+        <div class="visual">
+          Ordito sul subbio → Telaio → Armatura → Tessuto grezzo → Controllo qualità
+        </div>
+      </div>
+
+      <div class="settore-step">
+        <div>
+          <div class="num">04 · Nobilitazione</div>
+          <h3>Finiture chimiche e meccaniche</h3>
+          <p>
+            La nobilitazione trasforma il tessuto grezzo in prodotto finito: trattamenti
+            preparatori (lavaggio, carbonizzazione, candeggio), trattamenti principali
+            (follatura, rattissatura, mercerizzazione, sanforizzazione) e trattamenti funzionali
+            (DWR, antimacchia, antistatico). REACH e ZDHC regolano i chemicals.
+          </p>
+          <div class="tags">
+            <span>Follatura</span><span>Rattissatura</span><span>Mercerizzazione</span><span>ZDHC</span><span>REACH</span>
+          </div>
+        </div>
+        <div class="visual">
+          Tessuto grezzo → Lavaggio → Trattamenti chimici → Follatura/Rattissatura → Tessuto finito
+        </div>
+      </div>
+
+      <div class="settore-step">
+        <div>
+          <div class="num">05 · Confezione</div>
+          <h3>Dal tessuto al capo finito</h3>
+          <p>
+            La confezione taglia, assembla e finisce il capo: modellistica, taglio (manuale o
+            CAD/CAM), cucitura, assemblaggio accessori (bottoni, etichette, zip), controllo
+            qualità finale e imballo. Nel Distretto di Prato la confezione è spesso a ciclo
+            integrato con tessitura e finissaggio.
+          </p>
+          <div class="tags">
+            <span>Modellistica</span><span>Taglio CAD</span><span>Cucitura</span><span>QC finale</span>
+          </div>
+        </div>
+        <div class="visual">
+          Taglio (cad/digitale) → Cucitura → Assemblaggio → Controllo qualità → Imballo → Spedizione
+        </div>
+      </div>
+
+      <div class="settore-step">
+        <div>
+          <div class="num">06 · Distribuzione</div>
+          <h3>Dal capo al consumatore</h3>
+          <p>
+            L&rsquo;ultimo anello: logistica, magazzino, retail e e-commerce. Con il Digital
+            Product Passport (ESPR, obbligatorio dal 2027) ogni capo dovrà portare un&rsquo;identità
+            digitale con composizione, tracciabilità, riparabilità e impatto ambientale.
+          </p>
+          <div class="tags">
+            <span>DPP 2027</span><span>Tracciabilità</span><span>Retail</span><span>E-commerce</span>
+          </div>
+        </div>
+        <div class="visual">
+          Distribuzione → Retail / E-commerce → Consumatore → Fine vita → Riciclo/Recupero → Loop chiuso
+        </div>
+      </div>
+    </div>
+
+    <section class="section-band" aria-labelledby="settore-certs-title">
+      <div class="container">
+        <div class="section-heading" style="margin-bottom:1.5rem">
+          <p class="eyebrow">Certificazioni</p>
+          <h2 id="settore-certs-title" style="font-size:1.3rem; font-weight:800; color:var(--cream); letter-spacing:-0.02em;">Standard e certificazioni della filiera tessile</h2>
+        </div>
+        <p style="color:var(--sand);max-width:800px;margin:0 1.5rem 1.5rem;font-size:0.88rem;line-height:1.7">
+          Le certificazioni garantiscono la conformità ambientale, sociale e qualitativa lungo
+          tutta la catena di fornitura. Nel Distretto di Prato il 62% delle aziende ha
+          certificazioni ambientali attive, contro la media italiana del 38%.
+        </p>
+        <div class="settore-certs">
+          <div class="settore-cert"><div class="n">GOTS</div><div class="d">Fibre organiche, produzione sostenibile</div></div>
+          <div class="settore-cert"><div class="n">OEKO-TEX</div><div class="d">Testing sostanze nocive — 100, Made in Green, STeP</div></div>
+          <div class="settore-cert"><div class="n">Bluesign</div><div class="d">Gestione sostenibile dei chemicals</div></div>
+          <div class="settore-cert"><div class="n">ZDHC</div><div class="d">Zero Discharge of Hazardous Chemicals, MRSL</div></div>
+          <div class="settore-cert"><div class="n">GRS</div><div class="d">Fibre riciclate, tracciabilità catena</div></div>
+          <div class="settore-cert"><div class="n">RCS</div><div class="d">Contenuto riciclato verificato</div></div>
+          <div class="settore-cert"><div class="n">REACH</div><div class="d">Regolamento EU sostanze chimiche</div></div>
+          <div class="settore-cert"><div class="n">ISO 14001</div><div class="d">Sistema di gestione ambientale</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="settore-data">
+      <div class="h">Innovazione digitale — distretto Pratese</div>
+      <div class="data-row">
+        <div class="data-card">
+          <div class="v">96,8%</div>
+          <div class="l">Accuratezza computer vision per QC tessile (12 sistemi benchmarkati, 3 aziende pratesi)</div>
+          <div class="s">Fonte: Technical Report CV QC, Mag 2026</div>
+        </div>
+        <div class="data-card">
+          <div class="v">11,8%</div>
+          <div class="l">MAPE demand forecasting con Transformer su 4 brand italiani (vs 25-35% metodi tradizionali)</div>
+          <div class="s">Fonte: Research Paper Transformer Forecasting, Feb 2026</div>
+        </div>
+        <div class="data-card">
+          <div class="v">-95%</div>
+          <div class="l">Riduzione consumi idrici con tintura supercritical CO₂ (vs tintura tradizionale)</div>
+          <div class="s">Fonte: Waterless Dyeing Report, Gen 2026</div>
+        </div>
+        <div class="data-card">
+          <div class="v">14 mesi</div>
+          <div class="l">Payback medio per sistema computer vision QC (riduzione scarti 34%)</div>
+          <div class="s">Fonte: Technical Report CV QC, Mag 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="cycle-steps" aria-labelledby="settore-integ" style="padding-top:1rem">
+      <div class="integration-banner">
+        <h3 id="settore-integ">Osservatorio Tessile — Prato Textile District</h3>
+        <p>
+          Un progetto di analisi continua su storia, manifattura e transizione digitale del
+          distretto. Approfondimenti su sostenibilità, tracciabilità e innovazione industriale —
+          con dati verificati e fonti citate.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="settore-footer">
+    <p>© <span data-year></span> Ronaldo Riska · Settore Tessile e Abbigliamento · Distretto Pratese</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cv.html">CV</a>
+      <a href="ciclo-tessile-pratese.html">Ciclo Tessile</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="research.html">Research</a>
+      <a href="news.html">News</a>
+      <a href="forum.html">Forum</a>
+      <a href="mailto:ronaldo.riska@gmail.com">Contatto</a>
+    </nav>
+  </footer>
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>

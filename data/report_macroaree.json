@@ -1,0 +1,54 @@
+{
+ "01-TESSITURA_E_FILATURA": {
+  "title": "01-TESSITURA_E_FILATURA — Tessitura &amp; Filatura",
+  "area": "Tessitura &amp; Filatura"
+ },
+ "02-CHIMICA_FIBRE": {
+  "title": "02-CHIMICA_FIBRE — Chimica delle Fibre",
+  "area": "Chimica delle Fibre"
+ },
+ "03-NOBILITAZIONE_TESSILE": {
+  "title": "03-NOBILITAZIONE_TESSILE — Nobilitazione Tessile",
+  "area": "Nobilitazione Tessile"
+ },
+ "04-SOSTENIBILITA_SPECIALE": {
+  "title": "04-SOSTENIBILITA_SPECIALE — Sostenibilita&#x27; Speciale (Bananatex / Policy)",
+  "area": "Sostenibilita&#x27; Speciale (Bananatex / Policy)"
+ },
+ "05-MAGLIERIA": {
+  "title": "05-MAGLIERIA — Maglieria",
+  "area": "Maglieria"
+ },
+ "06-LEAN_SUPPLY_CHAIN": {
+  "title": "06-LEAN_SUPPLY_CHAIN — Ingegneria Gestionale, Lean &amp; Supply Chain",
+  "area": "Ingegneria Gestionale, Lean &amp; Supply Chain"
+ },
+ "07-PROJECT_MANAGEMENT": {
+  "title": "07-PROJECT_MANAGEMENT — Project Management",
+  "area": "Project Management"
+ },
+ "08-ECONOMIA": {
+  "title": "08-ECONOMIA — Economia",
+  "area": "Economia"
+ },
+ "09-COMUNICAZIONE_INGLESE": {
+  "title": "09-COMUNICAZIONE_INGLESE — Comunicazione &amp; Inglese",
+  "area": "Comunicazione &amp; Inglese"
+ },
+ "10-ORIENTAMENTO_PERSONALE": {
+  "title": "10-ORIENTAMENTO_PERSONALE — Orientamento &amp; Documenti Personali",
+  "area": "Orientamento &amp; Documenti Personali"
+ },
+ "11-FILIERA_PRATO_DATI": {
+  "title": "11-FILIERA_PRATO_DATI — Filiera Prato - dati e casi reali",
+  "area": "Filiera Prato - dati e casi reali"
+ },
+ "12-DISPOSIZIONE_PRODUZIONE": {
+  "title": "12-DISPOSIZIONE_PRODUZIONE — Disposizione &amp; Controllo Produzione",
+  "area": "Disposizione &amp; Controllo Produzione"
+ },
+ "99-MEDIA_E_ALTRO": {
+  "title": "99-MEDIA_E_ALTRO — Media, script e file non testuali",
+  "area": "Media, script e file non testuali"
+ }
+}
