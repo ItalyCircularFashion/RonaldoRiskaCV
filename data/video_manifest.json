@@ -1,0 +1,33 @@
+{
+  "videos": [
+    {
+      "name": "Orditura_60s_480p.mp4",
+      "size_bytes": 6900021,
+      "resolution": "854x480",
+      "codec": "h264",
+      "duration_s": 60,
+      "label": "Orditura"
+    },
+    {
+      "name": "Tessitura_60s_480p.mp4",
+      "size_bytes": 6924689,
+      "resolution": "854x480",
+      "codec": "h264",
+      "duration_s": 60,
+      "label": "Tessitura"
+    },
+    {
+      "name": "Tessitura2_60s_480p.mp4",
+      "size_bytes": 6753324,
+      "resolution": "854x480",
+      "codec": "h264",
+      "duration_s": 58.43,
+      "label": "Tessitura2"
+    }
+  ],
+  "paths": {
+    "Orditura_60s_480p.mp4": "/assets/Orditura_60s_480p.mp4",
+    "Tessitura_60s_480p.mp4": "/assets/Tessitura_60s_480p.mp4",
+    "Tessitura2_60s_480p.mp4": "/assets/Tessitura2_60s_480p.mp4"
+  }
+}

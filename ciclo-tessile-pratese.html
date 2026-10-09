@@ -263,6 +263,57 @@
       font-size: 0.78rem;
       color: var(--stone);
     }
+    /* Hero Video Grid */
+    .hero-video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .hero-video {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    .hero-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+      background: var(--bg-soft);
+    }
+
+    .hero-video-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      color: #fff;
+      font-size: 0.62rem;
+      font-family: var(--f-m);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.65rem;
+      pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero-video-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
   </style>
 </head>
 <body class="page-cv">
@@ -330,6 +381,28 @@
           <span class="hero-tag">Industry 4.0</span>
           <span class="hero-tag">Distretto Pratese</span>
           <span class="hero-tag">LCA &amp; ESG</span>
+        </div>
+      </div>
+
+      <!-- HERO VIDEO GRID — Orditura, Tessitura, Tessitura2 -->
+      <div class="hero-video-grid">
+        <div class="hero-video hero-video--orditura">
+          <video autoplay muted loop playsinline controls preload="metadata">
+            <source src="assets/Orditura_60s_480p.mp4" type="video/mp4">
+          </video>
+          <div class="hero-video-label">Orditura</div>
+        </div>
+        <div class="hero-video hero-video--tessitura">
+          <video autoplay muted loop playsinline controls preload="metadata">
+            <source src="assets/Tessitura_60s_480p.mp4" type="video/mp4">
+          </video>
+          <div class="hero-video-label">Tessitura</div>
+        </div>
+        <div class="hero-video hero-video--tessitura2">
+          <video autoplay muted loop playsinline controls preload="metadata">
+            <source src="assets/Tessitura2_60s_480p.mp4" type="video/mp4">
+          </video>
+          <div class="hero-video-label">Tessitura2</div>
         </div>
       </div>
     </section>
