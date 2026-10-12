@@ -57,18 +57,19 @@
     .platform {
       display:grid;
       grid-template-columns: var(--sidebar-w) 1fr;
-      height: 100vh;
-      overflow: hidden;
+      min-height:100dvh;
     }
     .platform-content {
-      overflow:auto;
-      height: 100vh;
+      overflow-x:hidden;
       background: var(--bg);
     }
     .platform-sidebar {
       border-right:1px solid var(--bdr);
       display:flex;
       flex-direction:column;
+      position:sticky;
+      top:0;
+      height:100dvh;
       overflow-y:auto;
     }
     .sidebar-backdrop {
@@ -347,13 +348,24 @@
     .settore-footer nav a { color: var(--stone); }
     .settore-footer nav a:hover { color: var(--primary); }
 
+    @media (max-width: 900px) {
+      .platform { grid-template-columns: 1fr; }
+      .platform-sidebar {
+        position:fixed; top:var(--ticker-h); left:0; height:calc(100dvh - var(--ticker-h));
+        transform:translateX(-100%); transition:transform var(--duration-normal); z-index:100;
+      }
+      .platform-sidebar.open { transform:translateX(0); }
+      .mob-menu-toggle { display:flex; }
+      .sidebar-backdrop.open { display:block; }
+      .platform-content { margin-left:0; }
+    }
     @media (max-width: 700px) {
       .settore-two, .settore-step { grid-template-columns: 1fr; }
       .settore-kpis { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); padding: .7rem; }
     }
   </style>
 </head>
-<body class="page-cv">
+<body class="page-settore">
 <a class="skip-link" href="#main">Salta al contenuto</a>
 
 <div class="platform">
