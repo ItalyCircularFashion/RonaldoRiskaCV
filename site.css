@@ -325,7 +325,10 @@ canvas.sparkline{width:100%;height:60px;display:block}
 .rc-footer{display:flex;align-items:center;justify-content:space-between;font-family:var(--f-m);font-size:var(--text-xs);color:var(--stone);padding-top:var(--space-3);border-top:1px solid var(--bdr)}
 .rc-cta{color:var(--primary);font-size:var(--text-sm);display:flex;align-items:center;gap:var(--space-1);transition:gap var(--duration-fast)}
 .rc:hover .rc-cta{gap:var(--space-2)}
+.rc-cta-off{color:var(--stone);cursor:default;font-style:italic;opacity:.8}
+.rc:hover .rc-cta-off{gap:var(--space-1)}
 .rc-cta::after{content:'→'}
+.rc-cta-off::after{content:''}
 
 /* Forum */
 .forum-cats{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-6)}

@@ -170,7 +170,7 @@ function renderResearch() {
   if (!CNT?.research) return;
   document.querySelectorAll('[data-research-grid]').forEach(grid => {
     const limit = parseInt(grid.dataset.limit || '99');
-    grid.innerHTML = CNT.research.slice(0, limit).map(r => `<article class="rc reveal" data-type="${r.type}"><div class="rc-type">${r.type}</div><h3 class="rc-title">${r.title}</h3><p class="rc-abstract">${r.abstract.slice(0, 180)}…</p><div class="rc-tags">${r.tags.map(t => `<span class="rc-tag">${t}</span>`).join('')}</div><div class="rc-footer"><span>${r.date} · ${r.pages}p · ${r.readTime}</span><a class="rc-cta" href="${r.url || '#'}" target="_blank" rel="noopener">Leggi</a></div></article>`).join('');
+    grid.innerHTML = CNT.research.slice(0, limit).map(r => `<article class="rc reveal" data-type="${r.type}"><div class="rc-type">${r.type}</div><h3 class="rc-title">${r.title}</h3><p class="rc-abstract">${r.abstract.slice(0, 180)}…</p><div class="rc-tags">${r.tags.map(t => `<span class="rc-tag">${t}</span>`).join('')}</div><div class="rc-footer"><span>${r.date} · ${r.pages}p · ${r.readTime}</span>${(r.url && r.url !== '#') ? `<a class="rc-cta" href="${r.url}" target="_blank" rel="noopener">Leggi</a>` : `<span class="rc-cta rc-cta-off">Solo abstract</span>`}</div></article>`).join('');
     setTimeout(() => observeNewReveals(grid), 80);
   });
 }

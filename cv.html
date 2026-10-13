@@ -71,18 +71,19 @@
     .platform {
       display:grid;
       grid-template-columns: var(--sidebar-w) 1fr;
-      height: 100vh;
-      overflow: hidden;
+      min-height:100dvh;
     }
     .platform-content {
-      overflow:auto;
-      height: 100vh;
+      overflow-x:hidden;
       background: var(--bg);
     }
     .platform-sidebar {
       border-right:1px solid var(--bdr);
       display:flex;
       flex-direction:column;
+      position:sticky;
+      top:0;
+      height:100dvh;
       overflow-y:auto;
     }
     .sidebar-backdrop {
@@ -358,6 +359,17 @@
       border: 1px solid rgba(255, 45, 111, .2);
     }
 
+    @media (max-width: 900px) {
+      .platform { grid-template-columns: 1fr; }
+      .platform-sidebar {
+        position:fixed; top:var(--ticker-h); left:0; height:calc(100dvh - var(--ticker-h));
+        transform:translateX(-100%); transition:transform var(--duration-normal); z-index:100;
+      }
+      .platform-sidebar.open { transform:translateX(0); }
+      .mob-menu-toggle { display:flex; }
+      .sidebar-backdrop.open { display:block; }
+      .platform-content { margin-left:0; }
+    }
     @media (max-width: 700px) {
       .cv-skills-grid { grid-template-columns: 1fr; }
       .cv-hero-avatar { width: 72px; height: 72px; margin-right: 1rem; }
