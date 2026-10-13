@@ -41,7 +41,7 @@ const SERIES = {
 
 /* ═══ CHARTS CONFIG ═══ */
 const CHARTS = [
-  { id:'c-cotton',   title:'Cotone NY (¢/lb)',   sub:'Ultime 12 settimane', val:'79.4¢', chg:'+1.8%', dir:'up',  series:'cotton',   color:'#D4A843' },
+  { id:'c-cotton',   title:'Cotone NY (¢/lb)',   sub:'Ultime 12 settimane', val:'79.4¢', chg:'+1.8%', dir:'up',  series:'cotton',   color:'#8FA8C8' },
   { id:'c-poly',     title:'Poliestere ($/kg)',  sub:'Ultime 12 settimane', val:'$1.12', chg:'-0.6%', dir:'dn',  series:'poly',     color:'#E74C3C' },
   { id:'c-wool',     title:'Lana Merino (€/kg)', sub:'Ultime 12 settimane', val:'€18.2', chg:'+0.4%', dir:'up',  series:'wool',     color:'#27AE60' },
   { id:'c-esg',      title:'ESG Textile Index',  sub:'Score 0-100',         val:'68.4',  chg:'+3.2',  dir:'up',  series:'esgtx',    color:'#2E7D52' },
@@ -365,7 +365,7 @@ const ARTICLES = [
     num: '01',
     cat: 'distretto',
     catLabel: 'Distretto',
-    catColor: '#D4A843',
+    catColor: '#8FA8C8',
     title: 'Prato: export +2,1% e occupazione +23%. I numeri della ripresa',
     readTime: '6 min',
     tags: ['Prato', 'Distretto', 'Export', 'Occupazione'],
@@ -455,7 +455,7 @@ const ARTICLES = [
     num: '07',
     cat: 'nobilitazione',
     catLabel: 'Nobilitazione',
-    catColor: '#D4A843',
+    catColor: '#8FA8C8',
     title: 'La Rifinizione e Nobilitazione dei Tessuti',
     readTime: '6 min',
     tags: ['Nobilitazione', 'Finissaggio', 'Trattamenti', 'Qualità'],
@@ -470,7 +470,7 @@ const ARTICLES = [
     num: '08',
     cat: 'nobilitazione',
     catLabel: 'Nobilitazione',
-    catColor: '#D4A843',
+    catColor: '#8FA8C8',
     title: 'Il Finissaggio Meccanico: Follatura, Rattissatura, Vaporizzazione',
     readTime: '6 min',
     tags: ['Follatura', 'Rattissatura', 'Decatissaggio', 'Finissaggio'],
