@@ -48,7 +48,10 @@
 
     /* ── RESET & BASE ── */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    .skip-link{position:absolute;top:-100px;left:var(--space-4);background:var(--primary);color:var(--bg);padding:var(--space-2) var(--space-4);border-radius:var(--r);z-index:300;font-weight:700;font-size:var(--text-sm);transition:top var(--duration-fast)}
+    .skip-link:focus{top:var(--space-4)}
     html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--bg-3,var(--bg-2)) var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    body{font-family:var(--f-h);font-size:var(--text-base);background:var(--bg);color:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
     ::selection{background:rgba(212,168,67,.25);color:var(--cream)}
     :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2px}
     :focus:not(:focus-visible){outline:none}
@@ -56,10 +59,14 @@
     /* ── PLATFORM LAYOUT ── */
     .platform {
       display:grid;
-      grid-template-columns: var(--sidebar-w) 1fr;
+      grid-template-rows:var(--ticker-h) 1fr;
+      grid-template-columns:1fr;
       min-height:100dvh;
     }
     .platform-content {
+      grid-column:1;
+      grid-row:2;
+      margin-left:var(--sidebar-w);
       overflow-x:hidden;
       background: var(--bg);
     }
@@ -67,10 +74,13 @@
       border-right:1px solid var(--bdr);
       display:flex;
       flex-direction:column;
-      position:sticky;
-      top:0;
-      height:100dvh;
+      position:fixed;
+      top:var(--ticker-h);
+      left:0;
+      width:var(--sidebar-w);
+      height:calc(100dvh - var(--ticker-h));
       overflow-y:auto;
+      z-index:100;
     }
     .sidebar-backdrop {
       position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:60; display:none;
@@ -662,21 +672,20 @@
       </div>
     </section>
 
+    <footer class="settore-footer">
+      <p>© <span data-year></span> Ronaldo Riska · Settore Tessile e Abbigliamento · Distretto Pratese</p>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="cv.html">CV</a>
+        <a href="ciclo-tessile-pratese.html">Ciclo Tessile</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="research.html">Research</a>
+        <a href="news.html">News</a>
+        <a href="forum.html">Forum</a>
+        <a href="mailto:ronaldo.riska@gmail.com">Contatto</a>
+      </nav>
+    </footer>
   </main>
-
-  <footer class="settore-footer">
-    <p>© <span data-year></span> Ronaldo Riska · Settore Tessile e Abbigliamento · Distretto Pratese</p>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="cv.html">CV</a>
-      <a href="ciclo-tessile-pratese.html">Ciclo Tessile</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="research.html">Research</a>
-      <a href="news.html">News</a>
-      <a href="forum.html">Forum</a>
-      <a href="mailto:ronaldo.riska@gmail.com">Contatto</a>
-    </nav>
-  </footer>
 </div>
 
 <script src="main.js" defer></script>

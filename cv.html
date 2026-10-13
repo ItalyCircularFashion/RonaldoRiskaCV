@@ -70,10 +70,14 @@
     /* ── PLATFORM LAYOUT ── */
     .platform {
       display:grid;
-      grid-template-columns: var(--sidebar-w) 1fr;
+      grid-template-rows:var(--ticker-h) 1fr;
+      grid-template-columns:1fr;
       min-height:100dvh;
     }
     .platform-content {
+      grid-column:1;
+      grid-row:2;
+      margin-left:var(--sidebar-w);
       overflow-x:hidden;
       background: var(--bg);
     }
@@ -81,10 +85,13 @@
       border-right:1px solid var(--bdr);
       display:flex;
       flex-direction:column;
-      position:sticky;
-      top:0;
-      height:100dvh;
+      position:fixed;
+      top:var(--ticker-h);
+      left:0;
+      width:var(--sidebar-w);
+      height:calc(100dvh - var(--ticker-h));
       overflow-y:auto;
+      z-index:100;
     }
     .sidebar-backdrop {
       position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:60; display:none;
