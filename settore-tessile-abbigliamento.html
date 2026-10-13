@@ -28,7 +28,7 @@
       --up:#22C55E;--up-lo:rgba(34,197,94,.12);
       --dn:#EF4444;--dn-lo:rgba(239,68,68,.10);
       --neutral:#9CA3AF;
-      --cream:#F2EDE4;--sand:#9BA5B0;--stone:#5E6B7A;
+      --cream:#F2EDE4;--sand:#9BA5B0;--stone:#94A3B8;
       --bdr:rgba(255,255,255,.06);--bdr-2:rgba(255,255,255,.12);--bdr-3:rgba(255,255,255,.20);
       --sidebar-w:220px;--ticker-h:36px;--content-max:1200px;
       --f-display:'Bungee',impact,sans-serif;
@@ -87,7 +87,7 @@
       display:flex; align-items:center; gap:.6rem;
     }
     .ticker-bar .ticker-label {
-      background:var(--accent); color:var(--cream); font-family:var(--f-m); font-size:.6rem;
+      background:var(--accent); color:#0A0A0A; font-family:var(--f-m); font-size:.7rem; font-weight:700;
       padding:.15rem .45rem; border-radius:3px; letter-spacing:.08em; text-transform:uppercase;
     }
 
@@ -345,7 +345,10 @@
       display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem;
       font-family: var(--f-m); font-size: 0.6rem; color: var(--stone);
     }
-    .settore-footer nav a { color: var(--stone); }
+    .settore-footer nav a {
+      color: var(--stone);
+      display:inline-flex; align-items:center; min-height:24px; padding:.35rem .2rem;
+    }
     .settore-footer nav a:hover { color: var(--primary); }
 
     @media (max-width: 900px) {
@@ -442,7 +445,7 @@
     <div class="settore-two">
       <div class="settore-card">
         <div class="cap">Settore tessile</div>
-        <h3 class="h3">Dall&rsquo;industria manifatturiera al riciclo</h3>
+        <h2 class="h3">Dall&rsquo;industria manifatturiera al riciclo</h2>
         <p>
           Il distretto pratese è un hub mondiale del riciclo laniero: il 60% delle fibre
           lavorate proviene da materiale riciclato. La filiera va dalla scelta della fibra —
@@ -460,7 +463,7 @@
       </div>
       <div class="settore-card">
         <div class="cap">Abbigliamento</div>
-        <h3 class="h3">Dal tessuto al capo finito</h3>
+        <h2 class="h3">Dal tessuto al capo finito</h2>
         <p>
           Dalla modellistica, taglio e cucitura al controllo qualità, etichettatura, imballo e
           logistica: il capo finito attraversa poche mani e poche miglia. La confezione è spesso
