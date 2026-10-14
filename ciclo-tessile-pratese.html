@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it" data-theme="dark" data-page="tessile">
+<html lang="it" data-theme="light" data-page="tessile">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -24,12 +24,45 @@
   <link rel="alternate" hreflang="x-default" href="https://italycircularfashion.github.io/RonaldoRiskaCV/">
   <link rel="icon" type="image/jpeg" href="profile.jpg">
   <style>
-    :root { --f-journ: 'Playfair Display', Georgia, 'Times New Roman', serif; }
+    :root {
+      --f-journ: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --primary:#FF5A00; --primary-hi:#FF8A3D; --gold:#FF5A00; --accent:#FF5A00;
+    }
+    /* Contrasto editoriale: titoli arancio con bordo nero */
     .cycle-hero h1,
     .section-heading h2,
+    .integration-banner h3 {
+      font-family: var(--f-journ);
+      font-weight: 900;
+      color: #FF5A00;
+      -webkit-text-stroke: 1px #000;
+      text-shadow:
+        -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px  1px 0 #000, 1px  1px 0 #000,
+        -2px  0   0 #000,  2px 0 0 #000,
+         0   -2px 0 #000,  0   2px 0 #000;
+      letter-spacing: -0.01em;
+    }
+    /* Sottotitoli nero grassetto */
     .cycle-step h3,
-    .integration-banner h3 { font-family: var(--f-journ); font-weight: 700; letter-spacing: -0.01em; }
-    .cycle-hero .lead { font-family: var(--f-journ); font-weight: 400; font-style: italic; }
+    .cert-card .cert-name,
+    .section-heading .eyebrow {
+      color: #111;
+      font-weight: 700;
+    }
+    /* Testo nero nitido */
+    .cycle-hero .lead,
+    .cycle-step p,
+    .cert-card .cert-desc,
+    .data-card .data-label,
+    .data-card .data-src,
+    .integration-banner p,
+    .site-footer p {
+      color: #111;
+      font-weight: 400;
+    }
+    .cycle-hero .lead { font-family: var(--f-journ); font-style: normal; }
+    .cycle-step-num, .data-card .data-val { color: #111; font-weight: 700; }
 
     .cycle-hero {
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
