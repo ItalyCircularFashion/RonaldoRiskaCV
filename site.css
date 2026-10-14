@@ -1,5 +1,5 @@
-/* ══════════════════════════════════════════════════════════
-   TEXTILE INTELLIGENCE PLATFORM · site.css v6.0
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+/* ═══ TEXTILE INTELLIGENCE PLATFORM · site.css v6.0 ═══ */
    REBUILD · Design system · Component architecture
 ══════════════════════════════════════════════════════════ */
 
@@ -13,32 +13,31 @@ html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--bg-3,var(
 /* ─── LAYER 2: DESIGN TOKENS ─── */
 :root{
   /* Palette */
-  --bg:#0A0A0A;--bg-elevated:#0F0F0F;--surface:#141414;--surface-raised:#1A1A1A;--surface-float:#222222;
-  --primary:#8FA8C8;--primary-hi:#B9CCE4;--primary-lo:rgba(143,168,200,.10);--primary-xs:rgba(143,168,200,.05);
-  /* Alias legacy: --gold e usato in 6 regole CSS e negli style inline di 7 pagine,
-     ma nel design system v6 e stato rinominato in --primary. Senza questo alias
-     var(--gold) non risolve e quei colori (incluso :focus-visible) spariscono. */
-  --gold:#8FA8C8;--gold-hi:#B9CCE4;--gold-lo:rgba(143,168,200,.10);
-  --secondary:#7DD3FC;--secondary-lo:rgba(125,211,252,.12);
-  --accent:#4F8EF7;--accent-lo:rgba(79,142,247,.10);
-  --blue:#60A5FA;--blue-lo:rgba(96,165,250,.12);
+  --bg:#0B0D0F;--bg-elevated:#14171A;--surface:#1B1F22;--surface-raised:#23282D;--surface-float:#303438;
+  --primary:#FF6B1A;--primary-hi:#FF8A4D;--primary-lo:rgba(255,107,26,.10);--primary-xs:rgba(255,107,26,.05);
+  --gold:#D4A72C;--gold-hi:#E7C059;--gold-lo:rgba(212,167,44,.12);
+  --secondary:#D4A72C;--secondary-lo:rgba(212,167,44,.12);
+  --accent:#D4A72C;--accent-lo:rgba(212,167,44,.10);
+  --blue:#6B8FFF;--blue-lo:rgba(107,143,255,.12);
   --up:#22C55E;--up-lo:rgba(34,197,94,.12);
   --dn:#EF4444;--dn-lo:rgba(239,68,68,.10);
-  --neutral:#9CA3AF;
+  --neutral:#A7ACB0;
+  --yellow:#FFC928;--yellow-lo:rgba(255,201,40,.12);
 
   /* Text */
-  --cream:#E8EAED;--sand:#9CA3AF;--stone:#5E6B7A;
+  --cream:#F4F3EF;--sand:#A7ACB0;--stone:#6F7478;
 
   /* Borders */
-  --bdr:rgba(255,255,255,.06);--bdr-2:rgba(255,255,255,.12);--bdr-3:rgba(255,255,255,.20);
+  --bdr:#22272B;--bdr-2:#303438;--bdr-3:#3C4248;
 
   /* Layout */
   --sidebar-w:220px;--ticker-h:36px;--content-max:1200px;
 
   /* Typography */
-  --f-display:'Bungee',impact,sans-serif;
-  --f-h:'Inter',system-ui,sans-serif;
-  --f-m:'JetBrains Mono','IBM Plex Mono','Courier New',monospace;
+  --f-display:'Space Grotesk',sans-serif;
+  --f-h:'IBM Plex Sans',sans-serif;
+  --f-m:'IBM Plex Sans',sans-serif;
+  --f-serif:'IBM Plex Sans',sans-serif;
 
   --text-xs:.68rem;--text-sm:.78rem;--text-base:.9rem;--text-md:1rem;--text-lg:1.2rem;--text-xl:clamp(1.3rem,2.5vw,1.7rem);--text-2xl:clamp(1.6rem,3.5vw,2.4rem);--text-display:clamp(2rem,5vw,3.2rem);
 
@@ -69,6 +68,7 @@ html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--bg-3,var(
 
 /* ─── LAYER 3: BASE ─── */
 body{font-family:var(--f-h);font-size:var(--text-base);background:var(--bg);color:var(--cream);line-height:1.6;overflow-x:hidden;overflow-y:auto;transition:background var(--duration-slow) var(--smooth),color var(--duration-slow) var(--smooth)}
+h1,h2,h3,h4,h5,h6{font-family:var(--f-display);font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--cream)}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none;transition:color var(--duration-fast) var(--smooth)}
 a:hover{color:var(--primary)}
