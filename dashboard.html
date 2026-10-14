@@ -11,6 +11,27 @@
   <link rel="alternate" hreflang="it" href="https://italycircularfashion.github.io/RonaldoRiskaCV/dashboard.html">
   <link rel="alternate" hreflang="x-default" href="https://italycircularfashion.github.io/RonaldoRiskaCV/dashboard.html">
   <link rel="stylesheet" href="site.css">
+  <style>
+    .chart-split { display:grid; grid-template-columns:1fr 1.5fr; gap:var(--space-4); }
+    .chart-card { background:var(--surface); border:1px solid var(--bdr-2); border-radius:var(--rl); padding:var(--space-4); }
+    .chart-card-title { font-family:var(--f-display); font-size:var(--text-md); font-weight:600; margin:0 0 var(--space-3); color:var(--cream); }
+    .pie-chart { width:200px; height:200px; margin:0 auto var(--space-4); border-radius:50%; border:1px solid var(--bdr-3);
+      background: conic-gradient(#FF6B1A 0 52%, #D4A72C 52% 76%, #FFC928 76% 88%, #6B8FFF 88% 92%, #A7ACB0 92% 96%, #525861 96% 100%); }
+    .pie-legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.35rem; font-size:var(--text-sm); }
+    .pie-legend li { display:flex; align-items:center; gap:.5rem; color:var(--sand); }
+    .dot { width:12px; height:12px; border-radius:2px; display:inline-block; }
+    .dot-poliestere{background:#FF6B1A} .dot-cotone{background:#D4A72C} .dot-mmcf{background:#FFC928}
+    .dot-nylon{background:#6B8FFF} .dot-lana{background:#A7ACB0} .dot-altro{background:#525861}
+    .line-chart { width:100%; height:auto; display:block; }
+    .line-chart .axis { stroke:var(--bdr-3); stroke-width:1; }
+    .line-chart .axis-label { fill:var(--sand); font-size:10px; font-family:var(--f-h); }
+    .line-chart polyline { fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    .line-chart circle { stroke-width:0; }
+    .series-cotone { stroke:#D4A72C; fill:#D4A72C; }
+    .series-poliestere { stroke:#FF6B1A; fill:#FF6B1A; }
+    .series-lana { stroke:#A7ACB0; fill:#A7ACB0; }
+    @media (max-width:760px){ .chart-split { grid-template-columns:1fr; } }
+  </style>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Market Dashboard — Tessile & Fashion | Ronaldo Riska">
   <meta property="og:description" content="Dashboard mercato tessile: quotazioni materie prime, export Italia, certificazioni ESG, AI adoption. KPI Distretto di Prato.">
@@ -88,7 +109,7 @@
           <div class="page-hdr-breadcrumb"><a href="index.html">Platform</a> / Market Dashboard</div>
           <h1>Textile Intelligence Dashboard</h1>
           <div class="page-hdr-meta">
-            <span>📅 Aggiornato: 2 set 2026</span>
+            <span>📅 Aggiornato: 14 ott 2026</span>
             <span>📊 Fonti: Textile Exchange · Euratex · ICAC · World Bank</span>
             <span class="dash-badge">Dato dimostrativo</span>
             <span style="color:var(--stone)">Struttura API-ready</span>
@@ -109,11 +130,11 @@
         <!-- HEADER -->
         <div class="dm-header">
           <div>
-            <div class="eyebrow">Market Intelligence · Aggiornato 2 set 2026</div>
+            <div class="eyebrow">Market Intelligence · Aggiornato 14 ott 2026</div>
             <h2>Textile Intelligence Dashboard</h2>
           </div>
           <div class="dm-meta">
-            <span>📅 2 set 2026</span>
+            <span>📅 14 ott 2026</span>
             <span>📊 ICAC · AWEX · Textile Exchange · World Bank</span>
           </div>
         </div>
@@ -301,7 +322,7 @@
               </table>
             </div>
             <div class="dm-footer">
-              <span>Ultimo aggiornamento: 2 settembre 2026</span>
+              <span>Ultimo aggiornamento: 14 ottobre 2026</span>
               <span>Ordina: clic su un intestazione</span>
             </div>
           </div>
@@ -354,6 +375,66 @@
             </div>
             <div class="dm-footer">
               <span>Medie basate su dati ICAC, AWEX, Textile Exchange. Stagionalita: pattern ricorrenti di prezzo.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ GRAFICI MATERIE PRIME (torta + andamento) ═══ -->
+        <div class="dm-row">
+          <div class="dm-panel">
+            <div class="dm-panel-hdr">
+              <div class="eyebrow">Analisi visuale · materie prime tessili</div>
+              <h3>Grafici: composizione fibra e andamento annuo</h3>
+            </div>
+            <div class="chart-split">
+              <div class="chart-card" aria-label="Grafico a torta quote fibra 2025">
+                <h4 class="chart-card-title">Quote fibre tessili (2025)</h4>
+                <div class="pie-chart" role="img" aria-label="Torta quote fibre 2025"></div>
+                <ul class="pie-legend">
+                  <li><span class="dot dot-poliestere"></span>Poliestere 52%</li>
+                  <li><span class="dot dot-cotone"></span>Cotone 24%</li>
+                  <li><span class="dot dot-mmcf"></span>Cellulosiche (MMCF) 12%</li>
+                  <li><span class="dot dot-nylon"></span>Nylon 4%</li>
+                  <li><span class="dot dot-lana"></span>Lana 4%</li>
+                  <li><span class="dot dot-altro"></span>Altro 4%</li>
+                </ul>
+              </div>
+              <div class="chart-card" aria-label="Grafico andamento prezzi materie prime 2020-2025">
+                <h4 class="chart-card-title">Indice prezzi materie prime (base 100 = 2020)</h4>
+                <svg class="line-chart" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Linee cotone, lana, poliestere 2020-2025">
+                  <line class="axis" x1="50" y1="270" x2="560" y2="270" />
+                  <line class="axis" x1="50" y1="30" x2="50" y2="270" />
+                  <text class="axis-label" x="50" y="290">2020</text>
+                  <text class="axis-label" x="152" y="290">2021</text>
+                  <text class="axis-label" x="254" y="290">2022</text>
+                  <text class="axis-label" x="356" y="290">2023</text>
+                  <text class="axis-label" x="458" y="290">2024</text>
+                  <text class="axis-label" x="560" y="290">2025</text>
+                  <text class="axis-label" x="20" y="45">130</text>
+                  <text class="axis-label" x="24" y="105">120</text>
+                  <text class="axis-label" x="24" y="165">110</text>
+                  <text class="axis-label" x="28" y="225">100</text>
+                  <text class="axis-label" x="28" y="265">90</text>
+                  <polyline class="series-poliestere" points="50,225 152,172 254,182 356,192 458,202 560,195" />
+                  <polyline class="series-cotone" points="50,225 152,188 254,198 356,205 458,215 560,208" />
+                  <polyline class="series-lana" points="50,225 152,200 254,215 356,232 458,245 560,238" />
+                  <circle cx="50" cy="225" r="3" class="series-cotone" />
+                  <circle cx="560" cy="208" r="3" class="series-cotone" />
+                  <circle cx="50" cy="225" r="3" class="series-lana" />
+                  <circle cx="560" cy="238" r="3" class="series-lana" />
+                  <circle cx="50" cy="225" r="3" class="series-poliestere" />
+                  <circle cx="560" cy="195" r="3" class="series-poliestere" />
+                </svg>
+                <ul class="pie-legend" style="flex-direction:row;flex-wrap:wrap;gap:1rem;">
+                  <li><span class="dot dot-poliestere"></span>Poliestere</li>
+                  <li><span class="dot dot-cotone"></span>Cotone</li>
+                  <li><span class="dot dot-lana"></span>Lana</li>
+                </ul>
+              </div>
+            </div>
+            <div class="dm-footer">
+              <span>Dati dimostrativi coerenti con le tabelle sopra. Indice normalizzato sul 2020.</span>
+              <span>Nessuna libreria esterna: SVG + CSS puro.</span>
             </div>
           </div>
         </div>
