@@ -621,6 +621,73 @@
           </div>
         </div>
 
+        <!-- FASCIO DI TRAIETTORIE — PRODUCTION FLOW ANALYSIS -->
+        <div class="dm-section">
+          <div class="dm-panel-hdr">
+            <div class="eyebrow">Production Flow Analysis · metodo Burbidge</div>
+            <h3>Fascio di traiettorie — raggruppamento famiglie prodotto</h3>
+          </div>
+
+          <div class="dash-sub">1 · Fasce di traiettoria per famiglia prodotto</div>
+          <div class="table-wrap">
+            <table class="data-table" data-dash-table="1">
+              <thead>
+                <tr><th scope="col">Famiglia</th><th scope="col">Traiettoria (fasi)</th><th scope="col" class="td-num">Rif.</th><th scope="col" class="td-num">Quota vol.</th><th scope="col">Fascio</th><th scope="col" class="td-num">Jaccard medio</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Lana vergine cardata</strong></td><td>Rit → Ord → Imb → Tes → Fin → Ctr</td><td class="td-num">128</td><td class="td-num">31%</td><td>A</td><td class="td-num td-up">0.69</td></tr>
+                <tr><td><strong>Rigenerato misto lana</strong></td><td>Cer → Rit → Ord → Imb → Tes → Fin</td><td class="td-num">96</td><td class="td-num">24%</td><td>A</td><td class="td-num td-up">0.69</td></tr>
+                <tr><td><strong>Nastri e passamaneria</strong></td><td>Rit → Ord → Tes → Fin</td><td class="td-num">54</td><td class="td-num">9%</td><td>A</td><td class="td-num">0.67</td></tr>
+                <tr><td><strong>Cotone jersey</strong></td><td>Rit → Tes → Tin → Fin</td><td class="td-num">142</td><td class="td-num">22%</td><td>B</td><td class="td-num td-up">0.75</td></tr>
+                <tr><td><strong>Poliestere tecnico</strong></td><td>Tes → Tin → Fin</td><td class="td-num">88</td><td class="td-num">14%</td><td>B</td><td class="td-num td-up">0.75</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="dm-footer"><span>Fasi: Cer cernita · Rit ritorcitura · Ord orditura · Imb imbozzimatura · Tes tessitura · Tin tintura · Fin finissaggio · Ctr controllo. Jaccard medio = media dell'indice verso le altre famiglie dello stesso fascio.</span></div>
+
+          <div class="dash-sub" style="margin-top:var(--space-6)">2 · Matrice di similarità Jaccard tra famiglie</div>
+          <div class="table-wrap">
+            <table class="data-table" data-dash-table="1">
+              <thead>
+                <tr><th scope="col">Coppia</th><th scope="col" class="td-num">Fasi comuni</th><th scope="col" class="td-num">Fasi totali</th><th scope="col" class="td-num">Jaccard</th><th scope="col">Valutazione</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Cotone jersey ↔ Poliestere tecnico</td><td class="td-num">3</td><td class="td-num">4</td><td class="td-num td-up">0.75</td><td>Nucleo fascio B — traiettorie convergenti</td></tr>
+                <tr><td>Lana cardata ↔ Rigenerato</td><td class="td-num">5</td><td class="td-num">7</td><td class="td-num td-up">0.71</td><td>Nucleo fascio A — ciclone condiviso</td></tr>
+                <tr><td>Lana cardata ↔ Nastri</td><td class="td-num">4</td><td class="td-num">6</td><td class="td-num">0.67</td><td>Fascio A — ciclone condiviso</td></tr>
+                <tr><td>Rigenerato ↔ Nastri</td><td class="td-num">4</td><td class="td-num">6</td><td class="td-num">0.67</td><td>Fascio A — ciclone condiviso</td></tr>
+                <tr><td>Cotone jersey ↔ Nastri</td><td class="td-num">3</td><td class="td-num">5</td><td class="td-num">0.60</td><td>Confine A/B — unico legame sopra soglia tra fasci</td></tr>
+                <tr><td>Cotone jersey ↔ Lana cardata</td><td class="td-num">3</td><td class="td-num">7</td><td class="td-num">0.43</td><td>Sotto soglia — fasci distinti</td></tr>
+                <tr><td>Cotone jersey ↔ Rigenerato</td><td class="td-num">3</td><td class="td-num">7</td><td class="td-num">0.43</td><td>Sotto soglia — fasci distinti</td></tr>
+                <tr><td>Nastri ↔ Poliestere tecnico</td><td class="td-num">2</td><td class="td-num">5</td><td class="td-num">0.40</td><td>Sotto soglia — fasci distinti</td></tr>
+                <tr><td>Lana cardata ↔ Poliestere tecnico</td><td class="td-num">2</td><td class="td-num">7</td><td class="td-num td-dn">0.29</td><td>Traiettorie indipendenti</td></tr>
+                <tr><td>Rigenerato ↔ Poliestere tecnico</td><td class="td-num">2</td><td class="td-num">7</td><td class="td-num td-dn">0.29</td><td>Traiettorie indipendenti</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="dm-footer"><span>Indice di Jaccard = fasi comuni / fasi totali delle due traiettorie. Soglia di raggruppamento PFA: 0.50.</span></div>
+
+          <div class="dash-sub" style="margin-top:var(--space-6)">3 · Concentrazione del traffico per fase</div>
+          <div class="table-wrap">
+            <table class="data-table" data-dash-table="1">
+              <thead>
+                <tr><th scope="col">Fase</th><th scope="col">Fascio dominante</th><th scope="col" class="td-num">Famiglie servite</th><th scope="col" class="td-num">Volume fase</th><th scope="col" class="td-num">Concentrazione</th><th scope="col">Ruolo cella</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Cernita</strong></td><td>A</td><td class="td-num">1/5</td><td class="td-num">24%</td><td class="td-num">1.00</td><td>Cella riciclo isolata</td></tr>
+                <tr><td><strong>Ritorcitura</strong></td><td>A</td><td class="td-num">4/5</td><td class="td-num">86%</td><td class="td-num">0.74</td><td>Ingresso condiviso laniero</td></tr>
+                <tr><td><strong>Orditura</strong></td><td>A</td><td class="td-num">3/5</td><td class="td-num">64%</td><td class="td-num">1.00</td><td>Cella laniera pura</td></tr>
+                <tr><td><strong>Imbozzimatura</strong></td><td>A</td><td class="td-num">2/5</td><td class="td-num">55%</td><td class="td-num">1.00</td><td>Cella laniera pura</td></tr>
+                <tr><td><strong>Tessitura</strong></td><td>A</td><td class="td-num">5/5</td><td class="td-num">100%</td><td class="td-num">0.64</td><td>Nodo centrale condiviso</td></tr>
+                <tr><td><strong>Tintura</strong></td><td>B</td><td class="td-num">2/5</td><td class="td-num">36%</td><td class="td-num">1.00</td><td>Cella tintoria dedicata</td></tr>
+                <tr><td><strong>Finissaggio</strong></td><td>A</td><td class="td-num">5/5</td><td class="td-num">100%</td><td class="td-num">0.64</td><td>Uscita condivisa</td></tr>
+                <tr><td><strong>Controllo finale</strong></td><td>A</td><td class="td-num">1/5</td><td class="td-num">31%</td><td class="td-num">1.00</td><td>Isolato — accorpabile a Fin</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="dm-footer"><span>Concentrazione = quota del volume di fase convogliata sul fascio dominante (0-1). Valori 1.00 = fase dedicata a un solo fascio; 0.64 = nodo condiviso tra A e B, candidato a collo di bottiglia.</span></div>
+        </div>
+
         <!-- API-READY NOTE -->
         <div class="dm-note">
           <strong>Nota metodologica.</strong>
